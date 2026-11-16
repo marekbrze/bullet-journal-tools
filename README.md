@@ -14,6 +14,7 @@
 |---|---|
 | [**Start**](start/) | For when you keep putting something off: pick the smallest step, count down from five, work for six minutes. |
 | [**Goals**](goals/) | Checklists for your notebook: set up a goal you actually want (picture, one sentence, is it yours, milestones backwards, a 30-day habit, today's step) and check in on it every month. |
+| [**Defuse**](defuse/) | A short checklist for a task that has grown too big in your head: say it plainly, “it's just…”, good enough instead of perfect, the straight line worked backwards, the first move now. |
 | [**Reset**](reset/) | A short checklist for your notebook when something went wrong: the facts, the thought spiral and the move against it, what you control, one move now. |
 | [**Reviews**](reviews/) | Review checklists: morning, evening, week, month, chapter. Tick the steps off one by one. |
 

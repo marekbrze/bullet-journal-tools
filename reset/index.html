@@ -466,7 +466,7 @@ footer .links { display: flex; gap: 14px; }
 
   function render(opts = {}) {
     const rt = route();
-    document.title = rt.review ? `${rt.review.title} · ${T.app}` : T.app;
+    document.title = rt.review && rt.review.title !== T.app ? `${rt.review.title} · ${T.app}` : T.app;
     if (rt.view === 'review') renderReview(rt.review, opts);
     else if (rt.view === 'cheat') renderCheat();
     else if (rt.view === 'history') renderHistory();
