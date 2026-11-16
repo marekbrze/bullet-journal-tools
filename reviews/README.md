@@ -26,7 +26,7 @@ A notebook review has a dozen or so steps, and it's easy to skip one, especially
 | | |
 |:-:|---|
 | **Morning** | 8 steps · new day page, three priorities for the day |
-| **Evening** | 6 steps · <code>×</code> on what's done, the rest through the filter, a headline for the day |
+| **Evening** | 7 steps · <code>×</code> on what's done, the rest through the filter, dates to the right place, a headline for the day |
 | **Week** | 11 steps · reflection on the left page, tasks and intention on the right |
 | **Month** | 15 steps · reflection with prompts, migration, 3 + 3 |
 | **Chapter** | 8 steps · chapter log with four boxes, moving to a new notebook |
