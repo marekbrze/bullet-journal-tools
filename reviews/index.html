@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="pl">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Przeglądy</title>
-<meta name="description" content="Checklisty przeglądów notesu: poranek, wieczór, tydzień, miesiąc, rozdział. Odhaczasz krok po kroku.">
+<title>Reviews</title>
+<meta name="description" content="Review checklists for a paper notebook: morning, evening, week, month, chapter. Tick the steps off one by one.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231c1917'/%3E%3Cpath d='M8.2 7.7l3.6 3.6M11.8 7.7l-3.6 3.6' stroke='%23fff' stroke-width='1.6' stroke-linecap='round'/%3E%3Crect x='14' y='8' width='10' height='3' rx='1.5' fill='%23fff'/%3E%3Ccircle cx='10' cy='16' r='1.9' fill='%23fff' opacity='.7'/%3E%3Crect x='14' y='14.5' width='8' height='3' rx='1.5' fill='%23fff' opacity='.7'/%3E%3Ccircle cx='10' cy='22.5' r='1.9' fill='%23fff' opacity='.45'/%3E%3Crect x='14' y='21' width='5' height='3' rx='1.5' fill='%23fff' opacity='.45'/%3E%3C/svg%3E">
 <style>
 :root {
@@ -250,11 +250,10 @@ footer .links { display: flex; gap: 14px; }
 <main><div class="wrap" id="app"></div></main>
 <footer>
   <div class="wrap">
-    <span id="foot-note"></span>
+    <span>Data stays in this browser</span>
     <span class="links">
-      <button type="button" data-act="lang" id="lang-btn"></button>
-      <button type="button" data-act="export" id="export-btn"></button>
-      <button type="button" data-act="import" id="import-btn"></button>
+      <button type="button" data-act="export">Export</button>
+      <button type="button" data-act="import">Import</button>
     </span>
   </div>
 </footer>
@@ -265,144 +264,12 @@ footer .links { display: flex; gap: 14px; }
 (() => {
   'use strict';
 
-  /* ---------- treść / content ----------
-     PL to oryginał, EN to jego tłumaczenie. Obie wersje muszą mieć tę samą
-     strukturę (te same id, sekcje i liczbę kroków), bo postęp zapisuje się
-     po pozycji kroku. {x} w tekście = symbol z legendy. */
+  /* ---------- content ----------
+     Review steps, written in our own words. {x} in text = a symbol from the legend. */
 
   const FILTER = 'filter';
 
-  const CONTENT = {
-  pl: {
-    reviews: [
-    {
-      id: 'morning', group: 'daily', title: 'Poranek', when: 'Rano, zanim ruszysz z dniem', time: '5–10 min',
-      sections: [{
-        items: [
-          { t: 'Nowa strona dnia', d: 'Data, dzień tygodnia, numer strony.', s: 'Zakładasz ją w dniu, którego dotyczy, najwcześniej poprzedniego wieczoru.' },
-          { t: 'Zrzut z głowy', d: 'Zapisz krótko wszystko, co chodzi ci po głowie od rana.' },
-          { t: 'Ostatnie dni', d: 'Przejrzyj strony z kilku poprzednich dni.' },
-          { t: 'Notatki {–}', d: 'Sprawa zamknięta? Zostaw. Wraca do ciebie albo chcesz ją rozwinąć? Zamień na {+}.', s: '{+} to temat do dłuższego pisania, np. przy przeglądzie tygodnia.' },
-          { t: 'Zadania {•}', d: 'Przy każdym zdecyduj: robię, oddaję komuś albo odpuszczam.' },
-          { t: 'Terminy na dziś', d: 'Wpisy z dzisiejszą datą sprawdź filtrem. Te, które zostają, przepisz na dziś z {*}.', key: true, extra: FILTER },
-          { t: 'Plan tygodnia', d: 'Zajrzyj na listę tygodnia i weź z niej kolejną rzecz na dziś.' },
-          { t: 'Trzy priorytety', d: 'Najwyżej trzy rzeczy na dziś, oznaczone {*}.', s: 'Przy pięciu priorytetach żaden nie jest naprawdę pierwszy.', key: true },
-        ],
-        notes: [['Nie', 'przenoś każdego otwartego zadania z poprzednich dni. Zbiorczo zajmie się nimi przegląd tygodnia.']],
-      }],
-    },
-    {
-      id: 'evening', group: 'daily', title: 'Wieczór', when: 'Na koniec dnia, po wyłączeniu ekranów', time: '5–10 min',
-      sections: [{
-        items: [
-          { t: 'Ekrany off', d: 'Notes to ostatnia rzecz, na którą dziś patrzysz.' },
-          { t: 'Domknij głowę', d: 'Zapisz to, co jeszcze krąży. Uzupełnij urwane notatki z dnia.' },
-          { t: 'Odhacz zrobione', d: '{×} przy wszystkim, co zrobione. To, czego nie zapisałeś, dopisz i też odhacz.', s: 'Pełna lista zrobionych rzeczy pokazuje, ile naprawdę dajesz radę zrobić w jeden dzień.', key: true },
-          { t: 'Kto jeszcze?', d: 'Czy coś z tego, co zostało, może zrobić ktoś inny?' },
-          { t: 'Filtr', d: 'Resztę sprawdź filtrem. Nie umiesz powiedzieć, po co to robisz? Skreśl.', s: 'Zanim skreślisz, zapytaj, czemu ta rzecz służy. Nudne zadanie bywa krokiem do czegoś, na czym ci zależy.', key: true, extra: FILTER, open: true },
-          { t: 'Nagłówek dnia', d: 'Obok daty wpisz jedno zdarzenie, które najlepiej opisuje ten dzień.', s: 'Z nagłówków złożysz timeline przy przeglądzie tygodnia i miesiąca.' },
-        ],
-        notes: [['Start', 'Zacznij od minimum: rano trzy rzeczy na dziś. Lepiej krótko i codziennie niż długo i od święta. Przegląd ciągle wypada? Skróć go. Przypomnienie w telefonie pomaga.']],
-      }],
-    },
-    {
-      id: 'week', group: 'cyclic', title: 'Tydzień', when: 'Zawsze ten sam dzień tygodnia', time: null,
-      sections: [
-        {
-          phase: ['A', 'Wstecz'],
-          items: [
-            { t: 'Timeline', d: 'W logu miesięcznym dopisz najważniejsze zdarzenia mijającego tygodnia. Masz je w nagłówkach dni.' },
-            { t: 'Przegląd stron', d: 'Przejrzyj strony dni i tygodni z bieżącego miesiąca.' },
-            { t: 'Lewa strona', d: 'Zacznij log tygodniowy. Tytuł: daty mijającego tygodnia.', extra: 'spread' },
-            { t: 'Refleksja', d: 'Wersja krótka: kilka punktów z wnioskami. Wersja długa: swobodne pisanie, strona lub dwie. Tematów szukaj przy {+}.', s: 'Zapisuj wnioski i odczucia. Zdarzenia są już w timeline’ie.', key: true },
-            { t: 'Przeczytaj, co napisałeś', d: 'Zwróć uwagę na ton. Jaki nastrój z tego wychodzi?', s: 'Jeden obszar życia zbiera mnóstwo zadań → sprawdź, co się tam dzieje. Wraca smutek → poszukaj źródła. Brakuje stron dni → masz za dużo na głowie, w tym tygodniu odciąż kalendarz.', key: true },
-          ],
-        },
-        {
-          phase: ['B', 'Naprzód'],
-          items: [
-            { t: 'Prawa strona', d: 'Lista zadań. Tytuł: daty nadchodzącego tygodnia.' },
-            { t: 'Z refleksji', d: 'Najpierw zadania, które z niej wyszły. Pomysły na później odłóż na stronę dnia albo do kolekcji.' },
-            { t: 'Z miesiąca', d: 'Weź z listy miesiąca to, co ma się zadziać w tym tygodniu. Duże rzeczy podziel na kroki rozpisane na dni.' },
-            { t: 'Otwarte {•}', d: 'Ze stron dni i tygodnia przenieś tylko to, co faktycznie zrobisz w tym tygodniu.', extra: FILTER },
-            { t: 'Intencja', d: 'Jednym zdaniem: o co chodzi w tym tygodniu? Zapisz przy datach.', key: true },
-            { t: 'Priorytety', d: 'Oznacz {*} zadania, które najlepiej służą intencji.', key: true },
-          ],
-          notes: [['Spokojnie', 'Czego dziś nie przeniesiesz, nie zginie. Wróci przy następnym przeglądzie.']],
-        },
-      ],
-    },
-    {
-      id: 'month', group: 'cyclic', title: 'Miesiąc', when: 'Ostatnie lub pierwsze dni miesiąca', time: null,
-      sections: [
-        {
-          phase: ['A', 'Wstecz'],
-          items: [
-            { t: 'Timeline', d: 'Dokończ timeline mijającego miesiąca.' },
-            { t: 'Lista zadań', d: 'Doprowadź ją do aktualnego stanu: {×}, {>}, skreślenia.' },
-            { t: 'Zestaw obok siebie', d: 'Porównaj zdarzenia z zadaniami. Co mogło wpłynąć na co?', s: 'Szukasz związków, np. między celem, który stoi w miejscu, a nawykiem, który mu przeszkadza.' },
-            { t: 'Przeczytaj miesiąc', d: 'Wszystkie strony dni i tygodni. Z ciekawością zamiast oceniania.' },
-            { t: 'Refleksja', d: 'Na pierwszej wolnej rozkładówce po ostatnim dniu miesiąca. Jeśli masz czas, pisz dłużej.', s: 'Spisz, czego nauczył cię ten miesiąc.', key: true, extra: 'qs', open: true },
-          ],
-          notes: [['Niezrobione', 'Zamiast się obwiniać, zapytaj dlaczego. Za duże → podziel. Nie widzę sensu → znajdź go albo odpuść. Nie musi być moje, nie musi być teraz → oddaj albo odpuść. Za dużo naraz → biorę więcej, niż mam czasu.']],
-        },
-        {
-          phase: ['B', 'Naprzód: migracja'],
-          items: [
-            { t: 'Nowy log miesięczny', d: 'Za refleksją. Tytuł: nazwa miesiąca. Lewa strona: timeline, prawa: zadania.', s: 'Timeline: kolejne dni z literą dnia tygodnia, kreska oddziela tygodnie. Wypełniasz po fakcie.' },
-            { t: 'Migracja', d: 'Przejdź stary miesiąc jeszcze raz. Otwarte {•} sprawdź filtrem i przenieś na nową listę albo do kolekcji.', s: 'Filtr od nowa, bo przez miesiąc sytuacja mogła się zmienić.', key: true, extra: FILTER },
-            { t: 'Future log', d: 'Przenieś to, na co przyszła pora w tym miesiącu.' },
-            { t: 'Z refleksji', d: 'Dopisz zadania, które z niej wyszły.' },
-            { t: 'Doprecyzuj', d: 'Niejasno zapisane zadanie przepisz tak, żeby było wiadomo, co zrobić.' },
-            { t: 'Porządki', d: 'Wpisy, które pasują do istniejących kolekcji, przenieś tam. Kilka powiązanych wpisów? Załóż kolekcję i przenieś tylko to, co nadal ważne.' },
-            { t: 'Wieczne migracje', d: 'Zadanie przenoszone kolejny raz jest pewnie za duże. Podziel je albo załóż mu kolekcję.' },
-            { t: 'Kolekcje', d: 'Których naprawdę używasz? Nieużywane zostaw. Niewygodne zaprojektuj od nowa, z tym, co się sprawdzało.', s: 'Kolekcja, która przestała być potrzebna, to normalna kolej rzeczy.' },
-            { t: '3 + 3', d: 'Jedna rzecz, która cię drenuje: trzy małe kroki, żeby ją ograniczyć. Jedna, która cię najbardziej ciekawi: trzy małe kroki, żeby się jej przyjrzeć. Wszystko na listę.', s: 'Małe znaczy naprawdę małe: kwadrans dziennie, jedna rozmowa, jedna książka.', key: true },
-            { t: 'Indeks', d: 'Wpisz nowy log miesięczny do indeksu.' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'chapter', group: 'cyclic', title: 'Rozdział', when: 'Gdy kończy się notes', time: null,
-      sections: [
-        {
-          phase: ['A', 'Pierwsze przejście: wnioski'],
-          items: [
-            { t: 'Chapter log', d: 'Wolna rozkładówka z tyłu notesu. Tytuł: od kiedy do kiedy był prowadzony. Podziel ją na cztery pola.', s: 'Lewa strona dotyczy tego, jak pracujesz. Prawa: co ci służyło, a co nie (zajęcia, ludzie, nawyki).', extra: 'quad', open: true },
-            { t: 'Cały notes', d: 'Przeczytaj notes od początku do końca i uzupełniaj cztery pola.', s: 'Timeline’y przypomną przebieg miesięcy, refleksje dodadzą szczegóły.', key: true },
-            { t: 'Refleksja', d: 'Na kolejnej rozkładówce zbierz najważniejsze wnioski.' },
-          ],
-        },
-        {
-          phase: ['B', 'Drugie przejście: nowy notes'],
-          items: [
-            { t: 'Indeks', d: 'Przy każdej kolekcji postaw {•}. Wciąż potrzebna: zostaw otwarte. Niepotrzebna: {×}. Przy każdej zastanów się dlaczego.', s: 'Kryterium jest jedno: czy ta kolekcja do czegoś ci dziś służy.' },
-            { t: 'Nowy notes', d: 'Przygotuj notes. Zapisz intencję: dotychczasową, jeśli nadal pasuje, albo nową, z refleksji.' },
-            { t: 'Kolekcje core', d: 'Załóż te z podstawowych kolekcji, których faktycznie używasz.' },
-            { t: 'Otwarte {•}', d: 'Jak przy migracji miesięcznej. Rzeczy na ten miesiąc trafiają do nowego logu miesięcznego.', extra: FILTER },
-            { t: 'Kolekcje {•}', d: 'Przenoś po jednej. Najpierw popraw układ: co było zbędne, czego brakowało. Potem przepisz tylko treść, która nadal jest potrzebna.', s: 'Reszta zostaje w starym notesie. Zawsze możesz tam zajrzeć.', key: true },
-          ],
-        },
-      ],
-    },
-    ],
-    monthQs: [
-    'Co powtarza się w moich zapiskach?', 'Co mnie ładowało, a co wyczerpywało?',
-    'Na ile to, co robiłem, szło w parze z intencją?', 'Gdzie się z nią rozjeżdżało?',
-    'Czym się usprawiedliwiam?', 'Co sobie o sobie wmawiam?',
-    'Co zostało niezrobione i czemu?', 'Który cel już mi nie służy?',
-    'Co pozytywnie mnie zaskoczyło?', 'Co konkretnie zmieniam w przyszłym miesiącu?',
-    ],
-    legend: [
-    ['•', 'Zadanie', 'do zrobienia'], ['×', 'Zrobione', 'krzyżyk na kropce'],
-    ['>', 'Przeniesione', 'na inny dzień, miesiąc, do kolekcji'], ['<', 'Do future logu', 'albo do kalendarza'],
-    ['<s>•</s>', 'Odpuszczone', 'świadoma decyzja'], ['–', 'Notatka', 'do zapamiętania'],
-    ['+', 'Do rozwinięcia', 'temat do dłuższego pisania'], ['○', 'Zdarzenie', 'fakt, bez oceny'],
-    ['*', 'Priorytet', 'przy zadaniu', true], ['!', 'Inspiracja', 'przy notatce', true],
-    ],
-  },
-  en: {
+  const C = {
     reviews: [
       {
         id: 'morning', group: 'daily', title: 'Morning', when: 'In the morning, before the day gets going', time: '5–10 min',
@@ -532,60 +399,11 @@ footer .links { display: flex; gap: 14px; }
       ['+', 'To explore', 'topic for longer writing'], ['○', 'Event', 'a fact, no judgement'],
       ['*', 'Priority', 'next to a task', true], ['!', 'Inspiration', 'next to a note', true],
     ],
-  },
   };
 
-  /* ---------- teksty interfejsu / UI strings ---------- */
-  const UI = {
-    pl: {
-      locale: 'pl-PL', app: 'Przeglądy', htmlLang: 'pl',
-      groups: { daily: 'Codziennie', cyclic: 'Cyklicznie' },
-      home: 'Co dziś przeglądasz?', homeLead: 'Najpierw to, co było. Potem plan na to, co dalej. Odhaczaj po kolei.',
-      history: 'Historia', handy: 'Pod ręką', cheat: 'Ściąga', cheatMeta: 'Symbole · filtr · w ciągu dnia · kolekcje core',
-      now: 'teraz', inProgress: (n, t) => `w toku · ${n} z ${t}`, steps: n => `${n} kroków`,
-      last: w => 'ostatnio ' + w, never: 'jeszcze nie robione', streak: n => `${n} dni z rzędu`,
-      today: 'dziś', yesterday: 'wczoraj', daysAgo: n => `${n} dni temu`,
-      back: 'Przeglądy', started: w => 'zaczęte ' + w, keyStep: 'Kluczowy krok',
-      staleTitle: 'Wczoraj?', stale: w => `Te odhaczenia są z ${w}.`, restart: 'Zacznij od nowa',
-      done: 'Gotowe', allDone: d => `Wszystkie kroki odhaczone${d ? ' w ' + d : ''}.`, saveClose: 'Zapisz i zamknij',
-      clear: 'Wyczyść odhaczenia', finishEarly: 'Zakończ wcześniej',
-      hintKey: 'kluczowy krok', hintKbd: '<kbd>X</kbd> odhacza następny · <kbd>Z</kbd> cofa · <kbd>↑</kbd> <kbd>↓</kbd> poruszanie · <kbd>Spacja</kbd> przełącza',
-      saved: t => `${t}: zapisane`, savedPart: (t, n, all) => `${t}: zapisane (${n} z ${all})`,
-      histLead30: s => 'Ostatnie 30 dni: ' + s, histEmpty: 'Jeszcze nic. Zamknięte przeglądy pojawią się tutaj.',
-      extras: { filter: 'Filtr', qs: 'Pytania do refleksji', spread: 'Układ rozkładówki', quad: 'Cztery pola' },
-      spread: [['Lewa · mijający tydzień', 'refleksja'], ['Prawa · nadchodzący', 'zadania · intencja · <span class="g">*</span>']],
-      quad: [['Co działało', 'sposób pracy'], ['Więcej tego', 'co mi służy'], ['Co nie działało', 'sposób pracy'], ['Mniej tego', 'co mi nie służy']],
-      filter: [
-        ['<strong>Czy to konieczne?</strong> Czy zaniechanie ma poważne skutki: praca, rachunki, urzędy?', 'Dopytuj „po co?”, aż dojdziesz do sedna. Wybieraj działania, na które masz wpływ, a nie wyniki. Tak → zostaje. Nie → dalej.'],
-        ['<strong>Czy to ważne</strong> dla mnie albo dla moich bliskich?', 'W pracy, gdy nie wiesz po co, dopytaj. Prywatnie sprawdź, czy dawny pomysł wciąż cię ciekawi. Tak → zostaje. Nie albo nie wiem → dalej.'],
-        ['<strong>Co się stanie, jeśli tego nie zrobię?</strong>', 'Nic? Skreśl bez wyrzutów. Ucierpi coś, na czym ci zależy, np. relacja? Wtedy zadanie ma sens.'],
-        ['<strong>Przepisz ręcznie.</strong> Ostatnie sito.', 'Szkoda ci minuty na przepisanie? Odpuść.'],
-      ],
-      verdict: '<b>Trzy razy „nie”</b> → skreśl. Zostaje → <span class="g">&gt;</span> przepisz tylko to, co zrobisz w tym okresie.',
-      cheatLead: 'To, do czego wracasz w trakcie przeglądów.',
-      symbols: 'Symbole', symbolsLead: 'Krótkie wpisy z jednym znakiem na początku',
-      filterTitle: 'Filtr', filterLead: 'Dla każdego otwartego <span class="g">•</span>, przy każdym przeglądzie.',
-      dayTitle: 'W ciągu dnia', dayLead: 'Zapisuj od razu',
-      day: [
-        ['Najpierw na stronę dnia', 'Krótko i od razu, bez zastanawiania się, gdzie to pasuje. Do kalendarza czy future logu przeniesiesz później.'],
-        ['Spotkania cykliczne', 'Na stronie dnia tylko <span class="g">○</span> z odnośnikiem do strony. Same notatki trafiają do osobnej kolekcji, z datą.'],
-        ['Zdarzenia <span class="g">○</span>', 'Fakty, bez oceny. Myśli i emocje jako <span class="g">–</span>, wcięte pod spodem.'],
-      ],
-      coreTitle: 'Kolekcje core', coreLead: 'Co gdzie leży',
-      core: [
-        ['Indeks', 'Na początku notesu. Nazwa kolekcji i numery stron; kolejne części dopisujesz obok. Stron dni nie indeksujesz.'],
-        ['Future log', 'Kilka kolejnych miesięcy na jednej rozkładówce. Trafia tu wszystko z datą poza bieżącym miesiącem.'],
-        ['Log miesięczny', 'Lewa strona: timeline, wypełniany po fakcie. Prawa: zadania z future logu, z poprzedniego miesiąca i nowe.'],
-        ['Log tygodniowy', 'Lewa strona: refleksja o mijającym tygodniu. Prawa: zadania na nadchodzący.'],
-        ['Strona dnia', 'Data i numer strony. Zajmuje tyle miejsca, ile trzeba. Nic nie zakładasz na zapas.'],
-      ],
-      quote: 'Przy każdym przeglądzie pytania są te same, ale odpowiedzi z czasem się zmieniają. Dlatego wracasz do nich regularnie.',
-      foot: 'Dane zostają w tej przeglądarce', other: 'English', exp: 'Eksport', imp: 'Import', file: 'przeglady',
-      saveErr: 'Nie udało się zapisać danych w tej przeglądarce',
-      imported: n => `Zaimportowano ${n} wpisów historii`, badFile: 'To nie jest poprawny plik eksportu',
-    },
-    en: {
-      locale: 'en-GB', app: 'Reviews', htmlLang: 'en',
+  /* ---------- UI strings ---------- */
+  const T = {
+      locale: 'en-GB', app: 'Reviews',
       groups: { daily: 'Daily', cyclic: 'Recurring' },
       home: 'What are you reviewing today?', homeLead: 'First what happened, then the plan for what’s next. Tick things off as you go.',
       history: 'History', handy: 'Handy', cheat: 'Cheat sheet', cheatMeta: 'Symbols · filter · during the day · core collections',
@@ -627,40 +445,24 @@ footer .links { display: flex; gap: 14px; }
         ['Day page', 'Date and page number. Takes as much space as it needs. Nothing gets set up in advance.'],
       ],
       quote: 'Every review asks the same questions, but the answers change over time. That’s why you keep coming back to them.',
-      foot: 'Data stays in this browser', other: 'Polski', exp: 'Export', imp: 'Import', file: 'reviews',
+      file: 'reviews',
       saveErr: 'Could not save data in this browser',
       imported: n => `Imported ${n} history entries`, badFile: 'Not a valid export file',
-    },
   };
-
-  /* ---------- język / language ---------- */
-  const LANG_KEY = 'notebook-tools.lang';  // wspólny dla wszystkich narzędzi w repo
-  let lang = (() => {
-    try { const v = localStorage.getItem(LANG_KEY); if (v === 'pl' || v === 'en') return v; } catch (e) {}
-    return /^pl\b/i.test(navigator.language || '') ? 'pl' : 'en';
-  })();
-  let T, C;
-  function setLang(l) {
-    lang = l; T = UI[l]; C = CONTENT[l];
-    document.documentElement.lang = T.htmlLang;
-    $('#foot-note').textContent = T.foot;
-    $('#lang-btn').textContent = T.other;
-    $('#export-btn').textContent = T.exp;
-    $('#import-btn').textContent = T.imp;
-  }
 
   const glyphs = s => s.replace(/\{(.+?)\}/g, '<span class="g">$1</span>');
   const TOTAL = r => r.sections.reduce((n, s) => n + s.items.length, 0);
   const byId = id => C.reviews.find(r => r.id === id);
 
   /* ---------- storage ---------- */
-  const KEY = 'przeglady.v1';
-  const LEGACY_KEY = 'bujo-reviews.v1';
+  const KEY = 'reviews.v1';
+  const LEGACY_KEYS = ['przeglady.v1', 'bujo-reviews.v1'];
   let db = load();
 
   function load() {
     try {
-      const d = JSON.parse(localStorage.getItem(KEY) || localStorage.getItem(LEGACY_KEY));
+      const raw = [KEY, ...LEGACY_KEYS].map(k => localStorage.getItem(k)).find(Boolean);
+      const d = JSON.parse(raw);
       if (d && d.progress && Array.isArray(d.log)) return d;
     } catch (e) {}
     return { progress: {}, log: [] };
@@ -672,7 +474,7 @@ footer .links { display: flex; gap: 14px; }
 
   const $ = s => document.querySelector(s);
 
-  /* ---------- daty / dates ---------- */
+  /* ---------- dates ---------- */
   const DAY = 864e5;
   const startOfDay = t => { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); };
   const daysAgo = t => Math.round((startOfDay(Date.now()) - startOfDay(t)) / DAY);
@@ -693,7 +495,7 @@ footer .links { display: flex; gap: 14px; }
   }
   const lastDone = id => db.log.filter(e => e.id === id).reduce((a, e) => Math.max(a, e.t), 0);
 
-  // Które review ma teraz sens? Podpowiedź, nie przymus.
+  // Which review makes sense right now? A hint, not a rule.
   function due(r) {
     const last = lastDone(r.id), now = new Date(), h = now.getHours();
     const doneToday = last && daysAgo(last) === 0;
@@ -708,7 +510,7 @@ footer .links { display: flex; gap: 14px; }
     return false;
   }
 
-  // Streak dla codziennych: dni z rzędu (do dziś albo do wczoraj).
+  // Streak for daily reviews: consecutive days (ending today or yesterday).
   function streak(id) {
     const days = new Set(db.log.filter(e => e.id === id).map(e => daysAgo(e.t)));
     const start = days.has(0) ? 0 : days.has(1) ? 1 : -1;
@@ -913,7 +715,7 @@ footer .links { display: flex; gap: 14px; }
       }).join('')}</ul>` : ''}`;
   }
 
-  /* ---------- akcje / actions ---------- */
+  /* ---------- actions ---------- */
   const current = () => route().review;
   let lastTicked = [];
 
@@ -966,11 +768,6 @@ footer .links { display: flex; gap: 14px; }
       delete db.progress[r.id]; lastTicked = []; save(); render(); window.scrollTo(0, 0);
     }
     else if (act === 'complete' && r) complete(r);
-    else if (act === 'lang') {
-      setLang(lang === 'pl' ? 'en' : 'pl');
-      try { localStorage.setItem(LANG_KEY, lang); } catch (_) {}
-      render();
-    }
     else if (act === 'export') {
       const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
@@ -1037,10 +834,8 @@ footer .links { display: flex; gap: 14px; }
 
   window.addEventListener('storage', e => {
     if (e.key === KEY) { db = load(); render(); }
-    if (e.key === LANG_KEY && (e.newValue === 'pl' || e.newValue === 'en')) { setLang(e.newValue); render(); }
   });
   window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
-  setLang(lang);
   render();
 })();
 </script>
