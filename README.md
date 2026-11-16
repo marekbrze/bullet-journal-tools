@@ -13,8 +13,8 @@
 | Tool | What it's for |
 |---|---|
 | [**Start**](start/) | For when you keep putting something off: pick the smallest step, count down from five, work for six minutes. |
-| [**Goals**](goals/) | A goal you actually want: a picture of it done, an excitement check, milestones worked backwards, a 30-day habit and a step for today. |
-| [**Reset**](reset/) | When something went wrong and your head runs the worst version of it: facts, the move against each thought pattern, what you control, one move now. |
+| [**Goals**](goals/) | Checklists for your notebook: set up a goal you actually want (picture, one sentence, is it yours, milestones backwards, a 30-day habit, today's step) and check in on it every month. |
+| [**Reset**](reset/) | A short checklist for your notebook when something went wrong: the facts, the thought spiral and the move against it, what you control, one move now. |
 | [**Reviews**](reviews/) | Review checklists: morning, evening, week, month, chapter. Tick the steps off one by one. |
 
 No account, no server. Each tool keeps its data in your browser, with export to a file.

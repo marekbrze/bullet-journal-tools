@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Reset</title>
-<meta name="description" content="When something went wrong: facts, the move against the worst-case spiral, what you control, and one move now.">
+<meta name="description" content="A short checklist for your notebook when something went wrong: facts, the spiral, what you control, one move.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231c1917'/%3E%3Cpath d='M21.5 12.5a6.5 6.5 0 1 0 1 5' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round'/%3E%3Cpath d='M22.5 8.5v4.5H18' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
 :root {
@@ -246,126 +246,6 @@ footer .links { display: flex; gap: 14px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
-/* ---------- start ---------- */
-.field { margin-top: 8px; }
-.field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
-.big {
-  width: 100%; border: 1px solid var(--line); background: var(--surface); border-radius: 12px;
-  padding: 14px 16px; font-size: 18px; box-shadow: var(--shadow); outline: none; transition: border-color .15s;
-}
-.big:focus { border-color: var(--muted); }
-.big::placeholder { color: var(--faint); }
-.chips:empty { display: none; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.chip { border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 6px 12px; font-size: 13px; color: var(--muted); }
-.chip:hover { color: var(--text); background: var(--hover); }
-.recap { border-left: 2px solid var(--line); padding: 2px 0 2px 14px; margin: 0 0 24px; color: var(--muted); font-size: 15px; }
-.recap b { display: block; color: var(--text); font-weight: 550; font-size: 17px; }
-.helpers { margin-top: 28px; border-top: 1px solid var(--line); }
-.helper { border-bottom: 1px solid var(--line); padding: 12px 0; }
-.helper .toggle { font-size: 14px; }
-.helper .body { padding: 12px 0 4px 18px; font-size: 15px; color: var(--muted); }
-.helper .body p { margin: 0 0 10px; }
-.helper .body .split { background: var(--hover); border-radius: 10px; padding: 12px 14px; color: var(--text); margin-top: 10px; }
-.helper .body .split span { display: block; }
-.helper .body .split span + span { margin-top: 6px; }
-.helper .big { font-size: 16px; padding: 10px 14px; box-shadow: none; }
-.mini-timer { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--text); margin-left: 10px; }
-
-.stage { text-align: center; padding-top: 12px; }
-.stage .task { font-size: 15px; color: var(--muted); margin: 0 0 4px; overflow-wrap: anywhere; }
-.stage .step { font-size: 20px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 28px; overflow-wrap: anywhere; }
-.count { font-size: 120px; line-height: 1; font-weight: 700; letter-spacing: -.04em; font-variant-numeric: tabular-nums; margin: 24px 0 8px; }
-.count.go { font-size: 72px; }
-.dial { position: relative; width: 240px; height: 240px; margin: 8px auto 24px; }
-.dial svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.dial circle { fill: none; stroke-width: 6; }
-.dial .bg { stroke: var(--line); }
-.dial .fg { stroke: var(--accent); stroke-linecap: round; transition: stroke-dashoffset .25s linear; }
-.dial .time { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.dial .time b { font-size: 52px; font-weight: 650; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-.dial .time small { font-size: 13px; color: var(--muted); }
-.stage .actions { justify-content: center; }
-.stats { display: flex; gap: 24px; margin: 0 0 28px; }
-.stats div { font-size: 13px; color: var(--muted); }
-.stats b { display: block; font-size: 22px; color: var(--text); font-weight: 650; font-variant-numeric: tabular-nums; }
-.recent { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.recent li { border-bottom: 1px solid var(--line); }
-.recent button { width: 100%; text-align: left; background: none; border: 0; padding: 12px 4px; display: flex; justify-content: space-between; gap: 12px; }
-.recent button:hover { background: var(--hover); }
-.recent .w { color: var(--faint); font-size: 13px; white-space: nowrap; }
-.hist .ok { color: var(--text); }
-.hist .no { color: var(--faint); }
-@media (max-width: 560px) {
-  .count { font-size: 96px; }
-  .dial { width: 210px; height: 210px; }
-}
-/* ---------- goals ---------- */
-textarea.big { min-height: 110px; resize: vertical; line-height: 1.5; font-size: 16px; }
-.wiz-meta { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.row2 { display: grid; grid-template-columns: 1fr 180px; gap: 10px; }
-.row2 .big { font-size: 16px; }
-.choices { display: grid; gap: 10px; margin-top: 4px; }
-.choice {
-  text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 14px 16px;
-  box-shadow: var(--shadow); transition: border-color .15s, background .15s;
-}
-.choice:hover { border-color: var(--muted); }
-.choice b { display: block; font-weight: 600; }
-.choice span { color: var(--muted); font-size: 14px; }
-.choice.on { border-color: var(--accent); background: var(--hover); }
-.callout { margin-top: 16px; padding: 12px 14px; border-radius: 12px; background: var(--hover); font-size: 14px; color: var(--muted); }
-.callout b { color: var(--text); }
-.ms { list-style: none; margin: 0; padding: 0; counter-reset: ms; }
-.ms li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: center; margin-bottom: 8px; }
-.ms li::before { content: attr(data-n); font-size: 13px; color: var(--faint); text-align: right; font-variant-numeric: tabular-nums; }
-.ms .big { font-size: 16px; padding: 10px 14px; box-shadow: none; }
-.contract {
-  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow);
-  padding: 22px 22px 18px; margin: 4px 0 0;
-}
-.contract .goal { font-size: 22px; font-weight: 650; letter-spacing: -.015em; line-height: 1.25; margin: 0 0 4px; overflow-wrap: anywhere; }
-.contract .by { font-size: 14px; color: var(--muted); margin: 0 0 16px; }
-.contract dl { margin: 0; display: grid; gap: 12px; }
-.contract dt { font-size: 12px; color: var(--faint); letter-spacing: .02em; text-transform: uppercase; }
-.contract dd { margin: 2px 0 0; overflow-wrap: anywhere; white-space: pre-wrap; }
-.contract .sign { margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--line); display: flex; justify-content: space-between; color: var(--faint); font-size: 13px; }
-.mlist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.mlist li { border-bottom: 1px solid var(--line); }
-.mlist .item { padding: 12px 4px; }
-.block { display: flex; align-items: center; gap: 14px; margin: 0 0 8px; }
-.block .bar { flex: 1; height: 4px; border-radius: 4px; background: var(--line); overflow: hidden; }
-.block .bar span { display: block; height: 100%; background: var(--accent); }
-.block small { font-size: 13px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
-.today { display: flex; gap: 10px; align-items: stretch; margin-top: 8px; }
-.today .big { flex: 1; font-size: 16px; padding: 10px 14px; box-shadow: none; }
-.spark { font-size: 12px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
-.spark.yes { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
-@media (max-width: 560px) {
-  .row2 { grid-template-columns: 1fr; }
-  .today { flex-direction: column; }
-  .contract { padding: 18px 16px 14px; }
-}
-/* ---------- reset ---------- */
-.sec-n { color: var(--faint); font-weight: 500; margin-right: 6px; font-variant-numeric: tabular-nums; }
-.pats { display: flex; flex-wrap: wrap; gap: 8px; }
-.pat { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 8px 14px; font-size: 14px; transition: background .15s, border-color .15s; }
-.pat:hover { border-color: var(--muted); }
-.pat.on { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
-.moves { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
-.moves li { padding: 10px 14px; border-radius: 10px; background: var(--hover); font-size: 15px; color: var(--muted); }
-.moves b { color: var(--text); font-weight: 600; }
-.anchor { margin: 16px 0 0; padding-left: 14px; border-left: 2px solid var(--accent); font-size: 15px; }
-.two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.two label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
-.two .big, .opt .big, #fact, #move { font-size: 16px; padding: 10px 14px; }
-.opt { margin-top: 14px; }
-.opt .body { padding: 10px 0 0 18px; display: grid; gap: 10px; }
-.opt .body label { font-size: 13px; color: var(--muted); display: block; margin-bottom: 6px; }
-.final { margin-top: 36px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
-.final h2 { margin: 0 0 4px; font-size: 20px; letter-spacing: -.01em; }
-.final .actions { margin-top: 16px; }
-@media (max-width: 560px) { .two { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -375,6 +255,7 @@ textarea.big { min-height: 110px; resize: vertical; line-height: 1.5; font-size:
     <span>Data stays in this browser</span>
     <span class="links">
       <a href="../index.html">All tools</a>
+      <a href="#/history">History</a>
       <button type="button" data-act="export">Export</button>
       <button type="button" data-act="import">Import</button>
     </span>
@@ -387,59 +268,180 @@ textarea.big { min-height: 110px; resize: vertical; line-height: 1.5; font-size:
 (() => {
   'use strict';
 
-  /* Reset: for when something went wrong and your head is running the worst
-     version of it. Two or three minutes, always ending in one move (via Start). */
+  /* ---------- content ----------
+     Review steps, written in our own words. {x} in text = a symbol from the legend. */
 
-  const START_URL = '../start/index.html';
-  const GOALS_KEY = 'goals.v1';
+  const FILTER = 'filter';
 
-  const PATTERNS = [
-    ['worst', 'Jumping to the worst case', 'Write the worst case down below and what you’d actually do. Fears shrink once they have a plan.'],
-    ['chain', 'One slip = everything’s ruined', 'One event, not a pattern. Today doesn’t decide tomorrow, the next move does.'],
-    ['overwhelm', 'Overwhelmed', 'Too many pieces at once. You only need the next one, the smallest.'],
-    ['doubt', 'Doubting it all', 'Doubt is a feeling, not a forecast. Move first, judge from what happens.'],
-    ['attack', 'Beating myself up', 'Talk to yourself like a good coach after a lost match: what’s the next play?'],
-    ['blame', 'It’s not my fault', 'Maybe true. What’s still in your hands anyway?'],
-    ['helpless', 'Nothing I can do', 'Name one small thing you can still decide today.'],
-  ];
+  const C = {
+    reviews: [
+      {
+        id: 'reset', group: 'any', title: 'Reset', when: 'When something went wrong and your head runs the worst version of it', time: '3–5 min',
+        sections: [
+          {
+            phase: ['A', 'Out of your head'],
+            items: [
+              { t: 'Write it down', d: 'On today’s page: what happened, in one sentence. Facts only, what a camera would have seen.' },
+              { t: 'Name the spiral', d: 'Under it, note what your head is doing with it. Pick from the list and read the move against it.', extra: 'patterns', open: true },
+              { t: 'One event', d: 'Write: “One event, not a pattern.” It happened, it’s done.', s: 'Forgive it quickly so you can move. The past gets better from what you do next.', key: true },
+            ],
+          },
+          {
+            phase: ['B', 'Back to what you control'],
+            items: [
+              { t: 'Draw the line', d: 'Two short lists: out of my hands, in my hands. Accept the first, work with the second.', key: true },
+              { t: 'Worst case', d: 'Only if you’re afraid of what comes next: write the worst case concretely, what you’d do if it happens, and whether you could live with it.', s: 'Not afraid? Tick it and move on. Fears shrink once they have a plan.' },
+            ],
+          },
+          {
+            phase: ['C', 'Move'],
+            items: [
+              { t: 'One move', d: 'Pick one thing from “in my hands”. Small and physical. Write it as a {*} task.', key: true },
+              { t: 'Do it now', d: 'Five-second countdown, six minutes. Then tick the task off.', key: true, link: ['../start/index.html', 'Do it with Start'] },
+            ],
+          },
+        ],
+      },
+    ],
+    extras: {
+      patterns: ['Thought patterns', `<ul class="defs">
+        <li><b>Jumping to the worst case</b>Write the worst case down in step 5, with what you’d actually do.</li>
+        <li><b>One slip = everything’s ruined</b>One event, not a pattern. Today doesn’t decide tomorrow, the next move does.</li>
+        <li><b>Overwhelmed</b>Too many pieces at once. You only need the next one, the smallest.</li>
+        <li><b>Doubting it all</b>Doubt is a feeling, not a forecast. Move first, judge from what happens.</li>
+        <li><b>Beating myself up</b>Talk to yourself like a good coach after a lost match: what’s the next play?</li>
+        <li><b>It’s not my fault</b>Maybe true. What’s still in your hands anyway?</li>
+        <li><b>Nothing I can do</b>Name one small thing you can still decide today.</li>
+      </ul>`],
+    },
+  };
+
+  /* ---------- UI strings ---------- */
+  const T = {
+      locale: 'en-GB', app: 'Reset',
+      groups: { any: 'When it goes wrong' },
+      home: 'Something went wrong', homeLead: 'A few minutes in your notebook: out of your head, back to what you control, one move.',
+      history: 'History', handy: 'Handy', cheat: 'Cheat sheet', cheatMeta: 'Symbols · filter · during the day · core collections',
+      now: 'now', inProgress: (n, t) => `in progress · ${n} of ${t}`, steps: n => `${n} steps`,
+      last: w => 'last ' + w, never: 'not done yet', streak: n => `${n} days in a row`,
+      today: 'today', yesterday: 'yesterday', daysAgo: n => `${n} days ago`,
+      back: 'Reset', started: w => 'started ' + w, keyStep: 'Key step',
+      staleTitle: 'Yesterday?', stale: w => `These ticks are from ${w}.`, restart: 'Start over',
+      done: 'Done', allDone: d => `All steps ticked off${d ? ' in ' + d : ''}.`, saveClose: 'Save and close',
+      clear: 'Clear ticks', finishEarly: 'Finish early',
+      hintKey: 'key step', hintKbd: '<kbd>X</kbd> ticks the next one · <kbd>Z</kbd> undo · <kbd>↑</kbd> <kbd>↓</kbd> move · <kbd>Space</kbd> toggles',
+      saved: t => `${t}: saved`, savedPart: (t, n, all) => `${t}: saved (${n} of ${all})`,
+      histLead30: s => 'Last 30 days: ' + s, histEmpty: 'Nothing yet. Finished reviews will show up here.',
+      extras: { filter: 'Filter', ...Object.fromEntries(Object.entries(C.extras).map(([k, [t]]) => [k, t])) },
+      spread: [['Left · past week', 'reflection'], ['Right · coming week', 'tasks · intention · <span class="g">*</span>']],
+      quad: [['What worked', 'how you work'], ['More of this', 'what’s good for me'], ['What didn’t work', 'how you work'], ['Less of this', 'what isn’t good for me']],
+      filter: [
+        ['<strong>Is it necessary?</strong> Would skipping it have serious consequences: work, bills, official matters?', 'Keep asking “why?” until you get to the heart of it. Choose actions you can influence, not outcomes. Yes → it stays. No → next.'],
+        ['<strong>Does it matter</strong> to me or to the people close to me?', 'At work, if you don’t know why, ask. In private life, check whether an old idea still interests you. Yes → it stays. No or not sure → next.'],
+        ['<strong>What happens if I never do it?</strong>', 'Nothing? Cross it out, no guilt. Something you care about suffers, like a relationship? Then the task makes sense.'],
+        ['<strong>Rewrite it by hand.</strong> The last sieve.', 'Not worth a minute of rewriting? Let it go.'],
+      ],
+      verdict: '<b>Three “no”s</b> → cross it out. It stays → <span class="g">&gt;</span> rewrite only what you’ll do in this period.',
+      cheatLead: 'What you come back to during reviews.',
+      symbols: 'Symbols', symbolsLead: 'Short entries that start with a single sign',
+      filterTitle: 'Filter', filterLead: 'For every open <span class="g">•</span>, at every review.',
+      dayTitle: 'During the day', dayLead: 'Write it down right away',
+      day: [
+        ['Day page first', 'Briefly and straight away, without deciding where it belongs. The evening review moves dated things to the monthly list, future log or calendar.'],
+        ['Recurring meetings', 'On the day page, just a <span class="g">○</span> with a pointer to the page. The notes themselves go into a separate collection, dated.'],
+        ['Events <span class="g">○</span>', 'Facts, no judgement. Thoughts and feelings as <span class="g">–</span>, indented underneath.'],
+      ],
+      coreTitle: 'Core collections', coreLead: 'What lives where',
+      core: [
+        ['Index', 'At the front of the notebook. Collection name and page numbers. Add later parts next to them. Day pages don’t get indexed.'],
+        ['Future log', 'The next few months on one spread. Everything with a date outside the current month goes here.'],
+        ['Monthly log', 'Left page: timeline, filled in after the fact. Right page: tasks from the future log, from last month and new ones.'],
+        ['Weekly log', 'Left page: reflection on the past week. Right page: tasks for the coming week.'],
+        ['Day page', 'Date and page number. Takes as much space as it needs. Nothing gets set up in advance.'],
+      ],
+      quote: 'Every review asks the same questions, but the answers change over time. That’s why you keep coming back to them.',
+      file: 'reset',
+      saveErr: 'Could not save data in this browser',
+      imported: n => `Imported ${n} history entries`, badFile: 'Not a valid export file',
+  };
+
+  const glyphs = s => s.replace(/\{(.+?)\}/g, '<span class="g">$1</span>');
+  const TOTAL = r => r.sections.reduce((n, s) => n + s.items.length, 0);
+  const byId = id => C.reviews.find(r => r.id === id);
 
   /* ---------- storage ---------- */
-  const KEY = 'reset.v1';
+  const KEY = 'reset-checklist.v1';
+  const LEGACY_KEYS = [];
   let db = load();
+
   function load() {
     try {
-      const d = JSON.parse(localStorage.getItem(KEY));
-      if (d && Array.isArray(d.log)) return d;
+      const raw = [KEY, ...LEGACY_KEYS].map(k => localStorage.getItem(k)).find(Boolean);
+      const d = JSON.parse(raw);
+      if (d && d.progress && Array.isArray(d.log)) return d;
     } catch (e) {}
-    return { cur: blank(), log: [] };
+    return { progress: {}, log: [] };
   }
-  function blank() { return { fact: '', pats: [], forgive: '', out: '', in: '', worst: '', plan: '', afford: '', move: '', started: Date.now() }; }
   function save() {
     try { localStorage.setItem(KEY, JSON.stringify(db)); }
-    catch (e) { toast('Could not save data in this browser'); }
-  }
-  function goals() {
-    try {
-      const d = JSON.parse(localStorage.getItem(GOALS_KEY));
-      return d && Array.isArray(d.goals) ? d.goals.filter(g => g.status === 'active') : [];
-    } catch (e) { return []; }
+    catch (e) { toast(T.saveErr); }
   }
 
   const $ = s => document.querySelector(s);
-  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const app = $('#app');
 
   /* ---------- dates ---------- */
   const DAY = 864e5;
   const startOfDay = t => { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); };
   const daysAgo = t => Math.round((startOfDay(Date.now()) - startOfDay(t)) / DAY);
-  const hm = t => new Date(t).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  const hm = t => new Date(t).toLocaleTimeString(T.locale, { hour: '2-digit', minute: '2-digit' });
   function fmtWhen(t) {
     const n = daysAgo(t);
-    if (n === 0) return 'today, ' + hm(t);
-    if (n === 1) return 'yesterday, ' + hm(t);
-    if (n < 7) return `${n} days ago`;
-    return new Date(t).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    if (n === 0) return T.today + ', ' + hm(t);
+    if (n === 1) return T.yesterday + ', ' + hm(t);
+    if (n < 7) return T.daysAgo(n);
+    const d = new Date(t);
+    return d.toLocaleDateString(T.locale, { day: 'numeric', month: 'short', year: d.getFullYear() === new Date().getFullYear() ? undefined : 'numeric' });
+  }
+  function fmtDur(ms) {
+    const m = Math.round(ms / 6e4);
+    if (m < 1) return '< 1 min';
+    if (m < 90) return `${m} min`;
+    return `${Math.floor(m / 60)} h ${m % 60} min`;
+  }
+  const lastDone = id => db.log.filter(e => e.id === id).reduce((a, e) => Math.max(a, e.t), 0);
+
+  // Which checklist makes sense right now? A hint, not a rule.
+  function due(r) {
+    const last = lastDone(r.id), now = new Date(), h = now.getHours();
+    const doneToday = last && daysAgo(last) === 0;
+    if (r.id === 'morning') return !doneToday && h >= 4 && h < 14;
+    if (r.id === 'evening') return !doneToday && (h >= 18 || h < 2);
+    if (r.id === 'week') return !last || daysAgo(last) >= 7;
+    if (r.id === 'month') {
+      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+      const edge = now.getDate() >= lastDay - 2 || now.getDate() <= 3;
+      return edge && (!last || daysAgo(last) >= 10);
+    }
+    return false;
+  }
+
+  // Streak for daily reviews: consecutive days (ending today or yesterday).
+  function streak(id) {
+    const days = new Set(db.log.filter(e => e.id === id).map(e => daysAgo(e.t)));
+    const start = days.has(0) ? 0 : days.has(1) ? 1 : -1;
+    if (start < 0) return 0;
+    let n = 0;
+    while (days.has(start + n)) n++;
+    return n;
+  }
+
+  /* ---------- routing ---------- */
+  function route() {
+    const p = location.hash.replace(/^#\/?/, '').split('/');
+    if (p[0] === 'r' && byId(p[1])) return { view: 'review', review: byId(p[1]) };
+    if (p[0] === 'cheat' || p[0] === 'sciaga') return { view: 'cheat' };
+    if (p[0] === 'history' || p[0] === 'historia') return { view: 'history' };
+    return C.reviews.length === 1 ? { view: 'review', review: C.reviews[0] } : { view: 'home' };
   }
 
   /* ---------- ui ---------- */
@@ -447,134 +449,239 @@ textarea.big { min-height: 110px; resize: vertical; line-height: 1.5; font-size:
   function toast(msg) {
     const t = $('#toast');
     t.textContent = msg; t.classList.add('show');
-    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
   }
   const ICON_BACK = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>';
   const ICON_NEXT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg>';
-  const LOGO = '<svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M21.5 12.5a6.5 6.5 0 1 0 1 5" fill="none" stroke="var(--bg)" stroke-width="2.2" stroke-linecap="round"/><path d="M22.5 8.5v4.5H18" fill="none" stroke="var(--bg)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  const route = () => location.hash.replace(/^#\/?/, '') === 'history' ? 'history' : 'main';
-  let worstOpen = false, forgiveOpen = false;
+  const ICON_CHECK = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg>';
+  const LOGO = '<svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M8.2 7.7l3.6 3.6M11.8 7.7l-3.6 3.6" stroke="var(--bg)" stroke-width="1.6" stroke-linecap="round"/><rect x="14" y="8" width="10" height="3" rx="1.5" fill="var(--bg)"/><circle cx="10" cy="16" r="1.9" fill="var(--bg)" opacity=".7"/><rect x="14" y="14.5" width="8" height="3" rx="1.5" fill="var(--bg)" opacity=".7"/><circle cx="10" cy="22.5" r="1.9" fill="var(--bg)" opacity=".45"/><rect x="14" y="21" width="5" height="3" rx="1.5" fill="var(--bg)" opacity=".45"/></svg>';
 
-  function render(opts = {}) {
-    if (route() === 'history') return renderHistory();
-    document.title = 'Reset';
-    const c = db.cur;
-    if (c.pats.includes('worst')) worstOpen = true;
-    const sel = PATTERNS.filter(p => c.pats.includes(p[0]));
-    app.innerHTML = `
-      <div class="crumbs"><a href="../index.html">${ICON_BACK}<span>All tools</span></a><a href="#/history">History</a></div>
-      <h1>Something went wrong</h1>
-      <p class="lead">Two or three minutes. Get it out of your head, back to what you control, and into one move.</p>
-
-      <h2 class="sec"><span class="sec-n">1</span>What happened?</h2>
-      <p class="lead">One sentence, facts only. What a camera would have seen, without the commentary.</p>
-      <input class="big" id="fact" value="${esc(c.fact)}" placeholder="e.g. I missed the deadline for the report" autocomplete="off">
-
-      <h2 class="sec"><span class="sec-n">2</span>What’s your head doing with it?</h2>
-      <p class="lead">Tap whatever fits. Each comes with the move against it.</p>
-      <div class="pats">${PATTERNS.map(([k, label]) => `<button type="button" class="pat ${c.pats.includes(k) ? 'on' : ''}" data-act="pat" data-k="${k}" aria-pressed="${c.pats.includes(k)}">${label}</button>`).join('')}</div>
-      ${sel.length ? `<ul class="moves">${sel.map(([, label, move]) => `<li><b>${label}.</b> ${move}</li>`).join('')}</ul>` : ''}
-      <p class="anchor">It happened, it’s done, and it’s one event. Forgive it fast so you can move. The past gets better from what you do next.</p>
-
-      <h2 class="sec"><span class="sec-n">3</span>Where’s the line?</h2>
-      <div class="two">
-        <div><label for="out">Out of my hands (accept it)</label><input class="big" id="out" value="${esc(c.out)}" placeholder="e.g. The client’s reaction" autocomplete="off"></div>
-        <div><label for="in">In my hands</label><input class="big" id="in" value="${esc(c.in)}" placeholder="e.g. Send an honest update with a new date" autocomplete="off"></div>
-      </div>
-      <div class="opt">
-        <button class="toggle" type="button" data-act="forgive" aria-expanded="${forgiveOpen}">${ICON_NEXT}Forgive yourself, in writing</button>
-        ${forgiveOpen ? `<div class="body"><div><label for="forgive">I forgive myself for…</label><input class="big" id="forgive" value="${esc(c.forgive)}" placeholder="e.g. leaving it too late this time" autocomplete="off"></div></div>` : ''}
-      </div>
-      <div class="opt">
-        <button class="toggle" type="button" data-act="worst" aria-expanded="${worstOpen}">${ICON_NEXT}Afraid of what comes next? Plan the worst case</button>
-        ${worstOpen ? `<div class="body">
-          <div><label for="worst">If it really goes badly, what happens?</label><input class="big" id="worst" value="${esc(c.worst)}" placeholder="Concretely, not a feeling" autocomplete="off"></div>
-          <div><label for="plan">What would I do then?</label><input class="big" id="plan" value="${esc(c.plan)}" placeholder="First step if it happens" autocomplete="off"></div>
-          <div><label for="afford">Could I live with it?</label><input class="big" id="afford" value="${esc(c.afford)}" placeholder="Yes / yes, if… / no, so I’ll…" autocomplete="off"></div>
-        </div>` : ''}
-      </div>
-
-      <div class="final">
-        <h2><span class="sec-n">4</span>One move, now</h2>
-        <p class="lead" style="margin-bottom:14px">Small and physical. You’ll get the five-second countdown and six minutes.</p>
-        <input class="big" id="move" value="${esc(c.move)}" placeholder="${esc(c.in || 'e.g. Open the email and write the first line')}" autocomplete="off">
-        <div class="chips" id="chips">${chipsHtml(c)}</div>
-        <div class="actions">
-          <button class="btn primary" data-act="go">Move now</button>
-          <button class="btn" data-act="save">Save without starting</button>
-          <span class="spacer"></span>
-          <button class="btn ghost danger" data-act="clear">Clear</button>
-        </div>
-      </div>`;
-    if (opts.focus) document.getElementById(opts.focus)?.focus();
+  function ring(done, total) {
+    const r = 11, c = 2 * Math.PI * r, f = total ? done / total : 0;
+    return `<svg class="ring" viewBox="0 0 28 28" aria-hidden="true"><circle class="bg" cx="14" cy="14" r="${r}"/><circle class="fg" cx="14" cy="14" r="${r}" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - f)}"/></svg>`;
   }
 
-  // Quick picks for the move: what's in your hands, plus today's steps from active goals.
-  function chipsHtml(c) {
-    const gs = goals().filter(g => g.today || g.process).slice(0, 3);
-    return (c.in.trim() ? `<button type="button" class="chip" data-act="use" data-v="${esc(c.in.trim())}">${esc(c.in.trim())}</button>` : '')
-      + gs.map(g => { const v = g.today || g.process; return `<button type="button" class="chip" data-act="use" data-v="${esc(v)}" title="${esc(g.title)}">Goal: ${esc(v)}</button>`; }).join('');
+  const app = $('#app');
+  const openExtras = new Set();
+
+  function render(opts = {}) {
+    const rt = route();
+    document.title = rt.review ? `${rt.review.title} · ${T.app}` : T.app;
+    if (rt.view === 'review') renderReview(rt.review, opts);
+    else if (rt.view === 'cheat') renderCheat();
+    else if (rt.view === 'history') renderHistory();
+    else renderHome();
+  }
+
+  function renderHome() {
+    const groups = [...new Set(C.reviews.map(r => r.group))];
+    const row = r => {
+      const p = db.progress[r.id], total = TOTAL(r);
+      const n = p ? p.done.length : 0;
+      const last = lastDone(r.id);
+      const st = r.group === 'daily' ? streak(r.id) : 0;
+      const bits = [];
+      if (p && n) bits.push(T.inProgress(n, total));
+      else bits.push(T.steps(total) + (r.time ? ` · ${r.time}` : ''));
+      bits.push(last ? T.last(fmtWhen(last)) : T.never);
+      if (st > 1) bits.push(T.streak(st));
+      return `
+        <li><a href="#/r/${r.id}">
+          <span class="name"><span>${r.title}</span>${due(r) && !(p && n) ? `<span class="tag">${T.now}</span>` : ''}</span>
+          <span class="meta">${bits.join(' · ')}</span>
+          <span class="side">${p && n ? ring(n, total) : ''}${ICON_NEXT}</span>
+        </a></li>`;
+    };
+    app.innerHTML = `
+      <div class="crumbs"><a href="../index.html">${ICON_BACK}<span>All tools</span></a><a href="#/history">${T.history}</a></div>
+      <h1>${T.home}</h1>
+      <p class="lead">${T.homeLead}</p>
+      ${groups.map(g => `
+        <p class="group">${T.groups[g]}</p>
+        <ul class="lists">${C.reviews.filter(r => r.group === g).map(row).join('')}</ul>`).join('')}`;
+  }
+
+  function filterHtml() {
+    return `
+      <div class="filtr">
+        ${T.filter.map(([q, s], i) => `<div class="step"><span class="k">${i + 1}</span><p>${q}<span>${s}</span></p></div>`).join('')}
+        <div class="verdict">${T.verdict}</div>
+      </div>`;
+  }
+  const cells = (rows, cls) => `<div class="spread${cls ? ' ' + cls : ''}">${rows.map(([b, s]) => `<div><b>${b}</b>${s}</div>`).join('')}</div>`;
+  const EXTRAS = {
+    [FILTER]: filterHtml,
+    qs: () => `<ul class="qs">${C.monthQs.map(q => `<li>${q}</li>`).join('')}</ul>`,
+    spread: () => cells(T.spread),
+    quad: () => cells(T.quad, 'quad'),
+    ...Object.fromEntries(Object.entries(C.extras).map(([k, [, h]]) => [k, () => h])),
+  };
+
+  function renderReview(r, opts) {
+    const p = db.progress[r.id];
+    const done = new Set(p ? p.done : []);
+    const total = TOTAL(r), n = done.size;
+    const pct = Math.round(n / total * 100);
+    let idx = 0;
+    const stale = p && p.started && daysAgo(p.started) > 0 && r.group === 'daily' && n > 0;
+
+    const sections = r.sections.map((s, si) => `
+      ${s.phase ? `<p class="phase"><b>${s.phase[0]}</b>${s.phase[1]}</p>` : ''}
+      <ol class="check">
+        ${s.items.map((it, ii) => {
+          const k = `${si}.${ii}`, num = ++idx, on = done.has(k);
+          const exKey = `${r.id}:${k}`;
+          const ex = it.extra && EXTRAS[it.extra];
+          const open = ex && (openExtras.has(exKey) || (it.open && !openExtras.has('!' + exKey)));
+          return `
+          <li>
+            <button class="item ${on ? 'done' : ''}" data-act="tick" data-k="${k}" role="checkbox" aria-checked="${on}">
+              <span class="box">${ICON_CHECK}</span>
+              <span>
+                <span class="t"><span class="n">${num}</span><span class="tx">${glyphs(it.t)}</span>${it.key ? `<span class="key" title="${T.keyStep}"></span>` : ''}</span>
+                <span class="d">${glyphs(it.d)}</span>
+                ${it.s ? `<span class="s">${glyphs(it.s)}</span>` : ''}
+              </span>
+            </button>
+            ${it.link ? `<div class="extra"><a class="toggle" href="${it.link[0]}">${ICON_NEXT}${it.link[1]}</a></div>` : ''}
+            ${ex ? `<div class="extra">
+              <button class="toggle" data-act="extra" data-x="${exKey}" data-default="${it.open ? 1 : 0}" aria-expanded="${open}">${ICON_NEXT}${T.extras[it.extra]}</button>
+              ${open ? ex() : ''}
+            </div>` : ''}
+          </li>`;
+        }).join('')}
+      </ol>
+      ${(s.notes || []).map(([b, t]) => `<div class="note"><b>${b}</b><span>${t}</span></div>`).join('')}`).join('');
+
+    app.innerHTML = `
+      <div class="crumbs">
+        <a href="../index.html">${ICON_BACK}<span>All tools</span></a>
+        <span class="progress-meta">${n} / ${total}</span>
+      </div>
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><span style="width:${pct}%"></span></div>
+      <h1>${r.title}</h1>
+      <p class="lead">${r.when}${r.time ? ' · ' + r.time : ''}${p && n && p.started ? ' · ' + T.started(fmtWhen(p.started)) : ''}</p>
+      ${stale ? `<div class="note" style="margin:-12px 0 24px"><b>${T.staleTitle}</b><span>${T.stale(fmtWhen(p.started))} <button class="toggle" style="text-decoration:underline;text-underline-offset:3px" data-act="restart">${T.restart}</button></span></div>` : ''}
+      ${sections}
+      ${n === total ? `
+        <div class="finish ${opts.anim ? 'anim' : ''}" id="finish">
+          <h2>${T.done}</h2>
+          <p>${T.allDone(p && p.started ? fmtDur(Date.now() - p.started) : '')}</p>
+          <div class="actions"><button class="btn primary" data-act="complete">${T.saveClose}</button></div>
+        </div>` : `
+        <div class="actions">
+          ${n ? `<button class="btn ghost danger" data-act="restart">${T.clear}</button>` : ''}
+          <span class="spacer"></span>
+          ${n ? `<button class="btn" data-act="complete">${T.finishEarly}</button>` : ''}
+        </div>
+        <p class="hint"><span class="legend-key"></span>${T.hintKey}<span class="kbd-hint"> · ${T.hintKbd}</span></p>`}`;
+
+    if (opts.focus) app.querySelector(`[data-k="${opts.focus}"]`)?.focus({ preventScroll: true });
+  }
+
+  function renderCheat() {
+    const defs = rows => `<ul class="defs">${rows.map(([b, s]) => `<li><b>${b}</b>${s}</li>`).join('')}</ul>`;
+    app.innerHTML = `
+      <div class="crumbs"><a href="#/">${ICON_BACK}<span>${T.back}</span></a></div>
+      <h1>${T.cheat}</h1>
+      <p class="lead">${T.cheatLead}</p>
+
+      <h2 class="sec">${T.symbols}</h2>
+      <p class="lead">${T.symbolsLead}</p>
+      <div class="legenda">
+        ${C.legend.map(([g, n, s, mark]) => `<div class="sym"><span class="gl${mark ? ' mark' : ''}">${g}</span><span>${n}<small>${s}</small></span></div>`).join('')}
+      </div>
+
+      <h2 class="sec">${T.filterTitle}</h2>
+      <p class="lead">${T.filterLead}</p>
+      ${filterHtml()}
+
+      <h2 class="sec">${T.dayTitle}</h2>
+      <p class="lead">${T.dayLead}</p>
+      ${defs(T.day)}
+
+      <h2 class="sec">${T.coreTitle}</h2>
+      <p class="lead">${T.coreLead}</p>
+      ${defs(T.core)}
+
+      <p class="quote">${T.quote}</p>`;
   }
 
   function renderHistory() {
-    document.title = 'History · Reset';
-    const items = [...db.log].sort((a, b) => b.t - a.t).slice(0, 100);
-    const label = Object.fromEntries(PATTERNS.map(p => [p[0], p[1]]));
-    const counts = {};
-    db.log.forEach(e => e.pats.forEach(p => { counts[p] = (counts[p] || 0) + 1; }));
-    const top = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+    const items = [...db.log].sort((a, b) => b.t - a.t).slice(0, 60);
+    const since = Date.now() - 30 * DAY;
+    const counts = C.reviews.map(r => [r, db.log.filter(e => e.id === r.id && e.t >= since).length]);
     app.innerHTML = `
-      <div class="crumbs"><a href="#/">${ICON_BACK}<span>Reset</span></a></div>
-      <h1>History</h1>
+      <div class="crumbs"><a href="#/">${ICON_BACK}<span>${T.back}</span></a></div>
+      <h1>${T.history}</h1>
       <p class="lead">${db.log.length
-        ? (top.length ? 'What your head does most: ' + top.map(([k, n]) => `${label[k].toLowerCase()} (${n})`).join(' · ') + '.' : 'Every reset shows up here.')
-        : 'Nothing yet. Every reset shows up here.'}</p>
-      ${items.length ? `<ul class="hist">${items.map(e => `
-        <li><span>${esc(e.fact || '—')}${e.move ? `<br><small style="color:var(--muted)">→ ${esc(e.move)}${e.moved ? '' : ' (not started)'}</small>` : ''}</span><span class="when">${fmtWhen(e.t)}</span></li>`).join('')}</ul>` : ''}`;
+        ? T.histLead30(counts.filter(c => c[1]).map(([r, c]) => `${r.title.toLowerCase()} ${c}×`).join(' · '))
+        : T.histEmpty}</p>
+      ${items.length ? `<ul class="hist">${items.map(e => {
+        const r = byId(e.id);
+        const part = e.n < e.total ? ` · ${e.n}/${e.total}` : '';
+        return `<li><span>${r ? r.title : e.id}${part}</span><span class="when">${fmtWhen(e.t)}${e.dur ? ' · ' + fmtDur(e.dur) : ''}</span></li>`;
+      }).join('')}</ul>` : ''}`;
   }
 
   /* ---------- actions ---------- */
-  function commit(moved) {
-    const c = db.cur;
-    if (!c.fact.trim() && !c.move.trim()) { toast('Write what happened first'); $('#fact')?.focus(); return false; }
-    db.log.push({ t: Date.now(), fact: c.fact.trim(), pats: c.pats, out: c.out.trim(), in: c.in.trim(), forgive: c.forgive.trim(), worst: c.worst.trim(), plan: c.plan.trim(), afford: c.afford.trim(), move: c.move.trim(), moved });
-    db.cur = blank(); worstOpen = false; forgiveOpen = false; save();
-    return true;
+  const current = () => route().review;
+  let lastTicked = [];
+
+  function tick(r, k, force) {
+    let p = db.progress[r.id];
+    if (!p) p = db.progress[r.id] = { started: Date.now(), done: [] };
+    const has = p.done.includes(k);
+    const want = force === undefined ? !has : force;
+    if (want === has) return;
+    if (want) { p.done.push(k); lastTicked.push(k); }
+    else p.done = p.done.filter(x => x !== k);
+    if (!p.done.length) delete db.progress[r.id];
+    save();
+    const wasLast = want && db.progress[r.id] && db.progress[r.id].done.length === TOTAL(r);
+    render({ focus: k, anim: wasLast });
+    if (wasLast) $('#finish')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  const FIELDS = ['fact', 'out', 'in', 'forgive', 'worst', 'plan', 'afford', 'move'];
-  document.addEventListener('input', e => {
-    if (FIELDS.includes(e.target.id)) { db.cur[e.target.id] = e.target.value; save(); }
-    if (e.target.id === 'in') {
-      const ch = $('#chips'); if (ch) ch.innerHTML = chipsHtml(db.cur);
-      const mv = $('#move'); if (mv) mv.placeholder = db.cur.in || 'e.g. Open the email and write the first line';
-    }
-  });
+  function keysOf(r) {
+    const out = [];
+    r.sections.forEach((s, si) => s.items.forEach((_, ii) => out.push(`${si}.${ii}`)));
+    return out;
+  }
 
-  document.addEventListener('click', async e => {
-    const el = e.target.closest('[data-act]'); if (!el) return;
-    const act = el.dataset.act, c = db.cur;
-    if (act === 'pat') {
-      const k = el.dataset.k, i = c.pats.indexOf(k);
-      i >= 0 ? c.pats.splice(i, 1) : c.pats.push(k);
-      if (k === 'worst' && i < 0) worstOpen = true;
-      save(); render(); app.querySelector(`[data-k="${k}"]`)?.focus({ preventScroll: true });
+  function complete(r) {
+    const p = db.progress[r.id];
+    const n = p ? p.done.length : 0, all = TOTAL(r);
+    db.log.push({ id: r.id, t: Date.now(), dur: p && p.started ? Date.now() - p.started : 0, n, total: all });
+    delete db.progress[r.id];
+    lastTicked = [];
+    save();
+    location.hash = '#/';
+    toast(n === all ? T.saved(r.title) : T.savedPart(r.title, n, all));
+  }
+
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-act]');
+    if (!el) return;
+    const act = el.dataset.act, r = current();
+
+    if (act === 'tick' && r) tick(r, el.dataset.k);
+    else if (act === 'extra') {
+      const x = el.dataset.x, def = el.dataset.default === '1';
+      if (def) { openExtras.has('!' + x) ? openExtras.delete('!' + x) : openExtras.add('!' + x); }
+      else { openExtras.has(x) ? openExtras.delete(x) : openExtras.add(x); }
+      render();
+      app.querySelector(`[data-x="${x}"]`)?.focus({ preventScroll: true });
     }
-    else if (act === 'worst') { worstOpen = !worstOpen; render({ focus: worstOpen ? 'worst' : null }); }
-    else if (act === 'forgive') { forgiveOpen = !forgiveOpen; render({ focus: forgiveOpen ? 'forgive' : null }); }
-    else if (act === 'use') { c.move = el.dataset.v; save(); render({ focus: 'move' }); }
-    else if (act === 'go') {
-      const move = (c.move || c.in || '').trim();
-      if (!move) { toast('Write one move first'); $('#move').focus(); return; }
-      c.move = move;
-      if (commit(true)) location.href = `${START_URL}?task=${encodeURIComponent(move)}`;
+    else if (act === 'restart' && r) {
+      delete db.progress[r.id]; lastTicked = []; save(); render(); window.scrollTo(0, 0);
     }
-    else if (act === 'save') { if (commit(false)) { render(); window.scrollTo(0, 0); toast('Saved. The move is waiting when you are.'); } }
-    else if (act === 'clear') { if (confirm('Clear this reset?')) { db.cur = blank(); worstOpen = forgiveOpen = false; save(); render(); window.scrollTo(0, 0); } }
+    else if (act === 'complete' && r) complete(r);
     else if (act === 'export') {
       const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob); a.download = `reset-${new Date().toISOString().slice(0, 10)}.json`;
+      a.href = URL.createObjectURL(blob);
+      a.download = `${T.file}-${new Date().toISOString().slice(0, 10)}.json`;
       document.body.appendChild(a); a.click(); a.remove();
       setTimeout(() => URL.revokeObjectURL(a.href), 1000);
     }
@@ -586,15 +693,57 @@ textarea.big { min-height: 110px; resize: vertical; line-height: 1.5; font-size:
     if (!f) return;
     try {
       const data = JSON.parse(await f.text());
-      if (!data || !Array.isArray(data.log)) throw 0;
-      const seen = new Set(db.log.map(x => x.t));
+      if (!data || !Array.isArray(data.log) || typeof data.progress !== 'object') throw 0;
+      const seen = new Set(db.log.map(x => x.id + '@' + x.t));
       let added = 0;
-      for (const x of data.log) { if (!x || !x.t || seen.has(x.t) || !Array.isArray(x.pats)) continue; db.log.push(x); added++; }
-      save(); render(); toast(`Imported ${added} entries`);
-    } catch (_) { toast('Not a valid export file'); }
+      for (const x of data.log) {
+        if (!x || !x.id || !x.t || seen.has(x.id + '@' + x.t)) continue;
+        db.log.push(x); added++;
+      }
+      for (const [id, p] of Object.entries(data.progress || {})) {
+        if (byId(id) && p && Array.isArray(p.done) && !db.progress[id]) db.progress[id] = p;
+      }
+      save(); render();
+      toast(T.imported(added));
+    } catch (_) { toast(T.badFile); }
   });
 
-  window.addEventListener('storage', e => { if (e.key === KEY && !/INPUT/.test(document.activeElement?.tagName)) { db = load(); render(); } });
+  document.addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const r = current();
+    if (!r) return;
+    const keys = keysOf(r);
+    const items = [...app.querySelectorAll('.item')];
+    const at = items.indexOf(document.activeElement);
+
+    if (e.key === 'x' || e.key === 'X') {
+      e.preventDefault();
+      const p = db.progress[r.id], done = new Set(p ? p.done : []);
+      const from = at >= 0 && !done.has(keys[at]) ? at : 0;
+      const k = keys.slice(from).find(x => !done.has(x)) || keys.find(x => !done.has(x));
+      if (k) tick(r, k, true);
+    }
+    else if (e.key === 'z' || e.key === 'Z') {
+      e.preventDefault();
+      const p = db.progress[r.id];
+      while (lastTicked.length) {
+        const k = lastTicked.pop();
+        if (p && p.done.includes(k)) { tick(r, k, false); return; }
+      }
+    }
+    else if (e.key === 'ArrowDown' || e.key === 'j') {
+      e.preventDefault();
+      (items[at + 1] || items[at < 0 ? 0 : at])?.focus();
+    }
+    else if (e.key === 'ArrowUp' || e.key === 'k') {
+      e.preventDefault();
+      (items[at - 1] || items[0])?.focus();
+    }
+  });
+
+  window.addEventListener('storage', e => {
+    if (e.key === KEY) { db = load(); render(); }
+  });
   window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
   render();
 })();

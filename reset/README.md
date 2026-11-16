@@ -2,7 +2,7 @@
 
 # Reset
 
-**Something went wrong and your head is running the worst version of it.<br>Two or three minutes back to what you control, then one move.**
+**A short checklist for your notebook when something went wrong<br>and your head is running the worst version of it.**
 
 [**→ Open the app**](https://marekbrze.github.io/bullet-journal-tools/reset/) &nbsp;·&nbsp; [Download the file](https://raw.githubusercontent.com/marekbrze/bullet-journal-tools/main/reset/index.html)
 
@@ -10,25 +10,24 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/reset-dark.png">
-  <img src="docs/reset-light.png" width="640" alt="The Reset page: what happened, thought patterns with counter-moves, what’s in your hands and one move now">
+  <img src="docs/reset-light.png" width="640" alt="The Reset checklist with the thought patterns expanded">
 </picture>
 
 </div>
 
 <br>
 
-Reset is short on purpose. It doesn't ask you to analyse the setback, it gets you out of the spiral and back into motion.
+Reset opens straight on the checklist. You write on today's page, the app keeps you moving through it.
 
-## Four parts, one page
+## Seven steps
 
 | | |
 |:-:|---|
-| **1** | **What happened**, in one sentence, facts only. |
-| **2** | **What your head is doing with it.** Tap the patterns that fit (worst case, one slip = everything, overwhelmed, doubting, beating yourself up, blaming, helpless) and each shows the move against it. |
-| **3** | **Where the line is**: what's out of your hands, what's in them. Optional: forgive yourself in writing, or plan the worst case (what happens, what you'd do, could you live with it). |
-| **4** | **One move, now.** Pick what's in your hands or today's step from one of your [Goals](../goals/), and it opens [Start](../start/) with the countdown. |
+| **A · Out of your head** | What happened, in one sentence, facts only. Name the spiral (worst case, one slip = everything, overwhelmed, doubting, beating yourself up, blaming, helpless) and read the move against it. “One event, not a pattern.” |
+| **B · Back to what you control** | Two lists: out of my hands, in my hands. The worst case written down with a plan, only if you're afraid of what comes next. |
+| **C · Move** | One small, physical move from “in my hands”, as a task. Then do it now with [Start](../start/). |
 
-The history shows which patterns come up most, so you know what to watch for.
+History is in the footer.
 
 <br>
 
