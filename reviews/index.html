@@ -282,7 +282,8 @@ footer .links { display: flex; gap: 14px; }
             { t: 'Tasks {•}', d: 'For each one, decide: do it, hand it off or let it go.' },
             { t: 'Due today', d: 'Look for entries dated today on the monthly list and recent pages. Run them through the filter. Copy the ones that stay onto today’s page with {*}, and mark the originals {>}.', key: true, extra: FILTER },
             { t: 'Weekly plan', d: 'Take the next {*} task from the week’s list for today. Mark it {>} there.' },
-            { t: 'Three priorities', d: 'Three things for today at most, marked {*}.', s: 'Pick what serves this week’s intention. With five priorities, none of them really comes first.', key: true },
+            { t: 'Goals', d: 'Look at your goals page. Make sure one of today’s steps moves a goal forward.', link: ['../goals/index.html', 'Open Goals'] },
+            { t: 'Three priorities', d: 'Three things for today at most, marked {*}.', s: 'Pick what serves this week’s intention. With five priorities, none of them really comes first.', key: true, link: ['../start/index.html', 'Stuck on one? Open Start'] },
           ],
           notes: [['Don’t', 'carry over every open task from previous days. The weekly review handles them in bulk.']],
         }],
@@ -297,6 +298,7 @@ footer .links { display: flex; gap: 14px; }
             { t: 'Anyone else?', d: 'Could someone else do any of what’s left?' },
             { t: 'Filter', d: 'Run the rest through the filter. Can’t say why you’re doing it? Cross it out.', s: 'Before you cross something out, ask what it’s for. A dull task can be a step towards something you care about. What passes stays open here, and the weekly review picks it up.', key: true, extra: FILTER, open: true },
             { t: 'Dates', d: 'Anything on today’s page tied to a date: this month → the monthly list ({>}), later → the future log or calendar ({<}).', s: 'This is where the day page gets emptied of things that belong somewhere else.' },
+            { t: 'One win', d: 'Write down one thing that went well today, however small.', s: 'Evidence for the days your head says nothing works. Something went wrong instead? Reset it before bed.', link: ['../reset/index.html', 'Open Reset'] },
             { t: 'Headline', d: 'Next to the date, write the one event that best sums up the day.', s: 'These headlines become the timeline in the weekly and monthly reviews.' },
           ],
           notes: [['Start', 'Begin with the minimum: three things for today, in the morning. Short and daily beats long and now and then. Keep skipping the review? Make it shorter. A phone reminder helps.']],
@@ -356,6 +358,7 @@ footer .links { display: flex; gap: 14px; }
               { t: 'Endless migrations', d: 'A task you’re moving yet again is probably too big. Split it or give it its own collection.' },
               { t: 'Collections', d: 'Which ones do you actually use? Leave the unused ones behind. Redesign the awkward ones, keeping what worked.', s: 'A collection you no longer need is a normal part of the process.' },
               { t: '3 + 3', d: 'One thing that drains you: three small steps to cut it down. The one that interests you most: three small steps to explore it. All of it goes on the list.', s: 'Small means really small: fifteen minutes a day, one conversation, one book.', key: true },
+              { t: 'Goals check-in', d: 'Reread each goal. Still lights you up? Tick off milestones, set the next 30 days and today’s step.', s: 'The 3 + 3 steps can go straight into a goal.', key: true, link: ['../goals/index.html', 'Open Goals'] },
               { t: 'Index', d: 'Add the new monthly log to the index.' },
             ],
           },
@@ -638,6 +641,7 @@ footer .links { display: flex; gap: 14px; }
                 ${it.s ? `<span class="s">${glyphs(it.s)}</span>` : ''}
               </span>
             </button>
+            ${it.link ? `<div class="extra"><a class="toggle" href="${it.link[0]}">${ICON_NEXT}${it.link[1]}</a></div>` : ''}
             ${ex ? `<div class="extra">
               <button class="toggle" data-act="extra" data-x="${exKey}" data-default="${it.open ? 1 : 0}" aria-expanded="${open}">${ICON_NEXT}${T.extras[it.extra]}</button>
               ${open ? ex() : ''}
