@@ -2,9 +2,9 @@
 
 <img src="docs/logo.svg" width="56" alt="">
 
-# Przeglądy BuJo
+# Przeglądy
 
-**Checklisty przeglądów Bullet Journal.<br>Otwierasz, odhaczasz po kolei, zamykasz.**
+**Checklisty przeglądów papierowego notesu.<br>Otwierasz, odhaczasz po kolei, zamykasz.**
 
 [**→ Otwórz aplikację**](https://marekbrze.github.io/bullet-journal-tools/) &nbsp;·&nbsp; [Pobierz plik](https://raw.githubusercontent.com/marekbrze/bullet-journal-tools/main/index.html)
 
@@ -19,7 +19,7 @@
 
 <br>
 
-Przegląd w Bullet Journalu ma kilkanaście kroków i łatwo jakiś pominąć, zwłaszcza miesięczny. Ta aplikacja prowadzi przez każdy przegląd krok po kroku: najpierw krok wstecz, potem krok naprzód. Treść oparta na kursie Rydera Carrolla *BuJo Basics & Beyond*.
+Przegląd notesu ma kilkanaście kroków i łatwo jakiś pominąć, zwłaszcza miesięczny. Ta aplikacja prowadzi przez każdy przegląd krok po kroku: najpierw to, co było, potem plan na to, co dalej. Kroki opisałem własnymi słowami na podstawie tego, jak sam prowadzę notes metodą Bullet Journal®.
 
 ## Pięć przeglądów
 
@@ -31,7 +31,7 @@ Przegląd w Bullet Journalu ma kilkanaście kroków i łatwo jakiś pominąć, z
 | **Miesiąc** | 15 kroków · refleksja z pytaniami, migracja, 3 + 3 |
 | **Rozdział** | 8 kroków · chapter log z czterema polami, przejście do nowego notesu |
 
-Plus **Ściąga**: legenda symboli, filtr migracji, zasady rapid logu i kolekcje core.
+Plus **Ściąga**: symbole, filtr, zasady zapisywania w ciągu dnia i kolekcje core.
 
 <div align="center">
 <picture>
@@ -44,7 +44,7 @@ Plus **Ściąga**: legenda symboli, filtr migracji, zasady rapid logu i kolekcje
 
 - **Pamięta, gdzie skończyłeś.** Odhaczenia zapisują się od razu. Zamkniesz kartę w połowie, wrócisz do tego samego miejsca.
 - **Podpowiada, co teraz.** Rano poranek, wieczorem wieczór, tydzień po tygodniu, miesiąc na przełomie miesięcy.
-- **Filtr pod ręką.** Kroki, w których migrujesz zadania, mają rozwijany filtr migracji.
+- **Filtr pod ręką.** Kroki, w których przenosisz zadania, mają rozwijany filtr.
 - **Historia.** Każdy zamknięty przegląd trafia do historii z czasem trwania. Przy codziennych widać serię dni z rzędu.
 - **Klawiatura.** `X` odhacza następny krok, `Z` cofa, `↑` `↓` poruszają.
 - **Prywatnie, jeden plik.** Bez konta i serwera. Pobierz `index.html` i otwórz z dysku, także offline.
@@ -61,10 +61,12 @@ Dane leżą w `localStorage` przeglądarki. Pobrany plik i wersja online nie wid
 <summary><b>Jak zmienić treść kroków</b></summary>
 <br>
 
-Wszystkie przeglądy są w tablicy `REVIEWS` na początku skryptu w `index.html`. Każdy krok ma tytuł (`t`), opis (`d`), opcjonalną podpowiedź (`s`), flagę kluczowego kroku (`key`) i opcjonalny dodatek (`extra`: filtr, pytania, układ rozkładówki). `{•}` w tekście renderuje się jako glif bullet journala.
+Wszystkie przeglądy są w tablicy `REVIEWS` na początku skryptu w `index.html`. Każdy krok ma tytuł (`t`), opis (`d`), opcjonalną podpowiedź (`s`), flagę kluczowego kroku (`key`) i opcjonalny dodatek (`extra`: filtr, pytania, układ rozkładówki). `{•}` w tekście renderuje się jako symbol z legendy.
 
 </details>
 
 <br>
 
 <div align="center"><sub>Bez instalacji · bez konta · bez śledzenia · działa na telefonie i w trybie ciemnym</sub></div>
+
+<div align="center"><sub>Bullet Journal® jest znakiem towarowym Rydera Carrolla. To niezależny projekt, niezwiązany z autorem metody ani z bulletjournal.com.</sub></div>
