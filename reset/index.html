@@ -256,6 +256,17 @@ footer .links { display: flex; gap: 14px; }
   --shadow: none; color-scheme: light;
 }
 .eink *, .eink *::before, .eink *::after { animation: none !important; transition: none !important; }
+/* fixed colours too: very old e-reader browsers (older Kindles) ignore var(--...) */
+.eink body { background: #fff; color: #000; }
+.eink .btn { background: #fff; color: #000; }
+.eink .btn.primary, .eink .btn.primary:hover { background: #000; color: #fff; border-color: #000; }
+.eink .box { color: #fff; }
+.eink .item.done .box { background: #000; border-color: #000; }
+.eink .progress span { background: #000; }
+.eink .ring .fg, .eink .dial .fg { stroke: #000; }
+.eink .tag { background: #000; color: #fff; }
+.eink .lists, .eink .lists li, .eink .check, .eink .check > li, .eink .defs, .eink .defs li { border-color: #333; }
+.eink .toast { background: #000; color: #fff; }
 .eink body { font-size: 18px; line-height: 1.55; -webkit-font-smoothing: auto; }
 .eink .wrap { max-width: 680px; padding: 0 20px; }
 .eink :focus-visible { outline: 3px solid #000; }
@@ -329,13 +340,27 @@ footer .links { display: flex; gap: 14px; }
 }
 </style>
 <script>
-/* E-ink mode: on by default on e-readers, switchable in the footer. One setting for all tools. */
+/* E-ink mode: on by default on e-readers, switchable in the footer. One setting for all tools.
+   Written for very old browsers too (older Kindles): no modern JS, and the footer switch is a
+   plain link (?eink=1 / ?eink=0) that reloads the page, so it works even where click handlers
+   or in-place restyling don't. The setting is kept in localStorage and in a cookie. */
 (function () {
-  var d = document.documentElement, ua = navigator.userAgent || '', pref = null;
-  try { pref = localStorage.getItem('notebook-tools:eink'); } catch (e) {}
+  var d = document.documentElement, ua = navigator.userAgent || '', K = 'notebook-tools:eink', pref = null, m;
   function mq(q) { try { return !!(window.matchMedia && window.matchMedia(q).matches); } catch (e) { return false; } }
+  try { pref = localStorage.getItem(K); } catch (e) {}
+  if (pref !== '1' && pref !== '0') { m = /(?:^|;\s*)ntEink=([01])/.exec(document.cookie || ''); pref = m ? m[1] : null; }
   var reader = /Kindle|Kobo|PocketBook|tolino|BOOX|Onyx|Bookeen|Inkpalm|Meebook|Bigme/i.test(ua) && !/Silk/i.test(ua);
-  if (pref === '1' || (pref !== '0' && (reader || mq('(monochrome)') || mq('(update: slow)')))) d.className += ' eink';
+  var auto = reader || mq('(monochrome)') || mq('(update: slow)');
+  var on = pref === '1' || (pref !== '0' && auto);
+  m = /[?&]eink=(1|0|toggle)/.exec(location.search || '');
+  if (m) {
+    on = m[1] === 'toggle' ? !on : m[1] === '1';
+    pref = on ? '1' : '0';
+    try { localStorage.setItem(K, pref); } catch (e) {}
+    try { document.cookie = 'ntEink=' + pref + '; path=/; expires=' + new Date(new Date().getTime() + 31536000000).toUTCString(); } catch (e) {}
+    try { if (window.history && history.replaceState) history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
+  }
+  if (on) d.className += ' eink';
 })();
 </script>
 </head>
@@ -349,7 +374,7 @@ footer .links { display: flex; gap: 14px; }
       <a href="#/history">History</a>
       <button type="button" data-act="export">Export</button>
       <button type="button" data-act="import">Import</button>
-      <button type="button" id="eink-toggle" aria-pressed="false">E-ink mode</button>
+      <a id="eink-toggle" role="button" href="?eink=toggle">E-ink mode</a>
     </span>
   </div>
 </footer>
@@ -842,17 +867,12 @@ footer .links { display: flex; gap: 14px; }
 </script>
 <script>
 (function () {
-  var b = document.getElementById('eink-toggle'), d = document.documentElement;
-  if (!b) return;
-  function on() { return /(^|\s)eink(\s|$)/.test(d.className); }
-  function label() { b.textContent = on() ? 'E-ink mode: on' : 'E-ink mode: off'; b.setAttribute('aria-pressed', on() ? 'true' : 'false'); }
-  label();
-  b.addEventListener('click', function () {
-    var next = !on();
-    d.className = next ? (d.className + ' eink').replace(/^\s+/, '') : d.className.replace(/(^|\s)eink(?=\s|$)/g, '');
-    try { localStorage.setItem('notebook-tools:eink', next ? '1' : '0'); } catch (e) {}
-    label();
-  });
+  var a = document.getElementById('eink-toggle');
+  if (!a) return;
+  var on = /(^|\s)eink(\s|$)/.test(document.documentElement.className);
+  a.innerHTML = on ? 'E-ink mode: on' : 'E-ink mode: off';
+  a.href = '?eink=' + (on ? '0' : '1') + (location.hash || '');
+  a.setAttribute('aria-pressed', on ? 'true' : 'false');
 })();
 </script>
 </body>

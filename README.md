@@ -24,7 +24,7 @@ No account, no server. Each tool keeps its data in your browser, with export to 
 
 1. A new folder with `index.html` (one file, no dependencies), plus optional `README.md` and `docs/` with screenshots.
 2. The same visual system as the rest: colour tokens on `:root`, dark mode, 640 px width.
-3. E-ink mode for Kindle, Kobo, PocketBook, Boox and other e-readers: copy the `e-ink` CSS block, the detection script in `<head>` and the “E-ink mode” footer button from any existing tool. Style new parts for it too: black on white, no grey text, no hover fills or animations, text 16 px or larger, tap targets 44 px or larger. Anything that updates on a timer should touch the page only when what's shown actually changes.
+3. E-ink mode for Kindle, Kobo, PocketBook, Boox and other e-readers: copy the `e-ink` CSS block, the detection script in `<head>` and the “E-ink mode” footer link (a plain link, not a button, so it also works on old e-reader browsers) from any existing tool. Style new parts for it too: black on white, no grey text, no hover fills or animations, text 16 px or larger, tap targets 44 px or larger. Anything that updates on a timer should touch the page only when what's shown actually changes.
 4. Its own `localStorage` key, so tools don't overwrite each other's data.
 5. An entry in the table above and a card in the root `index.html` (with the tool's icon, the same one as its favicon).
 6. A way back to the tools list: “All tools” top-left on the tool's home screen and in the footer of every view. Links between tools point at `…/index.html` so they also work from disk.
