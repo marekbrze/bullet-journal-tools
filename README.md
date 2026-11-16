@@ -1,29 +1,32 @@
 <div align="center">
 
-# Narzędzia do notesu
+**English** · [Polski](README.pl.md)
 
-**Małe narzędzia do prowadzenia papierowego notesu.<br>Każde to jeden plik HTML: działa w przeglądarce, na telefonie i offline.**
+# Notebook tools
 
-[**→ Otwórz**](https://marekbrze.github.io/bullet-journal-tools/)
+**Small tools for keeping a paper notebook.<br>Each one is a single HTML file: it works in the browser, on your phone and offline.**
+
+[**→ Open**](https://marekbrze.github.io/bullet-journal-tools/)
 
 </div>
 
 <br>
 
-| Narzędzie | Do czego |
+| Tool | What it's for |
 |---|---|
-| [**Przeglądy**](przeglady/) | Checklisty przeglądów: poranek, wieczór, tydzień, miesiąc, rozdział. Odhaczasz krok po kroku. |
+| [**Reviews**](przeglady/) | Review checklists: morning, evening, week, month, chapter. Tick the steps off one by one. |
 
-Bez konta, bez serwera. Dane każdego narzędzia zostają w przeglądarce, z eksportem do pliku.
+No account, no server. Each tool keeps its data in your browser, with export to a file. Every tool is available in English and Polish.
 
-## Dodawanie narzędzia
+## Adding a tool
 
-1. Nowy folder z `index.html` (jeden plik, bez zależności) i opcjonalnie `README.md` oraz `docs/` ze screenami.
-2. Ten sam system wizualny co reszta: tokeny kolorów z `:root`, tryb ciemny, szerokość 640 px.
-3. Własny klucz w `localStorage`, żeby narzędzia nie nadpisywały sobie danych.
-4. Wpis w tabeli wyżej i w liście w `index.html` w katalogu głównym.
-5. Treść piszemy własnymi słowami. Bez cytatów i tłumaczeń z kursów ani książek.
+1. A new folder with `index.html` (one file, no dependencies), plus optional `README.md` and `docs/` with screenshots.
+2. The same visual system as the rest: colour tokens on `:root`, dark mode, 640 px width.
+3. Its own `localStorage` key, so tools don't overwrite each other's data.
+4. An entry in the table above and in the list in the root `index.html`.
+5. Two languages: Polish content first, then an English translation with the same structure. The language choice lives under the shared `notebook-tools.lang` key, so it's one setting for all tools.
+6. Content is written in our own words. No quotes or translations from courses or books.
 
 <br>
 
-<div align="center"><sub>Bullet Journal® jest znakiem towarowym Rydera Carrolla. To niezależny projekt, niezwiązany z autorem metody ani z bulletjournal.com.</sub></div>
+<div align="center"><sub>Bullet Journal® is a trademark of Ryder Carroll. This is an independent project, not affiliated with the method's author or bulletjournal.com.</sub></div>

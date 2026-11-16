@@ -2,71 +2,74 @@
 
 <img src="docs/logo.svg" width="56" alt="">
 
-# Przeglądy
+**English** · [Polski](README.pl.md)
 
-**Checklisty przeglądów papierowego notesu.<br>Otwierasz, odhaczasz po kolei, zamykasz.**
+# Reviews
 
-[**→ Otwórz aplikację**](https://marekbrze.github.io/bullet-journal-tools/przeglady/) &nbsp;·&nbsp; [Pobierz plik](https://raw.githubusercontent.com/marekbrze/bullet-journal-tools/main/przeglady/index.html)
+**Review checklists for a paper notebook.<br>Open one, tick the steps off in order, close it.**
+
+[**→ Open the app**](https://marekbrze.github.io/bullet-journal-tools/przeglady/) &nbsp;·&nbsp; [Download the file](https://raw.githubusercontent.com/marekbrze/bullet-journal-tools/main/przeglady/index.html)
 
 <br>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/checklist-dark.png">
-  <img src="docs/checklist-light.png" width="640" alt="Checklista wieczornego przeglądu z trzema odhaczonymi krokami i rozwiniętym filtrem migracji">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/checklist-en-dark.png">
+  <img src="docs/checklist-en-light.png" width="640" alt="Evening review checklist with three steps ticked and the filter expanded">
 </picture>
 
 </div>
 
 <br>
 
-Przegląd notesu ma kilkanaście kroków i łatwo jakiś pominąć, zwłaszcza miesięczny. Ta aplikacja prowadzi przez każdy przegląd krok po kroku: najpierw to, co było, potem plan na to, co dalej. Kroki opisałem własnymi słowami na podstawie tego, jak sam prowadzę notes metodą Bullet Journal®.
+A notebook review has a dozen or so steps, and it's easy to skip one, especially in the monthly review. This app walks you through each review step by step: first what happened, then the plan for what's next. The steps are written in my own words, based on how I keep my notebook with the Bullet Journal® method.
 
-## Pięć przeglądów
+## Five reviews
 
 | | |
 |:-:|---|
-| **Poranek** | 8 kroków · nowy log dzienny, 3 priorytety dnia |
-| **Wieczór** | 6 kroków · <code>×</code> na zrobionym, reszta przez filtr, nagłówek dnia |
-| **Tydzień** | 11 kroków · refleksja na lewej stronie, zadania i intencja na prawej |
-| **Miesiąc** | 15 kroków · refleksja z pytaniami, migracja, 3 + 3 |
-| **Rozdział** | 8 kroków · chapter log z czterema polami, przejście do nowego notesu |
+| **Morning** | 8 steps · new day page, three priorities for the day |
+| **Evening** | 6 steps · <code>×</code> on what's done, the rest through the filter, a headline for the day |
+| **Week** | 11 steps · reflection on the left page, tasks and intention on the right |
+| **Month** | 15 steps · reflection with prompts, migration, 3 + 3 |
+| **Chapter** | 8 steps · chapter log with four boxes, moving to a new notebook |
 
-Plus **Ściąga**: symbole, filtr, zasady zapisywania w ciągu dnia i kolekcje core.
+Plus a **Cheat sheet**: symbols, the filter, how to log during the day and the core collections.
 
 <div align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/home-dark.png">
-  <img src="docs/home-light.png" width="640" alt="Ekran główny z listą przeglądów i znacznikiem „teraz”">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/home-en-dark.png">
+  <img src="docs/home-en-light.png" width="640" alt="Home screen with the list of reviews and a “now” tag">
 </picture>
 </div>
 
-## Co potrafi
+## What it does
 
-- **Pamięta, gdzie skończyłeś.** Odhaczenia zapisują się od razu. Zamkniesz kartę w połowie, wrócisz do tego samego miejsca.
-- **Podpowiada, co teraz.** Rano poranek, wieczorem wieczór, tydzień po tygodniu, miesiąc na przełomie miesięcy.
-- **Filtr pod ręką.** Kroki, w których przenosisz zadania, mają rozwijany filtr.
-- **Historia.** Każdy zamknięty przegląd trafia do historii z czasem trwania. Przy codziennych widać serię dni z rzędu.
-- **Klawiatura.** `X` odhacza następny krok, `Z` cofa, `↑` `↓` poruszają.
-- **Prywatnie, jeden plik.** Bez konta i serwera. Pobierz `index.html` i otwórz z dysku, także offline.
+- **Remembers where you stopped.** Ticks are saved right away. Close the tab halfway through and you'll come back to the same place.
+- **Suggests what's next.** Morning review in the morning, evening review in the evening, weekly after a week, monthly around the turn of the month.
+- **Filter at hand.** Steps where you move tasks have the filter one click away.
+- **History.** Every finished review goes into the history with how long it took. Daily reviews show your streak.
+- **Keyboard.** `X` ticks the next step, `Z` undoes, `↑` `↓` move.
+- **English and Polish.** The language follows your browser, with a switch in the footer. Progress and history stay when you switch.
+- **Private, one file.** No account, no server. Download `index.html` and open it from your disk, offline too.
 
 <details>
-<summary><b>Kopia zapasowa i przenoszenie danych</b></summary>
+<summary><b>Backup and moving your data</b></summary>
 <br>
 
-Dane leżą w `localStorage` przeglądarki. Pobrany plik i wersja online nie widzą swoich danych nawzajem. Do przenoszenia i kopii zapasowej służy **Eksport / Import** w stopce.
+Data lives in the browser's `localStorage`. The downloaded file and the online version don't see each other's data. Use **Export / Import** in the footer to move it or back it up.
 
 </details>
 
 <details>
-<summary><b>Jak zmienić treść kroków</b></summary>
+<summary><b>Editing the steps</b></summary>
 <br>
 
-Wszystkie przeglądy są w tablicy `REVIEWS` na początku skryptu w `index.html`. Każdy krok ma tytuł (`t`), opis (`d`), opcjonalną podpowiedź (`s`), flagę kluczowego kroku (`key`) i opcjonalny dodatek (`extra`: filtr, pytania, układ rozkładówki). `{•}` w tekście renderuje się jako symbol z legendy.
+The content is in the `CONTENT` object at the top of the script in `index.html`: `CONTENT.pl` is the original, `CONTENT.en` its translation. Both must have the same structure (same ids and number of steps), because progress is stored by step position. Interface strings are in the `UI` object. Each step has a title (`t`), a description (`d`), an optional hint (`s`), a key-step flag (`key`) and an optional extra (`extra`: filter, prompts, spread layout). `{•}` in the text renders as a symbol from the legend.
 
 </details>
 
 <br>
 
-<div align="center"><sub>Bez instalacji · bez konta · bez śledzenia · działa na telefonie i w trybie ciemnym</sub></div>
+<div align="center"><sub>No install · no account · no tracking · works on mobile and in dark mode</sub></div>
 
-<div align="center"><sub>Bullet Journal® jest znakiem towarowym Rydera Carrolla. To niezależny projekt, niezwiązany z autorem metody ani z bulletjournal.com.</sub></div>
+<div align="center"><sub>Bullet Journal® is a trademark of Ryder Carroll. This is an independent project, not affiliated with the method's author or bulletjournal.com.</sub></div>
