@@ -12,6 +12,7 @@
 
 | Tool | What it's for |
 |---|---|
+| [**Start**](start/) | For when you keep putting something off: pick the smallest step, count down from five, work for six minutes. |
 | [**Reviews**](reviews/) | Review checklists: morning, evening, week, month, chapter. Tick the steps off one by one. |
 
 No account, no server. Each tool keeps its data in your browser, with export to a file.
