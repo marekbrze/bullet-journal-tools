@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Goals</title>
-<meta name="description" content="A goal you actually want, worked back to a 30-day habit and a first step for today.">
+<meta name="description" content="Checklists for setting a goal in your notebook and checking in on it every month.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231c1917'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23fff' stroke-width='2.2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23fff'/%3E%3C/svg%3E">
 <style>
 :root {
@@ -246,105 +246,6 @@ footer .links { display: flex; gap: 14px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
-/* ---------- start ---------- */
-.field { margin-top: 8px; }
-.field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
-.big {
-  width: 100%; border: 1px solid var(--line); background: var(--surface); border-radius: 12px;
-  padding: 14px 16px; font-size: 18px; box-shadow: var(--shadow); outline: none; transition: border-color .15s;
-}
-.big:focus { border-color: var(--muted); }
-.big::placeholder { color: var(--faint); }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.chip { border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 6px 12px; font-size: 13px; color: var(--muted); }
-.chip:hover { color: var(--text); background: var(--hover); }
-.recap { border-left: 2px solid var(--line); padding: 2px 0 2px 14px; margin: 0 0 24px; color: var(--muted); font-size: 15px; }
-.recap b { display: block; color: var(--text); font-weight: 550; font-size: 17px; }
-.helpers { margin-top: 28px; border-top: 1px solid var(--line); }
-.helper { border-bottom: 1px solid var(--line); padding: 12px 0; }
-.helper .toggle { font-size: 14px; }
-.helper .body { padding: 12px 0 4px 18px; font-size: 15px; color: var(--muted); }
-.helper .body p { margin: 0 0 10px; }
-.helper .body .split { background: var(--hover); border-radius: 10px; padding: 12px 14px; color: var(--text); margin-top: 10px; }
-.helper .body .split span { display: block; }
-.helper .body .split span + span { margin-top: 6px; }
-.helper .big { font-size: 16px; padding: 10px 14px; box-shadow: none; }
-.mini-timer { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--text); margin-left: 10px; }
-
-.stage { text-align: center; padding-top: 12px; }
-.stage .task { font-size: 15px; color: var(--muted); margin: 0 0 4px; overflow-wrap: anywhere; }
-.stage .step { font-size: 20px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 28px; overflow-wrap: anywhere; }
-.count { font-size: 120px; line-height: 1; font-weight: 700; letter-spacing: -.04em; font-variant-numeric: tabular-nums; margin: 24px 0 8px; }
-.count.go { font-size: 72px; }
-.dial { position: relative; width: 240px; height: 240px; margin: 8px auto 24px; }
-.dial svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.dial circle { fill: none; stroke-width: 6; }
-.dial .bg { stroke: var(--line); }
-.dial .fg { stroke: var(--accent); stroke-linecap: round; transition: stroke-dashoffset .25s linear; }
-.dial .time { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.dial .time b { font-size: 52px; font-weight: 650; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-.dial .time small { font-size: 13px; color: var(--muted); }
-.stage .actions { justify-content: center; }
-.stats { display: flex; gap: 24px; margin: 0 0 28px; }
-.stats div { font-size: 13px; color: var(--muted); }
-.stats b { display: block; font-size: 22px; color: var(--text); font-weight: 650; font-variant-numeric: tabular-nums; }
-.recent { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.recent li { border-bottom: 1px solid var(--line); }
-.recent button { width: 100%; text-align: left; background: none; border: 0; padding: 12px 4px; display: flex; justify-content: space-between; gap: 12px; }
-.recent button:hover { background: var(--hover); }
-.recent .w { color: var(--faint); font-size: 13px; white-space: nowrap; }
-.hist .ok { color: var(--text); }
-.hist .no { color: var(--faint); }
-@media (max-width: 560px) {
-  .count { font-size: 96px; }
-  .dial { width: 210px; height: 210px; }
-}
-/* ---------- goals ---------- */
-textarea.big { min-height: 110px; resize: vertical; line-height: 1.5; font-size: 16px; }
-.wiz-meta { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.row2 { display: grid; grid-template-columns: 1fr 180px; gap: 10px; }
-.row2 .big { font-size: 16px; }
-.choices { display: grid; gap: 10px; margin-top: 4px; }
-.choice {
-  text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 14px 16px;
-  box-shadow: var(--shadow); transition: border-color .15s, background .15s;
-}
-.choice:hover { border-color: var(--muted); }
-.choice b { display: block; font-weight: 600; }
-.choice span { color: var(--muted); font-size: 14px; }
-.choice.on { border-color: var(--accent); background: var(--hover); }
-.callout { margin-top: 16px; padding: 12px 14px; border-radius: 12px; background: var(--hover); font-size: 14px; color: var(--muted); }
-.callout b { color: var(--text); }
-.ms { list-style: none; margin: 0; padding: 0; counter-reset: ms; }
-.ms li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: center; margin-bottom: 8px; }
-.ms li::before { content: attr(data-n); font-size: 13px; color: var(--faint); text-align: right; font-variant-numeric: tabular-nums; }
-.ms .big { font-size: 16px; padding: 10px 14px; box-shadow: none; }
-.contract {
-  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow);
-  padding: 22px 22px 18px; margin: 4px 0 0;
-}
-.contract .goal { font-size: 22px; font-weight: 650; letter-spacing: -.015em; line-height: 1.25; margin: 0 0 4px; overflow-wrap: anywhere; }
-.contract .by { font-size: 14px; color: var(--muted); margin: 0 0 16px; }
-.contract dl { margin: 0; display: grid; gap: 12px; }
-.contract dt { font-size: 12px; color: var(--faint); letter-spacing: .02em; text-transform: uppercase; }
-.contract dd { margin: 2px 0 0; overflow-wrap: anywhere; white-space: pre-wrap; }
-.contract .sign { margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--line); display: flex; justify-content: space-between; color: var(--faint); font-size: 13px; }
-.mlist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.mlist li { border-bottom: 1px solid var(--line); }
-.mlist .item { padding: 12px 4px; }
-.block { display: flex; align-items: center; gap: 14px; margin: 0 0 8px; }
-.block .bar { flex: 1; height: 4px; border-radius: 4px; background: var(--line); overflow: hidden; }
-.block .bar span { display: block; height: 100%; background: var(--accent); }
-.block small { font-size: 13px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
-.today { display: flex; gap: 10px; align-items: stretch; margin-top: 8px; }
-.today .big { flex: 1; font-size: 16px; padding: 10px 14px; box-shadow: none; }
-.spark { font-size: 12px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
-.spark.yes { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
-@media (max-width: 560px) {
-  .row2 { grid-template-columns: 1fr; }
-  .today { flex-direction: column; }
-  .contract { padding: 18px 16px 14px; }
-}
 </style>
 </head>
 <body>
@@ -366,406 +267,440 @@ textarea.big { min-height: 110px; resize: vertical; line-height: 1.5; font-size:
 (() => {
   'use strict';
 
-  /* Goals: a vision, one goal you actually want, milestones worked backwards,
-     a 30-day process and the smallest step for today (handed over to Start).
-     The finished goal is a contract you copy by hand into your notebook. */
+  /* ---------- content ----------
+     Review steps, written in our own words. {x} in text = a symbol from the legend. */
 
-  const BLOCK_DAYS = 30;
-  const START_URL = '../start/index.html';
+  const FILTER = 'filter';
 
-  const SPARK = {
-    spark: ['Spark', 'I want this. Something lights up.'],
-    flat: ['Flat', 'Sounds nice, but nothing happens.'],
-    heavy: ['Heavy', 'It feels like something I should want.'],
+  const C = {
+    reviews: [
+      {
+        id: 'new', group: 'new', title: 'New goal', when: 'A fresh spread in your notebook', time: '15–20 min',
+        sections: [
+          {
+            phase: ['A', 'Picture it'],
+            items: [
+              { t: 'Fresh spread', d: 'Next free spread in your notebook. Title: the goal in a few words. Add it to the index.', extra: 'layout', open: true },
+              { t: 'Picture it done', d: 'On the left page, write a few lines about the day it’s real. Where are you, what do you see, what has changed? Don’t edit.', s: 'If it doesn’t make you want it a little, push it further.' },
+            ],
+          },
+          {
+            phase: ['B', 'Commit'],
+            items: [
+              { t: 'One sentence', d: 'At the top of the right page: the goal in one concrete sentence, with a date.', s: 'Concrete enough that you’ll know when it’s done.', key: true },
+              { t: 'Why it matters', d: 'One line under it: why you want it.' },
+              { t: 'Is it yours?', d: 'Say the sentence out loud. Notice the reaction: a spark, nothing, or a weight.', s: 'Nothing usually means too small: make it bigger. A weight usually means it’s someone else’s goal: rewrite it as your own, or drop it.', key: true },
+            ],
+          },
+          {
+            phase: ['C', 'Work it back'],
+            items: [
+              { t: 'Milestones', d: 'Ask what has to be true just before the finish, then just before that. Write three to five, then number them in the order you’ll reach them.' },
+              { t: 'Next 30 days', d: 'One habit you control for the next 30 days, not a result. Write it with today’s date and the date 30 days from now.', s: 'Small enough that you’ll keep it on most days.', key: true },
+              { t: 'Sign it', d: 'Date and sign the page. It’s a contract with yourself.' },
+              { t: 'Dates', d: 'Put the goal’s date and the 30-day check-in in your future log or calendar ({<}).' },
+              { t: 'Today', d: 'The smallest step towards it today, as a {*} task on today’s page. Then do it.', key: true, link: ['../start/index.html', 'Do it with Start'] },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'checkin', group: 'regular', title: 'Check-in', when: 'Once a month, or when the 30 days are up', time: '5–10 min',
+        sections: [
+          {
+            phase: ['A', 'Look back'],
+            items: [
+              { t: 'Reread', d: 'Open the goal’s spread and read all of it, the picture too.' },
+              { t: 'Still yours?', d: 'Say the goal out loud again. A spark, nothing, or a weight?', s: 'Nothing or a weight: make it bigger, make it yours again, or let it go. Letting go of a goal that no longer fits is a decision, not a failure.', key: true },
+              { t: 'Milestones', d: 'Tick off ({×}) the ones you’ve reached.' },
+              { t: 'What moved', d: 'One line under the 30-day habit: what moved this month. Write down what you did, not what you didn’t.' },
+            ],
+          },
+          {
+            phase: ['B', 'Look ahead'],
+            items: [
+              { t: 'Next 30 days', d: 'Keep the habit, or change what didn’t work. Write the new block with its dates.', key: true },
+              { t: 'Monthly list', d: 'Put the next steps on this month’s task list.' },
+              { t: 'Dates', d: 'Next check-in in your future log or calendar ({<}).' },
+              { t: 'Today', d: 'One small step for today, marked {*}.', key: true, link: ['../start/index.html', 'Do it with Start'] },
+            ],
+            notes: [['Reached it?', 'Write the date on the goal’s page and tick it off ({×}) in the index. Then picture the next one.']],
+          },
+        ],
+      },
+    ],
+    extras: {
+      layout: ['Spread layout', '<div class="spread"><div><b>Left · picture</b>the day it’s real</div><div><b>Right · contract</b>goal + date · why · milestones · 30 days · signature</div></div>'],
+    },
   };
 
+  /* ---------- UI strings ---------- */
+  const T = {
+      locale: 'en-GB', app: 'Goals',
+      groups: { new: 'When you set a goal', regular: 'Regularly' },
+      home: 'Where are you heading?', homeLead: 'A goal you actually want, written in your notebook and worked back to a step for today.',
+      history: 'History', handy: 'Handy', cheat: 'Cheat sheet', cheatMeta: 'Symbols · filter · during the day · core collections',
+      now: 'now', inProgress: (n, t) => `in progress · ${n} of ${t}`, steps: n => `${n} steps`,
+      last: w => 'last ' + w, never: 'not done yet', streak: n => `${n} days in a row`,
+      today: 'today', yesterday: 'yesterday', daysAgo: n => `${n} days ago`,
+      back: 'Goals', started: w => 'started ' + w, keyStep: 'Key step',
+      staleTitle: 'Yesterday?', stale: w => `These ticks are from ${w}.`, restart: 'Start over',
+      done: 'Done', allDone: d => `All steps ticked off${d ? ' in ' + d : ''}.`, saveClose: 'Save and close',
+      clear: 'Clear ticks', finishEarly: 'Finish early',
+      hintKey: 'key step', hintKbd: '<kbd>X</kbd> ticks the next one · <kbd>Z</kbd> undo · <kbd>↑</kbd> <kbd>↓</kbd> move · <kbd>Space</kbd> toggles',
+      saved: t => `${t}: saved`, savedPart: (t, n, all) => `${t}: saved (${n} of ${all})`,
+      histLead30: s => 'Last 30 days: ' + s, histEmpty: 'Nothing yet. Finished reviews will show up here.',
+      extras: { filter: 'Filter', ...Object.fromEntries(Object.entries(C.extras).map(([k, [t]]) => [k, t])) },
+      spread: [['Left · past week', 'reflection'], ['Right · coming week', 'tasks · intention · <span class="g">*</span>']],
+      quad: [['What worked', 'how you work'], ['More of this', 'what’s good for me'], ['What didn’t work', 'how you work'], ['Less of this', 'what isn’t good for me']],
+      filter: [
+        ['<strong>Is it necessary?</strong> Would skipping it have serious consequences: work, bills, official matters?', 'Keep asking “why?” until you get to the heart of it. Choose actions you can influence, not outcomes. Yes → it stays. No → next.'],
+        ['<strong>Does it matter</strong> to me or to the people close to me?', 'At work, if you don’t know why, ask. In private life, check whether an old idea still interests you. Yes → it stays. No or not sure → next.'],
+        ['<strong>What happens if I never do it?</strong>', 'Nothing? Cross it out, no guilt. Something you care about suffers, like a relationship? Then the task makes sense.'],
+        ['<strong>Rewrite it by hand.</strong> The last sieve.', 'Not worth a minute of rewriting? Let it go.'],
+      ],
+      verdict: '<b>Three “no”s</b> → cross it out. It stays → <span class="g">&gt;</span> rewrite only what you’ll do in this period.',
+      cheatLead: 'What you come back to during reviews.',
+      symbols: 'Symbols', symbolsLead: 'Short entries that start with a single sign',
+      filterTitle: 'Filter', filterLead: 'For every open <span class="g">•</span>, at every review.',
+      dayTitle: 'During the day', dayLead: 'Write it down right away',
+      day: [
+        ['Day page first', 'Briefly and straight away, without deciding where it belongs. The evening review moves dated things to the monthly list, future log or calendar.'],
+        ['Recurring meetings', 'On the day page, just a <span class="g">○</span> with a pointer to the page. The notes themselves go into a separate collection, dated.'],
+        ['Events <span class="g">○</span>', 'Facts, no judgement. Thoughts and feelings as <span class="g">–</span>, indented underneath.'],
+      ],
+      coreTitle: 'Core collections', coreLead: 'What lives where',
+      core: [
+        ['Index', 'At the front of the notebook. Collection name and page numbers. Add later parts next to them. Day pages don’t get indexed.'],
+        ['Future log', 'The next few months on one spread. Everything with a date outside the current month goes here.'],
+        ['Monthly log', 'Left page: timeline, filled in after the fact. Right page: tasks from the future log, from last month and new ones.'],
+        ['Weekly log', 'Left page: reflection on the past week. Right page: tasks for the coming week.'],
+        ['Day page', 'Date and page number. Takes as much space as it needs. Nothing gets set up in advance.'],
+      ],
+      quote: 'Every review asks the same questions, but the answers change over time. That’s why you keep coming back to them.',
+      file: 'goals',
+      saveErr: 'Could not save data in this browser',
+      imported: n => `Imported ${n} history entries`, badFile: 'Not a valid export file',
+  };
+
+  const glyphs = s => s.replace(/\{(.+?)\}/g, '<span class="g">$1</span>');
+  const TOTAL = r => r.sections.reduce((n, s) => n + s.items.length, 0);
+  const byId = id => C.reviews.find(r => r.id === id);
+
   /* ---------- storage ---------- */
-  const KEY = 'goals.v1';
+  const KEY = 'goals-checklists.v1';
+  const LEGACY_KEYS = [];
   let db = load();
+
   function load() {
     try {
-      const d = JSON.parse(localStorage.getItem(KEY));
-      if (d && Array.isArray(d.goals)) return d;
+      const raw = [KEY, ...LEGACY_KEYS].map(k => localStorage.getItem(k)).find(Boolean);
+      const d = JSON.parse(raw);
+      if (d && d.progress && Array.isArray(d.log)) return d;
     } catch (e) {}
-    return { goals: [], draft: null };
+    return { progress: {}, log: [] };
   }
   function save() {
     try { localStorage.setItem(KEY, JSON.stringify(db)); }
-    catch (e) { toast('Could not save data in this browser'); }
+    catch (e) { toast(T.saveErr); }
   }
 
   const $ = s => document.querySelector(s);
-  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-  const app = $('#app');
 
   /* ---------- dates ---------- */
   const DAY = 864e5;
   const startOfDay = t => { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); };
-  const dayDiff = (a, b) => Math.round((startOfDay(a) - startOfDay(b)) / DAY);
-  const fmtDate = t => new Date(t).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-  const fmtShort = t => new Date(t).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
-  const parseDate = s => s ? new Date(s + 'T12:00:00').getTime() : null;
-  const isoDate = t => { const d = new Date(t); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
-  function untilText(t) {
-    const n = dayDiff(t, Date.now());
-    if (n < 0) return `${-n} days past the date`;
-    if (n === 0) return 'today';
-    if (n < 60) return `${n} days left`;
-    const m = Math.round(n / 30.4);
-    return m < 24 ? `${m} months left` : `${Math.round(n / 365)} years left`;
+  const daysAgo = t => Math.round((startOfDay(Date.now()) - startOfDay(t)) / DAY);
+  const hm = t => new Date(t).toLocaleTimeString(T.locale, { hour: '2-digit', minute: '2-digit' });
+  function fmtWhen(t) {
+    const n = daysAgo(t);
+    if (n === 0) return T.today + ', ' + hm(t);
+    if (n === 1) return T.yesterday + ', ' + hm(t);
+    if (n < 7) return T.daysAgo(n);
+    const d = new Date(t);
+    return d.toLocaleDateString(T.locale, { day: 'numeric', month: 'short', year: d.getFullYear() === new Date().getFullYear() ? undefined : 'numeric' });
+  }
+  function fmtDur(ms) {
+    const m = Math.round(ms / 6e4);
+    if (m < 1) return '< 1 min';
+    if (m < 90) return `${m} min`;
+    return `${Math.floor(m / 60)} h ${m % 60} min`;
+  }
+  const lastDone = id => db.log.filter(e => e.id === id).reduce((a, e) => Math.max(a, e.t), 0);
+
+  // Which checklist makes sense right now? A hint, not a rule.
+  function due(r) {
+    const last = lastDone(r.id), now = new Date(), h = now.getHours();
+    const doneToday = last && daysAgo(last) === 0;
+    if (r.id === 'checkin') { const l = Math.max(lastDone('checkin'), lastDone('new')); return !!l && daysAgo(l) >= 28; }
+    if (r.id === 'morning') return !doneToday && h >= 4 && h < 14;
+    if (r.id === 'evening') return !doneToday && (h >= 18 || h < 2);
+    if (r.id === 'week') return !last || daysAgo(last) >= 7;
+    if (r.id === 'month') {
+      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+      const edge = now.getDate() >= lastDay - 2 || now.getDate() <= 3;
+      return edge && (!last || daysAgo(last) >= 10);
+    }
+    return false;
   }
 
-  /* ---------- ui helpers ---------- */
-  let toastTimer;
-  function toast(msg) {
-    const t = $('#toast');
-    t.textContent = msg; t.classList.add('show');
-    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+  // Streak for daily reviews: consecutive days (ending today or yesterday).
+  function streak(id) {
+    const days = new Set(db.log.filter(e => e.id === id).map(e => daysAgo(e.t)));
+    const start = days.has(0) ? 0 : days.has(1) ? 1 : -1;
+    if (start < 0) return 0;
+    let n = 0;
+    while (days.has(start + n)) n++;
+    return n;
   }
-  const ICON_BACK = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>';
-  const ICON_NEXT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg>';
-  const ICON_CHECK = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg>';
-  const LOGO = '<svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="currentColor"/><circle cx="16" cy="16" r="8" fill="none" stroke="var(--bg)" stroke-width="2.2"/><circle cx="16" cy="16" r="3" fill="var(--bg)"/></svg>';
-  const startLink = task => `${START_URL}?task=${encodeURIComponent(task)}`;
 
   /* ---------- routing ---------- */
   function route() {
     const p = location.hash.replace(/^#\/?/, '').split('/');
-    const g = id => db.goals.find(x => x.id === id);
-    if (p[0] === 'new') return { view: 'wizard' };
-    if (p[0] === 'g' && g(p[1])) return { view: p[2] === 'check' ? 'check' : 'goal', goal: g(p[1]) };
-    if (p[0] === 'archive') return { view: 'archive' };
+    if (p[0] === 'r' && byId(p[1])) return { view: 'review', review: byId(p[1]) };
+    if (p[0] === 'cheat' || p[0] === 'sciaga') return { view: 'cheat' };
+    if (p[0] === 'history' || p[0] === 'historia') return { view: 'history' };
     return { view: 'home' };
   }
 
+  /* ---------- ui ---------- */
+  let toastTimer;
+  function toast(msg) {
+    const t = $('#toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+  const ICON_BACK = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>';
+  const ICON_NEXT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg>';
+  const ICON_CHECK = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg>';
+  const LOGO = '<svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M8.2 7.7l3.6 3.6M11.8 7.7l-3.6 3.6" stroke="var(--bg)" stroke-width="1.6" stroke-linecap="round"/><rect x="14" y="8" width="10" height="3" rx="1.5" fill="var(--bg)"/><circle cx="10" cy="16" r="1.9" fill="var(--bg)" opacity=".7"/><rect x="14" y="14.5" width="8" height="3" rx="1.5" fill="var(--bg)" opacity=".7"/><circle cx="10" cy="22.5" r="1.9" fill="var(--bg)" opacity=".45"/><rect x="14" y="21" width="5" height="3" rx="1.5" fill="var(--bg)" opacity=".45"/></svg>';
+
+  function ring(done, total) {
+    const r = 11, c = 2 * Math.PI * r, f = total ? done / total : 0;
+    return `<svg class="ring" viewBox="0 0 28 28" aria-hidden="true"><circle class="bg" cx="14" cy="14" r="${r}"/><circle class="fg" cx="14" cy="14" r="${r}" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - f)}"/></svg>`;
+  }
+
+  const app = $('#app');
+  const openExtras = new Set();
+
   function render(opts = {}) {
     const rt = route();
-    document.title = rt.goal ? `${rt.goal.title} · Goals` : 'Goals';
-    if (rt.view === 'wizard') renderWizard(opts);
-    else if (rt.view === 'goal') renderGoal(rt.goal);
-    else if (rt.view === 'check') renderCheck(rt.goal, opts);
-    else if (rt.view === 'archive') renderArchive();
+    document.title = rt.review ? `${rt.review.title} · ${T.app}` : T.app;
+    if (rt.view === 'review') renderReview(rt.review, opts);
+    else if (rt.view === 'cheat') renderCheat();
+    else if (rt.view === 'history') renderHistory();
     else renderHome();
   }
 
-  /* ---------- block helpers ---------- */
-  function blockInfo(g) {
-    const day = Math.min(BLOCK_DAYS, Math.max(1, dayDiff(Date.now(), g.blockStart) + 1));
-    const over = dayDiff(Date.now(), g.blockStart) + 1 > BLOCK_DAYS;
-    return { day, over };
-  }
-  const lastCheck = g => g.checks.length ? g.checks[g.checks.length - 1].t : g.created;
-  const checkDue = g => dayDiff(Date.now(), lastCheck(g)) >= 28 || blockInfo(g).over;
-  const nextMilestone = g => g.milestones.find(m => !m.done);
-
-  /* ---------- home ---------- */
   function renderHome() {
-    const active = db.goals.filter(g => g.status === 'active');
-    const archived = db.goals.length - active.length;
-    app.innerHTML = `
-      <div class="crumbs"><a href="../index.html">${ICON_BACK}<span>All tools</span></a>${archived ? '<a href="#/archive">Archive</a>' : ''}</div>
-      <h1>Where are you heading?</h1>
-      <p class="lead">A goal you actually want, worked back to something you can do today.</p>
-      ${db.draft ? `<div class="callout" style="margin:0 0 20px"><b>Unfinished goal:</b> ${esc(db.draft.title || 'untitled')}. <a href="#/new">Carry on</a></div>` : ''}
-      ${active.length ? `<ul class="lists">${active.map(g => {
-        const b = blockInfo(g), nm = nextMilestone(g);
-        const bits = [g.date ? untilText(g.date) : 'no date', `day ${b.day} of ${BLOCK_DAYS}`];
-        if (nm) bits.push('next: ' + esc(nm.text));
-        return `<li><a href="#/g/${g.id}">
-          <span class="name"><span>${esc(g.title)}</span>${checkDue(g) ? '<span class="tag">check in</span>' : ''}</span>
+    const groups = [...new Set(C.reviews.map(r => r.group))];
+    const row = r => {
+      const p = db.progress[r.id], total = TOTAL(r);
+      const n = p ? p.done.length : 0;
+      const last = lastDone(r.id);
+      const st = r.group === 'daily' ? streak(r.id) : 0;
+      const bits = [];
+      if (p && n) bits.push(T.inProgress(n, total));
+      else bits.push(T.steps(total) + (r.time ? ` · ${r.time}` : ''));
+      bits.push(last ? T.last(fmtWhen(last)) : T.never);
+      if (st > 1) bits.push(T.streak(st));
+      return `
+        <li><a href="#/r/${r.id}">
+          <span class="name"><span>${r.title}</span>${due(r) && !(p && n) ? `<span class="tag">${T.now}</span>` : ''}</span>
           <span class="meta">${bits.join(' · ')}</span>
-          <span class="side">${ICON_NEXT}</span>
+          <span class="side">${p && n ? ring(n, total) : ''}${ICON_NEXT}</span>
         </a></li>`;
-      }).join('')}</ul>` : `
-        <div class="empty" style="color:var(--muted)">
-          <p style="margin:0 0 4px">No goals yet.</p>
-          <p style="margin:0">It takes about ten minutes: a picture of the future, one sentence, a few milestones and a first step for today.</p>
-        </div>`}
-      <div class="actions"><a class="btn primary" href="#/new">${db.draft ? 'Continue the new goal' : 'New goal'}</a></div>`;
+    };
+    app.innerHTML = `
+      <div class="crumbs"><a href="../index.html">${ICON_BACK}<span>All tools</span></a><a href="#/history">${T.history}</a></div>
+      <h1>${T.home}</h1>
+      <p class="lead">${T.homeLead}</p>
+      ${groups.map(g => `
+        <p class="group">${T.groups[g]}</p>
+        <ul class="lists">${C.reviews.filter(r => r.group === g).map(row).join('')}</ul>`).join('')}`;
   }
 
-  /* ---------- wizard ---------- */
-  const STEPS = ['Vision', 'Goal', 'Is it yours?', 'Milestones', 'Next 30 days', 'Today'];
-
-  function draft() {
-    if (!db.draft) { db.draft = { step: 0, vision: '', title: '', date: '', why: '', spark: '', milestones: ['', '', ''], process: '', today: '' }; save(); }
-    return db.draft;
-  }
-
-  function renderWizard(opts) {
-    const d = draft(), i = d.step, last = i === STEPS.length - 1;
-    const pct = Math.round(i / STEPS.length * 100);
-    let body = '';
-    if (i === 0) body = `
-      <h1>Picture it done</h1>
-      <p class="lead">Jump ahead to the day it’s real. Where are you, what do you see, what has changed? Don’t edit, nobody else will read this.</p>
-      <textarea class="big" id="f-vision" placeholder="It’s a year from now and…">${esc(d.vision)}</textarea>
-      <p class="hint">A few lines are enough. If it doesn’t make you want it a little, push it further.</p>`;
-    if (i === 1) body = `
-      <h1>Say it in one sentence</h1>
-      <p class="lead">Concrete enough that you’ll know when it’s done. Add a date.</p>
-      <div class="row2">
-        <input class="big" id="f-title" value="${esc(d.title)}" placeholder="e.g. Swim 10 km in open water" aria-label="Goal" autocomplete="off">
-        <input class="big" id="f-date" type="date" value="${esc(d.date)}" aria-label="By when">
-      </div>
-      <div class="field" style="margin-top:16px">
-        <label for="f-why">Why does it matter to you?</label>
-        <input class="big" id="f-why" value="${esc(d.why)}" placeholder="Because…" autocomplete="off">
+  function filterHtml() {
+    return `
+      <div class="filtr">
+        ${T.filter.map(([q, s], i) => `<div class="step"><span class="k">${i + 1}</span><p>${q}<span>${s}</span></p></div>`).join('')}
+        <div class="verdict">${T.verdict}</div>
       </div>`;
-    if (i === 2) body = `
-      <h1>Is it really yours?</h1>
-      <p class="lead">Say it out loud: <b>“${esc(d.title || 'your goal')}”</b>. Then notice what your body does.</p>
-      <div class="choices">${Object.entries(SPARK).map(([k, [b, s]]) => `
-        <button type="button" class="choice ${d.spark === k ? 'on' : ''}" data-act="spark" data-v="${k}"><b>${b}</b><span>${s}</span></button>`).join('')}</div>
-      ${d.spark && d.spark !== 'spark' ? `<div class="callout">${d.spark === 'flat'
-        ? '<b>Flat often means too small.</b> Go back and make it bigger or more specific until it gets a reaction.'
-        : '<b>Heavy often means it’s someone else’s goal.</b> Whose voice is it? Rewrite it as something you’d choose, or keep it knowing why.'}
-        <div class="actions" style="margin-top:12px"><button class="btn" type="button" data-act="wiz-to" data-v="1">Rewrite the goal</button></div></div>` : ''}`;
-    if (i === 3) body = `
-      <h1>Work it backwards</h1>
-      <p class="lead">What has to be true just before the finish? And just before that? Start from the end and work down.</p>
-      <div class="recap" style="margin-bottom:12px"><b>${esc(d.title || 'Your goal')}</b></div>
-      <ol class="ms">${d.milestones.map((m, k) => `
-        <li data-n="↑"><input class="big" data-ms="${k}" value="${esc(m)}" placeholder="${k === 0 ? 'Right before it’s done…' : 'Before that…'}" autocomplete="off"></li>`).join('')}</ol>
-      ${d.milestones.length < 6 ? '<button class="btn ghost" type="button" data-act="ms-add">Add one more</button>' : ''}`;
-    if (i === 4) body = `
-      <h1>What will you do for 30 days?</h1>
-      <p class="lead">Not a result, a habit you control. Something you can repeat on most days, small enough that you’ll actually keep it.</p>
-      <input class="big" id="f-process" value="${esc(d.process)}" placeholder="e.g. 20 minutes of writing every weekday morning" autocomplete="off">
-      <p class="hint">After 30 days you look at what moved and adjust.</p>`;
-    if (i === 5) body = `
-      <h1>And today?</h1>
-      <p class="lead">The smallest step towards it you can take today. Physical, under ten minutes.</p>
-      <input class="big" id="f-today" value="${esc(d.today)}" placeholder="e.g. Book the first swim session" autocomplete="off">`;
+  }
+  const cells = (rows, cls) => `<div class="spread${cls ? ' ' + cls : ''}">${rows.map(([b, s]) => `<div><b>${b}</b>${s}</div>`).join('')}</div>`;
+  const EXTRAS = {
+    [FILTER]: filterHtml,
+    qs: () => `<ul class="qs">${C.monthQs.map(q => `<li>${q}</li>`).join('')}</ul>`,
+    spread: () => cells(T.spread),
+    quad: () => cells(T.quad, 'quad'),
+    ...Object.fromEntries(Object.entries(C.extras).map(([k, [, h]]) => [k, () => h])),
+  };
+
+  function renderReview(r, opts) {
+    const p = db.progress[r.id];
+    const done = new Set(p ? p.done : []);
+    const total = TOTAL(r), n = done.size;
+    const pct = Math.round(n / total * 100);
+    let idx = 0;
+    const stale = p && p.started && daysAgo(p.started) > 0 && r.group === 'daily' && n > 0;
+
+    const sections = r.sections.map((s, si) => `
+      ${s.phase ? `<p class="phase"><b>${s.phase[0]}</b>${s.phase[1]}</p>` : ''}
+      <ol class="check">
+        ${s.items.map((it, ii) => {
+          const k = `${si}.${ii}`, num = ++idx, on = done.has(k);
+          const exKey = `${r.id}:${k}`;
+          const ex = it.extra && EXTRAS[it.extra];
+          const open = ex && (openExtras.has(exKey) || (it.open && !openExtras.has('!' + exKey)));
+          return `
+          <li>
+            <button class="item ${on ? 'done' : ''}" data-act="tick" data-k="${k}" role="checkbox" aria-checked="${on}">
+              <span class="box">${ICON_CHECK}</span>
+              <span>
+                <span class="t"><span class="n">${num}</span><span class="tx">${glyphs(it.t)}</span>${it.key ? `<span class="key" title="${T.keyStep}"></span>` : ''}</span>
+                <span class="d">${glyphs(it.d)}</span>
+                ${it.s ? `<span class="s">${glyphs(it.s)}</span>` : ''}
+              </span>
+            </button>
+            ${it.link ? `<div class="extra"><a class="toggle" href="${it.link[0]}">${ICON_NEXT}${it.link[1]}</a></div>` : ''}
+            ${ex ? `<div class="extra">
+              <button class="toggle" data-act="extra" data-x="${exKey}" data-default="${it.open ? 1 : 0}" aria-expanded="${open}">${ICON_NEXT}${T.extras[it.extra]}</button>
+              ${open ? ex() : ''}
+            </div>` : ''}
+          </li>`;
+        }).join('')}
+      </ol>
+      ${(s.notes || []).map(([b, t]) => `<div class="note"><b>${b}</b><span>${t}</span></div>`).join('')}`).join('');
 
     app.innerHTML = `
       <div class="crumbs">
-        <a href="#/">${ICON_BACK}<span>Goals</span></a>
-        <span class="wiz-meta">${i + 1} / ${STEPS.length} · ${STEPS[i]}</span>
+        <a href="#/">${ICON_BACK}<span>${T.back}</span></a>
+        <span class="progress-meta">${n} / ${total}</span>
       </div>
       <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><span style="width:${pct}%"></span></div>
-      <form id="wiz" autocomplete="off" class="${opts.anim ? 'anim' : ''}">
-        ${body}
+      <h1>${r.title}</h1>
+      <p class="lead">${r.when}${r.time ? ' · ' + r.time : ''}${p && n && p.started ? ' · ' + T.started(fmtWhen(p.started)) : ''}</p>
+      ${stale ? `<div class="note" style="margin:-12px 0 24px"><b>${T.staleTitle}</b><span>${T.stale(fmtWhen(p.started))} <button class="toggle" style="text-decoration:underline;text-underline-offset:3px" data-act="restart">${T.restart}</button></span></div>` : ''}
+      ${sections}
+      ${n === total ? `
+        <div class="finish ${opts.anim ? 'anim' : ''}" id="finish">
+          <h2>${T.done}</h2>
+          <p>${T.allDone(p && p.started ? fmtDur(Date.now() - p.started) : '')}</p>
+          <div class="actions"><button class="btn primary" data-act="complete">${T.saveClose}</button></div>
+        </div>` : `
         <div class="actions">
-          ${i ? '<button class="btn ghost" type="button" data-act="wiz-back">Back</button>' : '<button class="btn ghost danger" type="button" data-act="wiz-discard">Discard</button>'}
+          ${n ? `<button class="btn ghost danger" data-act="restart">${T.clear}</button>` : ''}
           <span class="spacer"></span>
-          <button class="btn primary" type="submit">${last ? 'Create the goal' : 'Next'}</button>
+          ${n ? `<button class="btn" data-act="complete">${T.finishEarly}</button>` : ''}
         </div>
-      </form>`;
-    const f = app.querySelector('textarea, input');
-    if (f && !opts.noFocus) { f.focus(); if (f.setSelectionRange && f.type !== 'date') f.setSelectionRange(f.value.length, f.value.length); }
+        <p class="hint"><span class="legend-key"></span>${T.hintKey}<span class="kbd-hint"> · ${T.hintKbd}</span></p>`}`;
+
+    if (opts.focus) app.querySelector(`[data-k="${opts.focus}"]`)?.focus({ preventScroll: true });
   }
 
-  function readWizard() {
-    const d = db.draft; if (!d) return;
-    const v = id => { const el = document.getElementById(id); return el ? el.value : undefined; };
-    if (v('f-vision') !== undefined) d.vision = v('f-vision');
-    if (v('f-title') !== undefined) d.title = v('f-title');
-    if (v('f-date') !== undefined) d.date = v('f-date');
-    if (v('f-why') !== undefined) d.why = v('f-why');
-    if (v('f-process') !== undefined) d.process = v('f-process');
-    if (v('f-today') !== undefined) d.today = v('f-today');
-    app.querySelectorAll('[data-ms]').forEach(el => { d.milestones[+el.dataset.ms] = el.value; });
-  }
-
-  function wizNext() {
-    readWizard();
-    const d = db.draft, i = d.step;
-    const need = { 1: ['f-title', d.title], 2: [null, d.spark], 4: ['f-process', d.process], 5: ['f-today', d.today] }[i];
-    if (need && !String(need[1]).trim()) {
-      if (need[0]) document.getElementById(need[0])?.focus();
-      toast(i === 2 ? 'Pick what you noticed' : 'This one is needed');
-      return;
-    }
-    if (i === 3 && !d.milestones.some(m => m.trim())) { app.querySelector('[data-ms]')?.focus(); toast('Add at least one milestone'); return; }
-    if (i < STEPS.length - 1) { d.step++; save(); render({ anim: true }); window.scrollTo(0, 0); return; }
-    const now = Date.now();
-    const g = {
-      id: uid(), created: now, status: 'active',
-      title: d.title.trim(), date: parseDate(d.date), vision: d.vision.trim(), why: d.why.trim(), spark: d.spark,
-      // Entered from the finish backwards; stored in the order you'll reach them.
-      milestones: d.milestones.map(s => s.trim()).filter(Boolean).reverse().map(text => ({ text, done: false })),
-      process: d.process.trim(), blockStart: now, today: d.today.trim(), todayT: now,
-      written: false, checks: [], blocks: [],
-    };
-    db.goals.push(g); db.draft = null; save();
-    location.hash = `#/g/${g.id}`;
-  }
-
-  /* ---------- goal page ---------- */
-  function contractHtml(g) {
-    return `
-      <div class="contract">
-        <p class="goal">${esc(g.title)}</p>
-        <p class="by">${g.date ? 'By ' + fmtDate(g.date) : 'No date yet'}</p>
-        <dl>
-          ${g.why ? `<div><dt>Why it matters</dt><dd>${esc(g.why)}</dd></div>` : ''}
-          ${g.milestones.length ? `<div><dt>Milestones</dt><dd>${g.milestones.map((m, k) => `${k + 1}. ${esc(m.text)}`).join('\n')}</dd></div>` : ''}
-          ${g.process ? `<div><dt>For 30 days</dt><dd>${esc(g.process)}</dd></div>` : ''}
-          ${g.vision ? `<div><dt>Picture</dt><dd>${esc(g.vision)}</dd></div>` : ''}
-        </dl>
-        <div class="sign"><span>${fmtDate(g.created)}</span><span>Signed: ______________</span></div>
-      </div>`;
-  }
-
-  function renderGoal(g) {
-    const b = blockInfo(g);
-    const todayFresh = g.today && dayDiff(Date.now(), g.todayT || 0) === 0;
+  function renderCheat() {
+    const defs = rows => `<ul class="defs">${rows.map(([b, s]) => `<li><b>${b}</b>${s}</li>`).join('')}</ul>`;
     app.innerHTML = `
-      <div class="crumbs"><a href="#/">${ICON_BACK}<span>Goals</span></a>${g.status === 'active' ? `<a href="#/g/${g.id}/check">Check in</a>` : ''}</div>
-      ${g.status !== 'active' ? `<div class="callout" style="margin:0 0 20px"><b>${g.status === 'done' ? 'Reached' : 'Let go'}</b> on ${fmtDate(g.ended)}.</div>` : ''}
-      ${!g.written && g.status === 'active' ? `<div class="callout" style="margin:0 0 20px">
-        <b>Copy it into your notebook.</b> By hand, on its own page: date it, sign it, add the page to your index. Writing it out is part of committing to it.
-        <div class="actions" style="margin-top:12px"><button class="btn" data-act="written">It’s in my notebook</button></div></div>` : ''}
-      ${contractHtml(g)}
+      <div class="crumbs"><a href="#/">${ICON_BACK}<span>${T.back}</span></a></div>
+      <h1>${T.cheat}</h1>
+      <p class="lead">${T.cheatLead}</p>
 
-      ${g.status === 'active' ? `
-      <h2 class="sec">Today</h2>
-      <p class="lead">${todayFresh ? 'Your step for today.' : 'What’s the smallest step towards it today?'}</p>
-      <form class="today" id="today-form" autocomplete="off">
-        <input class="big" id="today" value="${todayFresh ? esc(g.today) : ''}" placeholder="${esc(g.process || 'One small physical step')}" aria-label="Today’s step">
-        <button class="btn primary" type="submit">Start it now</button>
-      </form>
-      <p class="hint">Opens Start with this step, then the five-second countdown.</p>
+      <h2 class="sec">${T.symbols}</h2>
+      <p class="lead">${T.symbolsLead}</p>
+      <div class="legenda">
+        ${C.legend.map(([g, n, s, mark]) => `<div class="sym"><span class="gl${mark ? ' mark' : ''}">${g}</span><span>${n}<small>${s}</small></span></div>`).join('')}
+      </div>
 
-      <h2 class="sec">This 30 days</h2>
-      <div class="block"><div class="bar"><span style="width:${Math.round(b.day / BLOCK_DAYS * 100)}%"></span></div><small>day ${b.day} of ${BLOCK_DAYS}</small></div>
-      <p class="lead">${esc(g.process || 'No process set.')}</p>
-      ${b.over ? `<div class="callout"><b>The 30 days are up.</b> Check in to see what moved and set the next block. <a href="#/g/${g.id}/check">Check in</a></div>` : ''}` : ''}
+      <h2 class="sec">${T.filterTitle}</h2>
+      <p class="lead">${T.filterLead}</p>
+      ${filterHtml()}
 
-      <h2 class="sec">Milestones</h2>
-      <ul class="mlist">${g.milestones.map((m, k) => `
-        <li><button class="item ${m.done ? 'done' : ''}" data-act="ms" data-k="${k}" role="checkbox" aria-checked="${m.done}">
-          <span class="box">${ICON_CHECK}</span><span><span class="t"><span class="n">${k + 1}</span><span class="tx">${esc(m.text)}</span></span></span>
-        </button></li>`).join('')}</ul>
+      <h2 class="sec">${T.dayTitle}</h2>
+      <p class="lead">${T.dayLead}</p>
+      ${defs(T.day)}
 
-      ${g.checks.length ? `<h2 class="sec">Check-ins</h2><ul class="hist">${[...g.checks].reverse().map(c => `
-        <li><span>${c.note ? esc(c.note) : '—'}</span><span class="when">${fmtShort(c.t)} <span class="spark ${c.spark === 'spark' ? 'yes' : ''}">${SPARK[c.spark]?.[0] || ''}</span></span></li>`).join('')}</ul>` : ''}
+      <h2 class="sec">${T.coreTitle}</h2>
+      <p class="lead">${T.coreLead}</p>
+      ${defs(T.core)}
 
-      <div class="actions">
-        ${g.status === 'active'
-          ? `<button class="btn" data-act="reached">Reached it</button><span class="spacer"></span><button class="btn ghost danger" data-act="drop">Let it go</button>`
-          : `<button class="btn" data-act="reopen">Make it active again</button><span class="spacer"></span><button class="btn ghost danger" data-act="delete">Delete</button>`}
-      </div>`;
+      <p class="quote">${T.quote}</p>`;
   }
 
-  /* ---------- check-in ---------- */
-  let check = null;
-  function renderCheck(g, opts) {
-    if (!check || check.id !== g.id) check = { id: g.id, spark: '', note: '', process: g.process, today: '' };
-    const b = blockInfo(g);
+  function renderHistory() {
+    const items = [...db.log].sort((a, b) => b.t - a.t).slice(0, 60);
+    const since = Date.now() - 30 * DAY;
+    const counts = C.reviews.map(r => [r, db.log.filter(e => e.id === r.id && e.t >= since).length]);
     app.innerHTML = `
-      <div class="crumbs"><a href="#/g/${g.id}">${ICON_BACK}<span>${esc(g.title)}</span></a></div>
-      <h1>Check in</h1>
-      <p class="lead">Read it again, notice how it lands, set the next 30 days. Five minutes.</p>
-      ${contractHtml(g)}
-
-      <h2 class="sec">1. Does it still light you up?</h2>
-      <div class="choices">${Object.entries(SPARK).map(([k, [bb, s]]) => `
-        <button type="button" class="choice ${check.spark === k ? 'on' : ''}" data-act="c-spark" data-v="${k}"><b>${bb}</b><span>${s}</span></button>`).join('')}</div>
-      ${check.spark && check.spark !== 'spark' ? `<div class="callout">Worth a look: make it bigger, change it so it’s yours again, or let it go. Letting go of a goal that no longer fits is a decision, not a failure.</div>` : ''}
-
-      <h2 class="sec">2. Tick what’s done</h2>
-      <ul class="mlist">${g.milestones.map((m, k) => `
-        <li><button class="item ${m.done ? 'done' : ''}" data-act="ms" data-k="${k}" role="checkbox" aria-checked="${m.done}">
-          <span class="box">${ICON_CHECK}</span><span><span class="t"><span class="n">${k + 1}</span><span class="tx">${esc(m.text)}</span></span></span>
-        </button></li>`).join('')}</ul>
-
-      <h2 class="sec">3. What moved?</h2>
-      <p class="lead">One line. Look for what you did, not what you didn’t.</p>
-      <input class="big" id="c-note" value="${esc(check.note)}" placeholder="e.g. Swam 3 times a week, first 2 km done" autocomplete="off">
-
-      <h2 class="sec">4. Next 30 days</h2>
-      <p class="lead">${b.over ? 'Keep the process, or change what didn’t work.' : `You’re on day ${b.day}. Change the process only if it isn’t working.`}</p>
-      <input class="big" id="c-process" value="${esc(check.process)}" aria-label="Process" autocomplete="off">
-
-      <h2 class="sec">5. Today</h2>
-      <input class="big" id="c-today" value="${esc(check.today)}" placeholder="Smallest step for today" autocomplete="off">
-
-      <div class="actions">
-        <button class="btn primary" data-act="c-save">Save and start today’s step</button>
-        <button class="btn" data-act="c-save-only">Save</button>
-      </div>`;
+      <div class="crumbs"><a href="#/">${ICON_BACK}<span>${T.back}</span></a></div>
+      <h1>${T.history}</h1>
+      <p class="lead">${db.log.length
+        ? T.histLead30(counts.filter(c => c[1]).map(([r, c]) => `${r.title.toLowerCase()} ${c}×`).join(' · '))
+        : T.histEmpty}</p>
+      ${items.length ? `<ul class="hist">${items.map(e => {
+        const r = byId(e.id);
+        const part = e.n < e.total ? ` · ${e.n}/${e.total}` : '';
+        return `<li><span>${r ? r.title : e.id}${part}</span><span class="when">${fmtWhen(e.t)}${e.dur ? ' · ' + fmtDur(e.dur) : ''}</span></li>`;
+      }).join('')}</ul>` : ''}`;
   }
 
-  function saveCheck(g, go) {
-    check.note = $('#c-note').value.trim(); check.process = $('#c-process').value.trim(); check.today = $('#c-today').value.trim();
-    if (!check.spark) { toast('Pick how it lands first'); return; }
-    const b = blockInfo(g);
-    g.checks.push({ t: Date.now(), spark: check.spark, note: check.note });
-    if (b.over || (check.process && check.process !== g.process)) {
-      g.blocks.push({ start: g.blockStart, end: Date.now(), process: g.process });
-      g.blockStart = Date.now();
-    }
-    if (check.process) g.process = check.process;
-    if (check.today) { g.today = check.today; g.todayT = Date.now(); }
+  /* ---------- actions ---------- */
+  const current = () => route().review;
+  let lastTicked = [];
+
+  function tick(r, k, force) {
+    let p = db.progress[r.id];
+    if (!p) p = db.progress[r.id] = { started: Date.now(), done: [] };
+    const has = p.done.includes(k);
+    const want = force === undefined ? !has : force;
+    if (want === has) return;
+    if (want) { p.done.push(k); lastTicked.push(k); }
+    else p.done = p.done.filter(x => x !== k);
+    if (!p.done.length) delete db.progress[r.id];
     save();
-    const today = check.today; check = null;
-    if (go && today) location.href = startLink(today);
-    else { location.hash = `#/g/${g.id}`; toast('Check-in saved'); }
+    const wasLast = want && db.progress[r.id] && db.progress[r.id].done.length === TOTAL(r);
+    render({ focus: k, anim: wasLast });
+    if (wasLast) $('#finish')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  /* ---------- archive ---------- */
-  function renderArchive() {
-    const gs = db.goals.filter(g => g.status !== 'active').sort((a, b) => (b.ended || 0) - (a.ended || 0));
-    app.innerHTML = `
-      <div class="crumbs"><a href="#/">${ICON_BACK}<span>Goals</span></a></div>
-      <h1>Archive</h1>
-      <p class="lead">Goals you reached and goals you let go.</p>
-      ${gs.length ? `<ul class="lists">${gs.map(g => `<li><a href="#/g/${g.id}">
-        <span class="name"><span>${esc(g.title)}</span></span>
-        <span class="meta">${g.status === 'done' ? 'Reached' : 'Let go'} · ${fmtDate(g.ended)}</span>
-        <span class="side">${ICON_NEXT}</span></a></li>`).join('')}</ul>` : ''}`;
+  function keysOf(r) {
+    const out = [];
+    r.sections.forEach((s, si) => s.items.forEach((_, ii) => out.push(`${si}.${ii}`)));
+    return out;
   }
 
-  /* ---------- events ---------- */
-  document.addEventListener('submit', e => {
-    e.preventDefault();
-    if (e.target.id === 'wiz') wizNext();
-    if (e.target.id === 'today-form') {
-      const g = route().goal, v = $('#today').value.trim() || g.process;
-      if (!v) { $('#today').focus(); return; }
-      g.today = v; g.todayT = Date.now(); save();
-      location.href = startLink(v);
-    }
-  });
+  function complete(r) {
+    const p = db.progress[r.id];
+    const n = p ? p.done.length : 0, all = TOTAL(r);
+    db.log.push({ id: r.id, t: Date.now(), dur: p && p.started ? Date.now() - p.started : 0, n, total: all });
+    delete db.progress[r.id];
+    lastTicked = [];
+    save();
+    location.hash = '#/';
+    toast(n === all ? T.saved(r.title) : T.savedPart(r.title, n, all));
+  }
 
-  document.addEventListener('input', e => {
-    const rt = route();
-    if (rt.view === 'wizard') { readWizard(); save(); }
-    if (rt.view === 'check' && check) {
-      if (e.target.id === 'c-note') check.note = e.target.value;
-      if (e.target.id === 'c-process') check.process = e.target.value;
-      if (e.target.id === 'c-today') check.today = e.target.value;
-    }
-  });
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-act]');
+    if (!el) return;
+    const act = el.dataset.act, r = current();
 
-  document.addEventListener('click', async e => {
-    const el = e.target.closest('[data-act]'); if (!el) return;
-    const act = el.dataset.act, rt = route(), g = rt.goal;
-    if (act === 'wiz-back') { readWizard(); db.draft.step--; save(); render({ anim: true }); }
-    else if (act === 'wiz-to') { readWizard(); db.draft.step = +el.dataset.v; save(); render({ anim: true }); }
-    else if (act === 'wiz-discard') { if (confirm('Discard this goal?')) { db.draft = null; save(); location.hash = '#/'; } }
-    else if (act === 'spark') { readWizard(); db.draft.spark = el.dataset.v; save(); render({ noFocus: true }); }
-    else if (act === 'ms-add') { readWizard(); db.draft.milestones.push(''); save(); render({ noFocus: true }); app.querySelector(`[data-ms="${db.draft.milestones.length - 1}"]`)?.focus(); }
-    else if (act === 'c-spark') { check.note = $('#c-note').value; check.process = $('#c-process').value; check.today = $('#c-today').value; check.spark = el.dataset.v; render({ noFocus: true }); }
-    else if (act === 'c-save' && g) saveCheck(g, true);
-    else if (act === 'c-save-only' && g) saveCheck(g, false);
-    else if (act === 'ms' && g) {
-      if (check) { check.note = $('#c-note')?.value ?? check.note; check.process = $('#c-process')?.value ?? check.process; check.today = $('#c-today')?.value ?? check.today; }
-      const m = g.milestones[+el.dataset.k]; m.done = !m.done; m.doneT = m.done ? Date.now() : null; save(); render({ noFocus: true });
-      app.querySelector(`[data-act="ms"][data-k="${el.dataset.k}"]`)?.focus({ preventScroll: true });
+    if (act === 'tick' && r) tick(r, el.dataset.k);
+    else if (act === 'extra') {
+      const x = el.dataset.x, def = el.dataset.default === '1';
+      if (def) { openExtras.has('!' + x) ? openExtras.delete('!' + x) : openExtras.add('!' + x); }
+      else { openExtras.has(x) ? openExtras.delete(x) : openExtras.add(x); }
+      render();
+      app.querySelector(`[data-x="${x}"]`)?.focus({ preventScroll: true });
     }
-    else if (act === 'written' && g) { g.written = true; save(); render(); toast('Good. That page is your contract.'); }
-    else if (act === 'reached' && g) { if (confirm(`Mark “${g.title}” as reached?`)) { g.status = 'done'; g.ended = Date.now(); save(); location.hash = '#/'; toast('Reached. Write it down in your notebook too.'); } }
-    else if (act === 'drop' && g) { if (confirm(`Let “${g.title}” go? You can make it active again later.`)) { g.status = 'dropped'; g.ended = Date.now(); save(); location.hash = '#/'; toast('Let go. That’s a decision too.'); } }
-    else if (act === 'reopen' && g) { g.status = 'active'; g.ended = null; g.blockStart = Date.now(); save(); render(); }
-    else if (act === 'delete' && g) { if (confirm(`Delete “${g.title}” for good?`)) { db.goals = db.goals.filter(x => x !== g); save(); location.hash = '#/'; } }
+    else if (act === 'restart' && r) {
+      delete db.progress[r.id]; lastTicked = []; save(); render(); window.scrollTo(0, 0);
+    }
+    else if (act === 'complete' && r) complete(r);
     else if (act === 'export') {
       const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob); a.download = `goals-${new Date().toISOString().slice(0, 10)}.json`;
+      a.href = URL.createObjectURL(blob);
+      a.download = `${T.file}-${new Date().toISOString().slice(0, 10)}.json`;
       document.body.appendChild(a); a.click(); a.remove();
       setTimeout(() => URL.revokeObjectURL(a.href), 1000);
     }
@@ -777,19 +712,58 @@ textarea.big { min-height: 110px; resize: vertical; line-height: 1.5; font-size:
     if (!f) return;
     try {
       const data = JSON.parse(await f.text());
-      if (!data || !Array.isArray(data.goals)) throw 0;
-      let added = 0, updated = 0;
-      for (const g of data.goals) {
-        if (!g || !g.id || !g.title || !Array.isArray(g.milestones)) continue;
-        const i = db.goals.findIndex(x => x.id === g.id);
-        if (i >= 0) { db.goals[i] = g; updated++; } else { db.goals.push(g); added++; }
+      if (!data || !Array.isArray(data.log) || typeof data.progress !== 'object') throw 0;
+      const seen = new Set(db.log.map(x => x.id + '@' + x.t));
+      let added = 0;
+      for (const x of data.log) {
+        if (!x || !x.id || !x.t || seen.has(x.id + '@' + x.t)) continue;
+        db.log.push(x); added++;
       }
-      save(); render(); toast(`Imported: ${added} new, ${updated} updated`);
-    } catch (_) { toast('Not a valid export file'); }
+      for (const [id, p] of Object.entries(data.progress || {})) {
+        if (byId(id) && p && Array.isArray(p.done) && !db.progress[id]) db.progress[id] = p;
+      }
+      save(); render();
+      toast(T.imported(added));
+    } catch (_) { toast(T.badFile); }
   });
 
-  window.addEventListener('storage', e => { if (e.key === KEY) { db = load(); if (!/INPUT|TEXTAREA/.test(document.activeElement?.tagName)) render(); } });
-  window.addEventListener('hashchange', () => { if (!location.hash.includes('/check')) check = null; render(); window.scrollTo(0, 0); });
+  document.addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const r = current();
+    if (!r) return;
+    const keys = keysOf(r);
+    const items = [...app.querySelectorAll('.item')];
+    const at = items.indexOf(document.activeElement);
+
+    if (e.key === 'x' || e.key === 'X') {
+      e.preventDefault();
+      const p = db.progress[r.id], done = new Set(p ? p.done : []);
+      const from = at >= 0 && !done.has(keys[at]) ? at : 0;
+      const k = keys.slice(from).find(x => !done.has(x)) || keys.find(x => !done.has(x));
+      if (k) tick(r, k, true);
+    }
+    else if (e.key === 'z' || e.key === 'Z') {
+      e.preventDefault();
+      const p = db.progress[r.id];
+      while (lastTicked.length) {
+        const k = lastTicked.pop();
+        if (p && p.done.includes(k)) { tick(r, k, false); return; }
+      }
+    }
+    else if (e.key === 'ArrowDown' || e.key === 'j') {
+      e.preventDefault();
+      (items[at + 1] || items[at < 0 ? 0 : at])?.focus();
+    }
+    else if (e.key === 'ArrowUp' || e.key === 'k') {
+      e.preventDefault();
+      (items[at - 1] || items[0])?.focus();
+    }
+  });
+
+  window.addEventListener('storage', e => {
+    if (e.key === KEY) { db = load(); render(); }
+  });
+  window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
   render();
 })();
 </script>

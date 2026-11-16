@@ -2,7 +2,7 @@
 
 # Goals
 
-**A goal you actually want,<br>worked back to something you can do today.**
+**Checklists for setting a goal in your notebook<br>and checking in on it every month.**
 
 [**→ Open the app**](https://marekbrze.github.io/bullet-journal-tools/goals/) &nbsp;·&nbsp; [Download the file](https://raw.githubusercontent.com/marekbrze/bullet-journal-tools/main/goals/index.html)
 
@@ -10,34 +10,23 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/goal-dark.png">
-  <img src="docs/goal-light.png" width="640" alt="A goal page with the written contract, today’s step and milestones">
+  <img src="docs/goal-light.png" width="640" alt="The New goal checklist with the spread layout expanded">
 </picture>
 
 </div>
 
 <br>
 
-Big goals stall in two places: when they aren't really yours, and when nothing about them is small enough to do today. Goals handles both and hands today's step straight to [Start](../start/).
+You write the goal in your notebook, by hand. The app only walks you through it, one step at a time, like the [Reviews](../reviews/).
 
-## New goal, about ten minutes
+## Two checklists
 
 | | |
 |:-:|---|
-| **1** | **Picture it done.** A few unedited lines about the day it's real. |
-| **2** | **One sentence and a date**, plus why it matters to you. |
-| **3** | **Is it yours?** Say it out loud and notice the reaction: spark, flat or heavy. Flat usually means too small, heavy usually means someone else's goal. |
-| **4** | **Milestones, backwards.** What has to be true just before the finish, and before that. |
-| **5** | **A 30-day habit** you control, instead of a result you don't. |
-| **6** | **Today's smallest step.** “Start it now” opens Start with the countdown. |
+| **New goal** | 10 steps · a fresh spread: the picture of it done on the left; on the right one sentence with a date, why it matters, the “is it yours?” check, milestones worked backwards, a 30-day habit and your signature. Ends with today's smallest step, which you can do with [Start](../start/). |
+| **Check-in** | 8 steps · once a month or when the 30 days are up: reread, still yours?, milestones, what moved, the next 30 days and today's step. |
 
-The result is a short contract. Copy it by hand onto its own page in your notebook, date it and sign it.
-
-## After that
-
-- **Goal page**: the contract, today's step, where you are in the 30 days, milestones to tick off.
-- **Check in** every month or when the 30 days are up: does it still light you up, what moved, the next 30 days and today's step.
-- **Reached it / let it go**: both go to the archive. Letting go of a goal that no longer fits is a decision, not a failure.
-- **Private, one file**: no account, no server. Export / Import in the footer.
+The home screen marks the check-in as due four weeks after the last one. History and Export / Import work like in the Reviews.
 
 <br>
 
