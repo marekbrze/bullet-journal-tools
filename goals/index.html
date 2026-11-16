@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goals</title>
+<meta name="description" content="A goal you actually want, worked back to a 30-day habit and a first step for today.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231c1917'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23fff' stroke-width='2.2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23fff'/%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --text: #1c1917;
+  --muted: #78716c;
+  --faint: #a8a29e;
+  --line: #e7e5e4;
+  --hover: #f5f5f4;
+  --accent: #1c1917;
+  --accent-text: #fafaf9;
+  --key: #b45309;
+  --danger: #b91c1c;
+  --focus: #2563eb;
+  --shadow: 0 1px 2px rgba(28,25,23,.04), 0 4px 16px rgba(28,25,23,.04);
+  --radius: 14px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c0a09;
+    --surface: #171412;
+    --text: #f5f5f4;
+    --muted: #a8a29e;
+    --faint: #6b625c;
+    --line: #2a2522;
+    --hover: #211d1a;
+    --accent: #f5f5f4;
+    --accent-text: #0c0a09;
+    --key: #f59e0b;
+    --danger: #f87171;
+    --focus: #60a5fa;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c0a09; --surface: #171412; --text: #f5f5f4; --muted: #a8a29e; --faint: #6b625c;
+  --line: #2a2522; --hover: #211d1a; --accent: #f5f5f4; --accent-text: #0c0a09; --key: #f59e0b;
+  --danger: #f87171; --focus: #60a5fa;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25); color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+
+.wrap { width: 100%; max-width: 640px; margin: 0 auto; padding: 0 16px; }
+main { flex: 1; padding: 40px 0 56px; }
+
+/* nav */
+.crumbs { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 28px; margin-bottom: 28px; font-size: 14px; color: var(--muted); }
+.crumbs a { text-decoration: none; display: inline-flex; align-items: center; gap: 6px; max-width: 70%; }
+.crumbs a span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.crumbs a:hover { color: var(--text); }
+.brand { font-weight: 600; color: var(--text); letter-spacing: -.01em; display: inline-flex; align-items: center; gap: 8px; }
+.brand svg { width: 18px; height: 18px; }
+.progress-meta { font-variant-numeric: tabular-nums; }
+
+h1 { font-size: 28px; line-height: 1.2; font-weight: 650; letter-spacing: -.02em; margin: 0 0 6px; }
+.lead { color: var(--muted); margin: 0 0 28px; font-size: 15px; }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 42px; padding: 0 18px; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--surface); text-decoration: none; font-size: 15px; font-weight: 500;
+  transition: background .15s, border-color .15s, transform .1s;
+  white-space: nowrap;
+}
+.btn:hover { background: var(--hover); }
+.btn:active { transform: scale(.98); }
+.btn.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+.btn.primary:hover { opacity: .88; }
+.btn:disabled { opacity: .4; pointer-events: none; }
+.btn.ghost { border-color: transparent; background: transparent; color: var(--muted); padding: 0 12px; }
+.btn.ghost:hover { color: var(--text); background: var(--hover); }
+.btn.danger:hover { color: var(--danger); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; align-items: center; }
+.actions .spacer { flex: 1; }
+.hint { font-size: 13px; color: var(--faint); margin-top: 14px; }
+.legend-key { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--key); margin-right: 6px; position: relative; top: -1px; }
+
+kbd {
+  font: 500 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--faint);
+  border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 3px 6px; background: var(--bg);
+}
+@media (hover: none) { kbd, .kbd-hint { display: none; } }
+
+/* bullet glyphs */
+.g { font: 600 .95em/1 ui-monospace, SFMono-Regular, Menlo, monospace; padding: 0 1px; white-space: nowrap; }
+
+/* home */
+.group { margin: 28px 0 8px; font-size: 13px; color: var(--muted); }
+.group:first-of-type { margin-top: 0; }
+.lists { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.lists li { border-bottom: 1px solid var(--line); }
+.lists a { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; text-decoration: none; padding: 16px 4px; }
+.lists .name { font-weight: 550; display: flex; align-items: center; gap: 8px; }
+.lists .meta { font-size: 13px; color: var(--muted); grid-column: 1; }
+.lists .side { grid-row: 1 / span 2; grid-column: 2; display: flex; align-items: center; gap: 10px; color: var(--faint); }
+.lists .side svg { width: 14px; height: 14px; }
+.lists a:hover .name span:first-child { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--faint); }
+.tag { font-size: 11px; font-weight: 600; letter-spacing: .02em; padding: 2px 7px; border-radius: 999px; background: var(--accent); color: var(--accent-text); }
+.tag.soft { background: transparent; color: var(--muted); border: 1px solid var(--line); font-weight: 500; }
+.ring { width: 28px; height: 28px; flex: none; }
+.ring circle { fill: none; stroke-width: 3; }
+.ring .bg { stroke: var(--line); }
+.ring .fg { stroke: var(--accent); stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; }
+
+/* checklist */
+.progress { height: 3px; background: var(--line); border-radius: 3px; overflow: hidden; margin: -16px 0 36px; }
+.progress span { display: block; height: 100%; background: var(--accent); border-radius: 3px; transition: width .3s ease; }
+.phase { margin: 32px 0 10px; font-size: 13px; color: var(--muted); display: flex; align-items: baseline; gap: 8px; }
+.phase:first-child { margin-top: 0; }
+.phase b { font-weight: 600; color: var(--text); }
+.check { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.check > li { border-bottom: 1px solid var(--line); }
+.item {
+  width: 100%; display: grid; grid-template-columns: 26px 1fr; gap: 14px; align-items: start;
+  padding: 14px 4px; border: 0; background: transparent; text-align: left; border-radius: 0;
+  transition: background .15s;
+}
+.item:hover { background: var(--hover); }
+.item:focus-visible { outline-offset: -2px; border-radius: 8px; }
+.box {
+  width: 22px; height: 22px; margin-top: 1px; border-radius: 6px; border: 1.5px solid var(--faint);
+  display: inline-flex; align-items: center; justify-content: center; color: var(--accent-text);
+  transition: background .15s, border-color .15s;
+}
+.box svg { width: 14px; height: 14px; opacity: 0; transform: scale(.6); transition: opacity .15s, transform .15s; }
+.item .t { font-weight: 550; display: block; }
+.item .n { color: var(--faint); font-size: 13px; font-weight: 400; font-variant-numeric: tabular-nums; margin-right: 6px; }
+.item .key { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--key); vertical-align: middle; margin-left: 8px; position: relative; top: -2px; }
+.item .d { display: block; color: var(--muted); font-size: 15px; margin-top: 2px; }
+.item .s { display: block; color: var(--faint); font-size: 13px; margin-top: 6px; }
+.item.done .box { background: var(--accent); border-color: var(--accent); }
+.item.done .box svg { opacity: 1; transform: none; }
+.item.done .t { color: var(--muted); }
+.item.done .tx { text-decoration: line-through; text-decoration-color: var(--faint); }
+.item.done .d, .item.done .s { opacity: .6; }
+
+.extra { padding: 0 4px 14px 44px; }
+.toggle { background: none; border: 0; padding: 0; font-size: 13px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+.toggle:hover { color: var(--text); }
+.toggle svg { width: 12px; height: 12px; transition: transform .15s; }
+.toggle[aria-expanded="true"] svg { transform: rotate(90deg); }
+
+.filtr { margin-top: 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 6px 16px; box-shadow: var(--shadow); }
+.filtr .step { display: grid; grid-template-columns: 20px 1fr; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+.filtr .step:last-of-type { border-bottom: 0; }
+.filtr .k { color: var(--faint); font-variant-numeric: tabular-nums; }
+.filtr p { margin: 0; }
+.filtr p span { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+.verdict { border-top: 1px solid var(--line); padding: 10px 0 8px; font-size: 13px; color: var(--muted); }
+.verdict b { color: var(--text); }
+
+.qs { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; font-size: 14px; color: var(--muted); }
+.qs li { padding-left: 14px; position: relative; }
+.qs li::before { content: "–"; position: absolute; left: 0; color: var(--faint); }
+
+.spread { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface); font-size: 13px; color: var(--muted); }
+.spread > div { padding: 10px 14px; }
+.spread > div + div { border-left: 1px solid var(--line); }
+.spread b { display: block; color: var(--text); font-weight: 550; font-size: 14px; }
+.spread.quad > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+.spread.quad > div:nth-child(3) { border-left: 0; }
+
+.note {
+  margin: 14px 0 0; padding: 12px 14px; border-radius: 12px; background: var(--hover);
+  font-size: 14px; color: var(--muted); display: grid; grid-template-columns: auto 1fr; gap: 10px;
+}
+.note b { color: var(--text); font-weight: 600; }
+
+.finish { text-align: center; margin-top: 36px; padding: 28px 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
+.finish h2 { margin: 0 0 4px; font-size: 20px; letter-spacing: -.01em; }
+.finish p { margin: 0; color: var(--muted); font-size: 15px; }
+.finish .actions { justify-content: center; margin-top: 20px; }
+.anim { animation: in .22s ease; }
+@keyframes in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* cheat sheet */
+h2.sec { font-size: 18px; letter-spacing: -.01em; margin: 36px 0 4px; }
+h2.sec + .lead { margin-bottom: 14px; }
+.legenda { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+.sym { display: grid; grid-template-columns: 32px 1fr; gap: 10px; align-items: baseline; padding: 10px 4px; border-bottom: 1px solid var(--line); }
+.sym .gl { font: 600 18px/1 ui-monospace, SFMono-Regular, Menlo, monospace; text-align: center; }
+.sym .gl.mark { color: var(--key); }
+.sym small { display: block; color: var(--muted); font-size: 13px; }
+.defs { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.defs li { padding: 12px 4px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+.defs li b { display: block; color: var(--text); font-weight: 550; }
+.quote { margin: 36px 0 0; padding-left: 16px; border-left: 2px solid var(--line); color: var(--muted); font-size: 15px; }
+
+/* history */
+.hist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); font-size: 14px; }
+.hist li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 4px; border-bottom: 1px solid var(--line); }
+.hist .when { color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+
+/* footer */
+footer { padding: 24px 0 32px; font-size: 13px; color: var(--faint); }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+footer button { background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
+footer button:hover { color: var(--text); }
+footer .links { display: flex; gap: 14px; }
+
+/* toast */
+.toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 12px); opacity: 0; pointer-events: none;
+  background: var(--accent); color: var(--accent-text); padding: 10px 16px; border-radius: 10px; font-size: 14px;
+  transition: opacity .2s, transform .2s; box-shadow: var(--shadow); max-width: calc(100% - 32px);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 560px) {
+  main { padding-top: 24px; }
+  h1 { font-size: 24px; }
+  .actions .btn { flex: 1; }
+  .actions .spacer { display: none; }
+  .qs, .legenda { grid-template-columns: 1fr; }
+  .extra { padding-left: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+/* ---------- start ---------- */
+.field { margin-top: 8px; }
+.field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+.big {
+  width: 100%; border: 1px solid var(--line); background: var(--surface); border-radius: 12px;
+  padding: 14px 16px; font-size: 18px; box-shadow: var(--shadow); outline: none; transition: border-color .15s;
+}
+.big:focus { border-color: var(--muted); }
+.big::placeholder { color: var(--faint); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.chip { border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 6px 12px; font-size: 13px; color: var(--muted); }
+.chip:hover { color: var(--text); background: var(--hover); }
+.recap { border-left: 2px solid var(--line); padding: 2px 0 2px 14px; margin: 0 0 24px; color: var(--muted); font-size: 15px; }
+.recap b { display: block; color: var(--text); font-weight: 550; font-size: 17px; }
+.helpers { margin-top: 28px; border-top: 1px solid var(--line); }
+.helper { border-bottom: 1px solid var(--line); padding: 12px 0; }
+.helper .toggle { font-size: 14px; }
+.helper .body { padding: 12px 0 4px 18px; font-size: 15px; color: var(--muted); }
+.helper .body p { margin: 0 0 10px; }
+.helper .body .split { background: var(--hover); border-radius: 10px; padding: 12px 14px; color: var(--text); margin-top: 10px; }
+.helper .body .split span { display: block; }
+.helper .body .split span + span { margin-top: 6px; }
+.helper .big { font-size: 16px; padding: 10px 14px; box-shadow: none; }
+.mini-timer { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--text); margin-left: 10px; }
+
+.stage { text-align: center; padding-top: 12px; }
+.stage .task { font-size: 15px; color: var(--muted); margin: 0 0 4px; overflow-wrap: anywhere; }
+.stage .step { font-size: 20px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 28px; overflow-wrap: anywhere; }
+.count { font-size: 120px; line-height: 1; font-weight: 700; letter-spacing: -.04em; font-variant-numeric: tabular-nums; margin: 24px 0 8px; }
+.count.go { font-size: 72px; }
+.dial { position: relative; width: 240px; height: 240px; margin: 8px auto 24px; }
+.dial svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.dial circle { fill: none; stroke-width: 6; }
+.dial .bg { stroke: var(--line); }
+.dial .fg { stroke: var(--accent); stroke-linecap: round; transition: stroke-dashoffset .25s linear; }
+.dial .time { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.dial .time b { font-size: 52px; font-weight: 650; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.dial .time small { font-size: 13px; color: var(--muted); }
+.stage .actions { justify-content: center; }
+.stats { display: flex; gap: 24px; margin: 0 0 28px; }
+.stats div { font-size: 13px; color: var(--muted); }
+.stats b { display: block; font-size: 22px; color: var(--text); font-weight: 650; font-variant-numeric: tabular-nums; }
+.recent { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.recent li { border-bottom: 1px solid var(--line); }
+.recent button { width: 100%; text-align: left; background: none; border: 0; padding: 12px 4px; display: flex; justify-content: space-between; gap: 12px; }
+.recent button:hover { background: var(--hover); }
+.recent .w { color: var(--faint); font-size: 13px; white-space: nowrap; }
+.hist .ok { color: var(--text); }
+.hist .no { color: var(--faint); }
+@media (max-width: 560px) {
+  .count { font-size: 96px; }
+  .dial { width: 210px; height: 210px; }
+}
+/* ---------- goals ---------- */
+textarea.big { min-height: 110px; resize: vertical; line-height: 1.5; font-size: 16px; }
+.wiz-meta { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.row2 { display: grid; grid-template-columns: 1fr 180px; gap: 10px; }
+.row2 .big { font-size: 16px; }
+.choices { display: grid; gap: 10px; margin-top: 4px; }
+.choice {
+  text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 14px 16px;
+  box-shadow: var(--shadow); transition: border-color .15s, background .15s;
+}
+.choice:hover { border-color: var(--muted); }
+.choice b { display: block; font-weight: 600; }
+.choice span { color: var(--muted); font-size: 14px; }
+.choice.on { border-color: var(--accent); background: var(--hover); }
+.callout { margin-top: 16px; padding: 12px 14px; border-radius: 12px; background: var(--hover); font-size: 14px; color: var(--muted); }
+.callout b { color: var(--text); }
+.ms { list-style: none; margin: 0; padding: 0; counter-reset: ms; }
+.ms li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: center; margin-bottom: 8px; }
+.ms li::before { content: attr(data-n); font-size: 13px; color: var(--faint); text-align: right; font-variant-numeric: tabular-nums; }
+.ms .big { font-size: 16px; padding: 10px 14px; box-shadow: none; }
+.contract {
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow);
+  padding: 22px 22px 18px; margin: 4px 0 0;
+}
+.contract .goal { font-size: 22px; font-weight: 650; letter-spacing: -.015em; line-height: 1.25; margin: 0 0 4px; overflow-wrap: anywhere; }
+.contract .by { font-size: 14px; color: var(--muted); margin: 0 0 16px; }
+.contract dl { margin: 0; display: grid; gap: 12px; }
+.contract dt { font-size: 12px; color: var(--faint); letter-spacing: .02em; text-transform: uppercase; }
+.contract dd { margin: 2px 0 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+.contract .sign { margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--line); display: flex; justify-content: space-between; color: var(--faint); font-size: 13px; }
+.mlist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.mlist li { border-bottom: 1px solid var(--line); }
+.mlist .item { padding: 12px 4px; }
+.block { display: flex; align-items: center; gap: 14px; margin: 0 0 8px; }
+.block .bar { flex: 1; height: 4px; border-radius: 4px; background: var(--line); overflow: hidden; }
+.block .bar span { display: block; height: 100%; background: var(--accent); }
+.block small { font-size: 13px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.today { display: flex; gap: 10px; align-items: stretch; margin-top: 8px; }
+.today .big { flex: 1; font-size: 16px; padding: 10px 14px; box-shadow: none; }
+.spark { font-size: 12px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.spark.yes { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+@media (max-width: 560px) {
+  .row2 { grid-template-columns: 1fr; }
+  .today { flex-direction: column; }
+  .contract { padding: 18px 16px 14px; }
+}
+</style>
+</head>
+<body>
+<main><div class="wrap" id="app"></div></main>
+<footer>
+  <div class="wrap">
+    <span>Data stays in this browser</span>
+    <span class="links">
+      <button type="button" data-act="export">Export</button>
+      <button type="button" data-act="import">Import</button>
+    </span>
+  </div>
+</footer>
+<input type="file" id="file" accept="application/json,.json" hidden>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  'use strict';
+
+  /* Goals: a vision, one goal you actually want, milestones worked backwards,
+     a 30-day process and the smallest step for today (handed over to Start).
+     The finished goal is a contract you copy by hand into your notebook. */
+
+  const BLOCK_DAYS = 30;
+  const START_URL = '../start/index.html';
+
+  const SPARK = {
+    spark: ['Spark', 'I want this. Something lights up.'],
+    flat: ['Flat', 'Sounds nice, but nothing happens.'],
+    heavy: ['Heavy', 'It feels like something I should want.'],
+  };
+
+  /* ---------- storage ---------- */
+  const KEY = 'goals.v1';
+  let db = load();
+  function load() {
+    try {
+      const d = JSON.parse(localStorage.getItem(KEY));
+      if (d && Array.isArray(d.goals)) return d;
+    } catch (e) {}
+    return { goals: [], draft: null };
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(db)); }
+    catch (e) { toast('Could not save data in this browser'); }
+  }
+
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  const app = $('#app');
+
+  /* ---------- dates ---------- */
+  const DAY = 864e5;
+  const startOfDay = t => { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); };
+  const dayDiff = (a, b) => Math.round((startOfDay(a) - startOfDay(b)) / DAY);
+  const fmtDate = t => new Date(t).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  const fmtShort = t => new Date(t).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  const parseDate = s => s ? new Date(s + 'T12:00:00').getTime() : null;
+  const isoDate = t => { const d = new Date(t); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+  function untilText(t) {
+    const n = dayDiff(t, Date.now());
+    if (n < 0) return `${-n} days past the date`;
+    if (n === 0) return 'today';
+    if (n < 60) return `${n} days left`;
+    const m = Math.round(n / 30.4);
+    return m < 24 ? `${m} months left` : `${Math.round(n / 365)} years left`;
+  }
+
+  /* ---------- ui helpers ---------- */
+  let toastTimer;
+  function toast(msg) {
+    const t = $('#toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+  }
+  const ICON_BACK = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>';
+  const ICON_NEXT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg>';
+  const ICON_CHECK = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg>';
+  const LOGO = '<svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="currentColor"/><circle cx="16" cy="16" r="8" fill="none" stroke="var(--bg)" stroke-width="2.2"/><circle cx="16" cy="16" r="3" fill="var(--bg)"/></svg>';
+  const startLink = task => `${START_URL}?task=${encodeURIComponent(task)}`;
+
+  /* ---------- routing ---------- */
+  function route() {
+    const p = location.hash.replace(/^#\/?/, '').split('/');
+    const g = id => db.goals.find(x => x.id === id);
+    if (p[0] === 'new') return { view: 'wizard' };
+    if (p[0] === 'g' && g(p[1])) return { view: p[2] === 'check' ? 'check' : 'goal', goal: g(p[1]) };
+    if (p[0] === 'archive') return { view: 'archive' };
+    return { view: 'home' };
+  }
+
+  function render(opts = {}) {
+    const rt = route();
+    document.title = rt.goal ? `${rt.goal.title} · Goals` : 'Goals';
+    if (rt.view === 'wizard') renderWizard(opts);
+    else if (rt.view === 'goal') renderGoal(rt.goal);
+    else if (rt.view === 'check') renderCheck(rt.goal, opts);
+    else if (rt.view === 'archive') renderArchive();
+    else renderHome();
+  }
+
+  /* ---------- block helpers ---------- */
+  function blockInfo(g) {
+    const day = Math.min(BLOCK_DAYS, Math.max(1, dayDiff(Date.now(), g.blockStart) + 1));
+    const over = dayDiff(Date.now(), g.blockStart) + 1 > BLOCK_DAYS;
+    return { day, over };
+  }
+  const lastCheck = g => g.checks.length ? g.checks[g.checks.length - 1].t : g.created;
+  const checkDue = g => dayDiff(Date.now(), lastCheck(g)) >= 28 || blockInfo(g).over;
+  const nextMilestone = g => g.milestones.find(m => !m.done);
+
+  /* ---------- home ---------- */
+  function renderHome() {
+    const active = db.goals.filter(g => g.status === 'active');
+    const archived = db.goals.length - active.length;
+    app.innerHTML = `
+      <div class="crumbs"><span class="brand">${LOGO}Goals</span>${archived ? '<a href="#/archive">Archive</a>' : ''}</div>
+      <h1>Where are you heading?</h1>
+      <p class="lead">A goal you actually want, worked back to something you can do today.</p>
+      ${db.draft ? `<div class="callout" style="margin:0 0 20px"><b>Unfinished goal:</b> ${esc(db.draft.title || 'untitled')}. <a href="#/new">Carry on</a></div>` : ''}
+      ${active.length ? `<ul class="lists">${active.map(g => {
+        const b = blockInfo(g), nm = nextMilestone(g);
+        const bits = [g.date ? untilText(g.date) : 'no date', `day ${b.day} of ${BLOCK_DAYS}`];
+        if (nm) bits.push('next: ' + esc(nm.text));
+        return `<li><a href="#/g/${g.id}">
+          <span class="name"><span>${esc(g.title)}</span>${checkDue(g) ? '<span class="tag">check in</span>' : ''}</span>
+          <span class="meta">${bits.join(' · ')}</span>
+          <span class="side">${ICON_NEXT}</span>
+        </a></li>`;
+      }).join('')}</ul>` : `
+        <div class="empty" style="color:var(--muted)">
+          <p style="margin:0 0 4px">No goals yet.</p>
+          <p style="margin:0">It takes about ten minutes: a picture of the future, one sentence, a few milestones and a first step for today.</p>
+        </div>`}
+      <div class="actions"><a class="btn primary" href="#/new">${db.draft ? 'Continue the new goal' : 'New goal'}</a></div>`;
+  }
+
+  /* ---------- wizard ---------- */
+  const STEPS = ['Vision', 'Goal', 'Is it yours?', 'Milestones', 'Next 30 days', 'Today'];
+
+  function draft() {
+    if (!db.draft) { db.draft = { step: 0, vision: '', title: '', date: '', why: '', spark: '', milestones: ['', '', ''], process: '', today: '' }; save(); }
+    return db.draft;
+  }
+
+  function renderWizard(opts) {
+    const d = draft(), i = d.step, last = i === STEPS.length - 1;
+    const pct = Math.round(i / STEPS.length * 100);
+    let body = '';
+    if (i === 0) body = `
+      <h1>Picture it done</h1>
+      <p class="lead">Jump ahead to the day it’s real. Where are you, what do you see, what has changed? Don’t edit, nobody else will read this.</p>
+      <textarea class="big" id="f-vision" placeholder="It’s a year from now and…">${esc(d.vision)}</textarea>
+      <p class="hint">A few lines are enough. If it doesn’t make you want it a little, push it further.</p>`;
+    if (i === 1) body = `
+      <h1>Say it in one sentence</h1>
+      <p class="lead">Concrete enough that you’ll know when it’s done. Add a date.</p>
+      <div class="row2">
+        <input class="big" id="f-title" value="${esc(d.title)}" placeholder="e.g. Swim 10 km in open water" aria-label="Goal" autocomplete="off">
+        <input class="big" id="f-date" type="date" value="${esc(d.date)}" aria-label="By when">
+      </div>
+      <div class="field" style="margin-top:16px">
+        <label for="f-why">Why does it matter to you?</label>
+        <input class="big" id="f-why" value="${esc(d.why)}" placeholder="Because…" autocomplete="off">
+      </div>`;
+    if (i === 2) body = `
+      <h1>Is it really yours?</h1>
+      <p class="lead">Say it out loud: <b>“${esc(d.title || 'your goal')}”</b>. Then notice what your body does.</p>
+      <div class="choices">${Object.entries(SPARK).map(([k, [b, s]]) => `
+        <button type="button" class="choice ${d.spark === k ? 'on' : ''}" data-act="spark" data-v="${k}"><b>${b}</b><span>${s}</span></button>`).join('')}</div>
+      ${d.spark && d.spark !== 'spark' ? `<div class="callout">${d.spark === 'flat'
+        ? '<b>Flat often means too small.</b> Go back and make it bigger or more specific until it gets a reaction.'
+        : '<b>Heavy often means it’s someone else’s goal.</b> Whose voice is it? Rewrite it as something you’d choose, or keep it knowing why.'}
+        <div class="actions" style="margin-top:12px"><button class="btn" type="button" data-act="wiz-to" data-v="1">Rewrite the goal</button></div></div>` : ''}`;
+    if (i === 3) body = `
+      <h1>Work it backwards</h1>
+      <p class="lead">What has to be true just before the finish? And just before that? Start from the end and work down.</p>
+      <div class="recap" style="margin-bottom:12px"><b>${esc(d.title || 'Your goal')}</b></div>
+      <ol class="ms">${d.milestones.map((m, k) => `
+        <li data-n="↑"><input class="big" data-ms="${k}" value="${esc(m)}" placeholder="${k === 0 ? 'Right before it’s done…' : 'Before that…'}" autocomplete="off"></li>`).join('')}</ol>
+      ${d.milestones.length < 6 ? '<button class="btn ghost" type="button" data-act="ms-add">Add one more</button>' : ''}`;
+    if (i === 4) body = `
+      <h1>What will you do for 30 days?</h1>
+      <p class="lead">Not a result, a habit you control. Something you can repeat on most days, small enough that you’ll actually keep it.</p>
+      <input class="big" id="f-process" value="${esc(d.process)}" placeholder="e.g. 20 minutes of writing every weekday morning" autocomplete="off">
+      <p class="hint">After 30 days you look at what moved and adjust.</p>`;
+    if (i === 5) body = `
+      <h1>And today?</h1>
+      <p class="lead">The smallest step towards it you can take today. Physical, under ten minutes.</p>
+      <input class="big" id="f-today" value="${esc(d.today)}" placeholder="e.g. Book the first swim session" autocomplete="off">`;
+
+    app.innerHTML = `
+      <div class="crumbs">
+        <a href="#/">${ICON_BACK}<span>Goals</span></a>
+        <span class="wiz-meta">${i + 1} / ${STEPS.length} · ${STEPS[i]}</span>
+      </div>
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><span style="width:${pct}%"></span></div>
+      <form id="wiz" autocomplete="off" class="${opts.anim ? 'anim' : ''}">
+        ${body}
+        <div class="actions">
+          ${i ? '<button class="btn ghost" type="button" data-act="wiz-back">Back</button>' : '<button class="btn ghost danger" type="button" data-act="wiz-discard">Discard</button>'}
+          <span class="spacer"></span>
+          <button class="btn primary" type="submit">${last ? 'Create the goal' : 'Next'}</button>
+        </div>
+      </form>`;
+    const f = app.querySelector('textarea, input');
+    if (f && !opts.noFocus) { f.focus(); if (f.setSelectionRange && f.type !== 'date') f.setSelectionRange(f.value.length, f.value.length); }
+  }
+
+  function readWizard() {
+    const d = db.draft; if (!d) return;
+    const v = id => { const el = document.getElementById(id); return el ? el.value : undefined; };
+    if (v('f-vision') !== undefined) d.vision = v('f-vision');
+    if (v('f-title') !== undefined) d.title = v('f-title');
+    if (v('f-date') !== undefined) d.date = v('f-date');
+    if (v('f-why') !== undefined) d.why = v('f-why');
+    if (v('f-process') !== undefined) d.process = v('f-process');
+    if (v('f-today') !== undefined) d.today = v('f-today');
+    app.querySelectorAll('[data-ms]').forEach(el => { d.milestones[+el.dataset.ms] = el.value; });
+  }
+
+  function wizNext() {
+    readWizard();
+    const d = db.draft, i = d.step;
+    const need = { 1: ['f-title', d.title], 2: [null, d.spark], 4: ['f-process', d.process], 5: ['f-today', d.today] }[i];
+    if (need && !String(need[1]).trim()) {
+      if (need[0]) document.getElementById(need[0])?.focus();
+      toast(i === 2 ? 'Pick what you noticed' : 'This one is needed');
+      return;
+    }
+    if (i === 3 && !d.milestones.some(m => m.trim())) { app.querySelector('[data-ms]')?.focus(); toast('Add at least one milestone'); return; }
+    if (i < STEPS.length - 1) { d.step++; save(); render({ anim: true }); window.scrollTo(0, 0); return; }
+    const now = Date.now();
+    const g = {
+      id: uid(), created: now, status: 'active',
+      title: d.title.trim(), date: parseDate(d.date), vision: d.vision.trim(), why: d.why.trim(), spark: d.spark,
+      // Entered from the finish backwards; stored in the order you'll reach them.
+      milestones: d.milestones.map(s => s.trim()).filter(Boolean).reverse().map(text => ({ text, done: false })),
+      process: d.process.trim(), blockStart: now, today: d.today.trim(), todayT: now,
+      written: false, checks: [], blocks: [],
+    };
+    db.goals.push(g); db.draft = null; save();
+    location.hash = `#/g/${g.id}`;
+  }
+
+  /* ---------- goal page ---------- */
+  function contractHtml(g) {
+    return `
+      <div class="contract">
+        <p class="goal">${esc(g.title)}</p>
+        <p class="by">${g.date ? 'By ' + fmtDate(g.date) : 'No date yet'}</p>
+        <dl>
+          ${g.why ? `<div><dt>Why it matters</dt><dd>${esc(g.why)}</dd></div>` : ''}
+          ${g.milestones.length ? `<div><dt>Milestones</dt><dd>${g.milestones.map((m, k) => `${k + 1}. ${esc(m.text)}`).join('\n')}</dd></div>` : ''}
+          ${g.process ? `<div><dt>For 30 days</dt><dd>${esc(g.process)}</dd></div>` : ''}
+          ${g.vision ? `<div><dt>Picture</dt><dd>${esc(g.vision)}</dd></div>` : ''}
+        </dl>
+        <div class="sign"><span>${fmtDate(g.created)}</span><span>Signed: ______________</span></div>
+      </div>`;
+  }
+
+  function renderGoal(g) {
+    const b = blockInfo(g);
+    const todayFresh = g.today && dayDiff(Date.now(), g.todayT || 0) === 0;
+    app.innerHTML = `
+      <div class="crumbs"><a href="#/">${ICON_BACK}<span>Goals</span></a>${g.status === 'active' ? `<a href="#/g/${g.id}/check">Check in</a>` : ''}</div>
+      ${g.status !== 'active' ? `<div class="callout" style="margin:0 0 20px"><b>${g.status === 'done' ? 'Reached' : 'Let go'}</b> on ${fmtDate(g.ended)}.</div>` : ''}
+      ${!g.written && g.status === 'active' ? `<div class="callout" style="margin:0 0 20px">
+        <b>Copy it into your notebook.</b> By hand, on its own page: date it, sign it, add the page to your index. Writing it out is part of committing to it.
+        <div class="actions" style="margin-top:12px"><button class="btn" data-act="written">It’s in my notebook</button></div></div>` : ''}
+      ${contractHtml(g)}
+
+      ${g.status === 'active' ? `
+      <h2 class="sec">Today</h2>
+      <p class="lead">${todayFresh ? 'Your step for today.' : 'What’s the smallest step towards it today?'}</p>
+      <form class="today" id="today-form" autocomplete="off">
+        <input class="big" id="today" value="${todayFresh ? esc(g.today) : ''}" placeholder="${esc(g.process || 'One small physical step')}" aria-label="Today’s step">
+        <button class="btn primary" type="submit">Start it now</button>
+      </form>
+      <p class="hint">Opens Start with this step, then the five-second countdown.</p>
+
+      <h2 class="sec">This 30 days</h2>
+      <div class="block"><div class="bar"><span style="width:${Math.round(b.day / BLOCK_DAYS * 100)}%"></span></div><small>day ${b.day} of ${BLOCK_DAYS}</small></div>
+      <p class="lead">${esc(g.process || 'No process set.')}</p>
+      ${b.over ? `<div class="callout"><b>The 30 days are up.</b> Check in to see what moved and set the next block. <a href="#/g/${g.id}/check">Check in</a></div>` : ''}` : ''}
+
+      <h2 class="sec">Milestones</h2>
+      <ul class="mlist">${g.milestones.map((m, k) => `
+        <li><button class="item ${m.done ? 'done' : ''}" data-act="ms" data-k="${k}" role="checkbox" aria-checked="${m.done}">
+          <span class="box">${ICON_CHECK}</span><span><span class="t"><span class="n">${k + 1}</span><span class="tx">${esc(m.text)}</span></span></span>
+        </button></li>`).join('')}</ul>
+
+      ${g.checks.length ? `<h2 class="sec">Check-ins</h2><ul class="hist">${[...g.checks].reverse().map(c => `
+        <li><span>${c.note ? esc(c.note) : '—'}</span><span class="when">${fmtShort(c.t)} <span class="spark ${c.spark === 'spark' ? 'yes' : ''}">${SPARK[c.spark]?.[0] || ''}</span></span></li>`).join('')}</ul>` : ''}
+
+      <div class="actions">
+        ${g.status === 'active'
+          ? `<button class="btn" data-act="reached">Reached it</button><span class="spacer"></span><button class="btn ghost danger" data-act="drop">Let it go</button>`
+          : `<button class="btn" data-act="reopen">Make it active again</button><span class="spacer"></span><button class="btn ghost danger" data-act="delete">Delete</button>`}
+      </div>`;
+  }
+
+  /* ---------- check-in ---------- */
+  let check = null;
+  function renderCheck(g, opts) {
+    if (!check || check.id !== g.id) check = { id: g.id, spark: '', note: '', process: g.process, today: '' };
+    const b = blockInfo(g);
+    app.innerHTML = `
+      <div class="crumbs"><a href="#/g/${g.id}">${ICON_BACK}<span>${esc(g.title)}</span></a></div>
+      <h1>Check in</h1>
+      <p class="lead">Read it again, notice how it lands, set the next 30 days. Five minutes.</p>
+      ${contractHtml(g)}
+
+      <h2 class="sec">1. Does it still light you up?</h2>
+      <div class="choices">${Object.entries(SPARK).map(([k, [bb, s]]) => `
+        <button type="button" class="choice ${check.spark === k ? 'on' : ''}" data-act="c-spark" data-v="${k}"><b>${bb}</b><span>${s}</span></button>`).join('')}</div>
+      ${check.spark && check.spark !== 'spark' ? `<div class="callout">Worth a look: make it bigger, change it so it’s yours again, or let it go. Letting go of a goal that no longer fits is a decision, not a failure.</div>` : ''}
+
+      <h2 class="sec">2. Tick what’s done</h2>
+      <ul class="mlist">${g.milestones.map((m, k) => `
+        <li><button class="item ${m.done ? 'done' : ''}" data-act="ms" data-k="${k}" role="checkbox" aria-checked="${m.done}">
+          <span class="box">${ICON_CHECK}</span><span><span class="t"><span class="n">${k + 1}</span><span class="tx">${esc(m.text)}</span></span></span>
+        </button></li>`).join('')}</ul>
+
+      <h2 class="sec">3. What moved?</h2>
+      <p class="lead">One line. Look for what you did, not what you didn’t.</p>
+      <input class="big" id="c-note" value="${esc(check.note)}" placeholder="e.g. Swam 3 times a week, first 2 km done" autocomplete="off">
+
+      <h2 class="sec">4. Next 30 days</h2>
+      <p class="lead">${b.over ? 'Keep the process, or change what didn’t work.' : `You’re on day ${b.day}. Change the process only if it isn’t working.`}</p>
+      <input class="big" id="c-process" value="${esc(check.process)}" aria-label="Process" autocomplete="off">
+
+      <h2 class="sec">5. Today</h2>
+      <input class="big" id="c-today" value="${esc(check.today)}" placeholder="Smallest step for today" autocomplete="off">
+
+      <div class="actions">
+        <button class="btn primary" data-act="c-save">Save and start today’s step</button>
+        <button class="btn" data-act="c-save-only">Save</button>
+      </div>`;
+  }
+
+  function saveCheck(g, go) {
+    check.note = $('#c-note').value.trim(); check.process = $('#c-process').value.trim(); check.today = $('#c-today').value.trim();
+    if (!check.spark) { toast('Pick how it lands first'); return; }
+    const b = blockInfo(g);
+    g.checks.push({ t: Date.now(), spark: check.spark, note: check.note });
+    if (b.over || (check.process && check.process !== g.process)) {
+      g.blocks.push({ start: g.blockStart, end: Date.now(), process: g.process });
+      g.blockStart = Date.now();
+    }
+    if (check.process) g.process = check.process;
+    if (check.today) { g.today = check.today; g.todayT = Date.now(); }
+    save();
+    const today = check.today; check = null;
+    if (go && today) location.href = startLink(today);
+    else { location.hash = `#/g/${g.id}`; toast('Check-in saved'); }
+  }
+
+  /* ---------- archive ---------- */
+  function renderArchive() {
+    const gs = db.goals.filter(g => g.status !== 'active').sort((a, b) => (b.ended || 0) - (a.ended || 0));
+    app.innerHTML = `
+      <div class="crumbs"><a href="#/">${ICON_BACK}<span>Goals</span></a></div>
+      <h1>Archive</h1>
+      <p class="lead">Goals you reached and goals you let go.</p>
+      ${gs.length ? `<ul class="lists">${gs.map(g => `<li><a href="#/g/${g.id}">
+        <span class="name"><span>${esc(g.title)}</span></span>
+        <span class="meta">${g.status === 'done' ? 'Reached' : 'Let go'} · ${fmtDate(g.ended)}</span>
+        <span class="side">${ICON_NEXT}</span></a></li>`).join('')}</ul>` : ''}`;
+  }
+
+  /* ---------- events ---------- */
+  document.addEventListener('submit', e => {
+    e.preventDefault();
+    if (e.target.id === 'wiz') wizNext();
+    if (e.target.id === 'today-form') {
+      const g = route().goal, v = $('#today').value.trim() || g.process;
+      if (!v) { $('#today').focus(); return; }
+      g.today = v; g.todayT = Date.now(); save();
+      location.href = startLink(v);
+    }
+  });
+
+  document.addEventListener('input', e => {
+    const rt = route();
+    if (rt.view === 'wizard') { readWizard(); save(); }
+    if (rt.view === 'check' && check) {
+      if (e.target.id === 'c-note') check.note = e.target.value;
+      if (e.target.id === 'c-process') check.process = e.target.value;
+      if (e.target.id === 'c-today') check.today = e.target.value;
+    }
+  });
+
+  document.addEventListener('click', async e => {
+    const el = e.target.closest('[data-act]'); if (!el) return;
+    const act = el.dataset.act, rt = route(), g = rt.goal;
+    if (act === 'wiz-back') { readWizard(); db.draft.step--; save(); render({ anim: true }); }
+    else if (act === 'wiz-to') { readWizard(); db.draft.step = +el.dataset.v; save(); render({ anim: true }); }
+    else if (act === 'wiz-discard') { if (confirm('Discard this goal?')) { db.draft = null; save(); location.hash = '#/'; } }
+    else if (act === 'spark') { readWizard(); db.draft.spark = el.dataset.v; save(); render({ noFocus: true }); }
+    else if (act === 'ms-add') { readWizard(); db.draft.milestones.push(''); save(); render({ noFocus: true }); app.querySelector(`[data-ms="${db.draft.milestones.length - 1}"]`)?.focus(); }
+    else if (act === 'c-spark') { check.note = $('#c-note').value; check.process = $('#c-process').value; check.today = $('#c-today').value; check.spark = el.dataset.v; render({ noFocus: true }); }
+    else if (act === 'c-save' && g) saveCheck(g, true);
+    else if (act === 'c-save-only' && g) saveCheck(g, false);
+    else if (act === 'ms' && g) {
+      if (check) { check.note = $('#c-note')?.value ?? check.note; check.process = $('#c-process')?.value ?? check.process; check.today = $('#c-today')?.value ?? check.today; }
+      const m = g.milestones[+el.dataset.k]; m.done = !m.done; m.doneT = m.done ? Date.now() : null; save(); render({ noFocus: true });
+      app.querySelector(`[data-act="ms"][data-k="${el.dataset.k}"]`)?.focus({ preventScroll: true });
+    }
+    else if (act === 'written' && g) { g.written = true; save(); render(); toast('Good. That page is your contract.'); }
+    else if (act === 'reached' && g) { if (confirm(`Mark “${g.title}” as reached?`)) { g.status = 'done'; g.ended = Date.now(); save(); location.hash = '#/'; toast('Reached. Write it down in your notebook too.'); } }
+    else if (act === 'drop' && g) { if (confirm(`Let “${g.title}” go? You can make it active again later.`)) { g.status = 'dropped'; g.ended = Date.now(); save(); location.hash = '#/'; toast('Let go. That’s a decision too.'); } }
+    else if (act === 'reopen' && g) { g.status = 'active'; g.ended = null; g.blockStart = Date.now(); save(); render(); }
+    else if (act === 'delete' && g) { if (confirm(`Delete “${g.title}” for good?`)) { db.goals = db.goals.filter(x => x !== g); save(); location.hash = '#/'; } }
+    else if (act === 'export') {
+      const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = `goals-${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    }
+    else if (act === 'import') $('#file').click();
+  });
+
+  $('#file').addEventListener('change', async e => {
+    const f = e.target.files[0]; e.target.value = '';
+    if (!f) return;
+    try {
+      const data = JSON.parse(await f.text());
+      if (!data || !Array.isArray(data.goals)) throw 0;
+      let added = 0, updated = 0;
+      for (const g of data.goals) {
+        if (!g || !g.id || !g.title || !Array.isArray(g.milestones)) continue;
+        const i = db.goals.findIndex(x => x.id === g.id);
+        if (i >= 0) { db.goals[i] = g; updated++; } else { db.goals.push(g); added++; }
+      }
+      save(); render(); toast(`Imported: ${added} new, ${updated} updated`);
+    } catch (_) { toast('Not a valid export file'); }
+  });
+
+  window.addEventListener('storage', e => { if (e.key === KEY) { db = load(); if (!/INPUT|TEXTAREA/.test(document.activeElement?.tagName)) render(); } });
+  window.addEventListener('hashchange', () => { if (!location.hash.includes('/check')) check = null; render(); window.scrollTo(0, 0); });
+  render();
+})();
+</script>
+</body>
+</html>
