@@ -408,6 +408,13 @@ footer .links { display: flex; gap: 14px; }
       ['+', 'To explore', 'topic for longer writing'], ['○', 'Event', 'a fact, no judgement'],
       ['*', 'Priority', 'next to a task', true], ['!', 'Inspiration', 'next to a note', true],
     ],
+
+    // Personal signifiers, added on top of the standard set.
+    legendMine: [
+      ['$', 'Expense', 'money spent, with the amount'],
+      ['@', 'Newsletter idea', 'a topic or link for the newsletter'],
+      ['△', 'Thoughts & feelings', 'my own reaction, how something lands (a delta: what changed in me)'],
+    ],
   };
 
   /* ---------- UI strings ---------- */
@@ -437,7 +444,7 @@ footer .links { display: flex; gap: 14px; }
       ],
       verdict: '<b>Three “no”s</b> → cross it out. It stays → <span class="g">&gt;</span> rewrite only what you’ll do in this period.',
       cheatLead: 'What you come back to during reviews.',
-      symbols: 'Symbols', symbolsLead: 'Short entries that start with a single sign',
+      symbols: 'Symbols', symbolsLead: 'Short entries that start with a single sign', mine: 'My own symbols',
       filterTitle: 'Filter', filterLead: 'For every open <span class="g">•</span>, at every review.',
       dayTitle: 'During the day', dayLead: 'Write it down right away',
       day: [
@@ -691,6 +698,10 @@ footer .links { display: flex; gap: 14px; }
       <p class="lead">${T.symbolsLead}</p>
       <div class="legenda">
         ${C.legend.map(([g, n, s, mark]) => `<div class="sym"><span class="gl${mark ? ' mark' : ''}">${g}</span><span>${n}<small>${s}</small></span></div>`).join('')}
+      </div>
+      <p class="group" style="margin-top:20px">${T.mine}</p>
+      <div class="legenda">
+        ${C.legendMine.map(([g, n, s]) => `<div class="sym"><span class="gl">${g}</span><span>${n}<small>${s}</small></span></div>`).join('')}
       </div>
 
       <h2 class="sec">${T.filterTitle}</h2>
