@@ -2,19 +2,17 @@
 
 <img src="docs/logo.svg" width="56" alt="">
 
-**English** · [Polski](README.pl.md)
-
 # Reviews
 
 **Review checklists for a paper notebook.<br>Open one, tick the steps off in order, close it.**
 
-[**→ Open the app**](https://marekbrze.github.io/bullet-journal-tools/przeglady/) &nbsp;·&nbsp; [Download the file](https://raw.githubusercontent.com/marekbrze/bullet-journal-tools/main/przeglady/index.html)
+[**→ Open the app**](https://marekbrze.github.io/bullet-journal-tools/reviews/) &nbsp;·&nbsp; [Download the file](https://raw.githubusercontent.com/marekbrze/bullet-journal-tools/main/reviews/index.html)
 
 <br>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/checklist-en-dark.png">
-  <img src="docs/checklist-en-light.png" width="640" alt="Evening review checklist with three steps ticked and the filter expanded">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/checklist-dark.png">
+  <img src="docs/checklist-light.png" width="640" alt="Evening review checklist with three steps ticked and the filter expanded">
 </picture>
 
 </div>
@@ -37,8 +35,8 @@ Plus a **Cheat sheet**: symbols, the filter, how to log during the day and the c
 
 <div align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/home-en-dark.png">
-  <img src="docs/home-en-light.png" width="640" alt="Home screen with the list of reviews and a “now” tag">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/home-dark.png">
+  <img src="docs/home-light.png" width="640" alt="Home screen with the list of reviews and a “now” tag">
 </picture>
 </div>
 
@@ -49,7 +47,6 @@ Plus a **Cheat sheet**: symbols, the filter, how to log during the day and the c
 - **Filter at hand.** Steps where you move tasks have the filter one click away.
 - **History.** Every finished review goes into the history with how long it took. Daily reviews show your streak.
 - **Keyboard.** `X` ticks the next step, `Z` undoes, `↑` `↓` move.
-- **English and Polish.** The language follows your browser, with a switch in the footer. Progress and history stay when you switch.
 - **Private, one file.** No account, no server. Download `index.html` and open it from your disk, offline too.
 
 <details>
@@ -64,7 +61,7 @@ Data lives in the browser's `localStorage`. The downloaded file and the online v
 <summary><b>Editing the steps</b></summary>
 <br>
 
-The content is in the `CONTENT` object at the top of the script in `index.html`: `CONTENT.pl` is the original, `CONTENT.en` its translation. Both must have the same structure (same ids and number of steps), because progress is stored by step position. Interface strings are in the `UI` object. Each step has a title (`t`), a description (`d`), an optional hint (`s`), a key-step flag (`key`) and an optional extra (`extra`: filter, prompts, spread layout). `{•}` in the text renders as a symbol from the legend.
+The content is in the `C` object at the top of the script in `index.html`, interface strings in `T`. Progress is stored by step position, so after adding or removing a step in a review, an unfinished run of that review may show the wrong ticks. Each step has a title (`t`), a description (`d`), an optional hint (`s`), a key-step flag (`key`) and an optional extra (`extra`: filter, prompts, spread layout). `{•}` in the text renders as a symbol from the legend.
 
 </details>
 
