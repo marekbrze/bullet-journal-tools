@@ -39,11 +39,11 @@ Two optional helpers on the step screen, each under a minute or three:
 
 ## Also
 
-- **History and streaks**: every start is logged with how long you worked (pauses don't count).
-- **Survives a reload**: the timer keeps running if you close the tab.
+- **No history.** It's a quick shot: nothing is logged, nothing to review later.
+- **Survives a reload**: a running timer keeps going if you close the tab.
 - **Keeps the screen on** during the timer where the browser allows it. Sound and vibration at the end, with a mute switch.
-- **Can be opened with a task**: `start/?task=Write%20the%20report` goes straight to the step screen.
-- **Private, one file**: no account, no server. Export / Import in the footer.
+- **Can be opened with a task**: `start/index.html?task=Write%20the%20report` goes straight to the step screen. Goals and Reset use this.
+- **One file**: no account, no server.
 
 <br>
 
