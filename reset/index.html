@@ -223,6 +223,8 @@ footer { padding: 24px 0 32px; font-size: 13px; color: var(--faint); }
 footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 footer button { background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
 footer button:hover { color: var(--text); }
+footer a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
+footer a:hover { color: var(--text); }
 footer .links { display: flex; gap: 14px; }
 
 /* toast */
@@ -372,6 +374,7 @@ textarea.big { min-height: 110px; resize: vertical; line-height: 1.5; font-size:
   <div class="wrap">
     <span>Data stays in this browser</span>
     <span class="links">
+      <a href="../index.html">All tools</a>
       <button type="button" data-act="export">Export</button>
       <button type="button" data-act="import">Import</button>
     </span>
@@ -459,7 +462,7 @@ textarea.big { min-height: 110px; resize: vertical; line-height: 1.5; font-size:
     if (c.pats.includes('worst')) worstOpen = true;
     const sel = PATTERNS.filter(p => c.pats.includes(p[0]));
     app.innerHTML = `
-      <div class="crumbs"><span class="brand">${LOGO}Reset</span><a href="#/history">History</a></div>
+      <div class="crumbs"><a href="../index.html">${ICON_BACK}<span>All tools</span></a><a href="#/history">History</a></div>
       <h1>Something went wrong</h1>
       <p class="lead">Two or three minutes. Get it out of your head, back to what you control, and into one move.</p>
 

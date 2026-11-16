@@ -25,8 +25,9 @@ No account, no server. Each tool keeps its data in your browser, with export to 
 2. The same visual system as the rest: colour tokens on `:root`, dark mode, 640 px width.
 3. Its own `localStorage` key, so tools don't overwrite each other's data.
 4. An entry in the table above and in the list in the root `index.html`.
-5. Everything in English: interface, content, code comments and docs.
-6. Content is written in our own words. No quotes or translations from courses or books.
+5. A way back to the tools list: “All tools” top-left on the tool's home screen and in the footer of every view. Links between tools point at `…/index.html` so they also work from disk.
+6. Everything in English: interface, content, code comments and docs.
+7. Content is written in our own words. No quotes or translations from courses or books.
 
 <br>
 
