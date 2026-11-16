@@ -294,8 +294,8 @@ footer .links { display: flex; gap: 14px; }
           { t: 'Ekrany', d: 'Off. Usiądź z notesem.' },
           { t: 'Głowa', d: 'Dopisz resztę myśli. Uzupełnij luki w notatkach z dnia.' },
           { t: 'Zrobione', d: 'Postaw {×} na wszystkim, co zrobione, też tym niezapisanym.', s: 'Zobacz, ile zrobiłeś. To trzyma realny obraz siebie.', key: true },
-          { t: 'Reszta: kto?', d: 'Czy muszę zrobić to wszystko sam? Deleguj.' },
-          { t: 'Reszta: filtr', d: 'Co zostało, przez 3 pytania filtra. Nie umiesz podać powodu? To busy work: skreśl.', key: true, extra: FILTER, open: true },
+          { t: 'Reszta: kto?', d: 'Czy muszę zrobić to wszystko sam? Deleguj.', s: 'Im więcej robisz, tym mniej ciebie zostaje dla tego, co robisz.' },
+          { t: 'Reszta: filtr', d: 'Co zostało, przez 3 pytania filtra. Nie umiesz podać powodu? To busy work: skreśl.', s: 'Szukaj powodu głębiej. Nie chcę robić prezentacji, ale chcę awansu? Ma sens. Pranie nie ma znaczenia, ale goście mają się czuć mile widziani? Ma.', key: true, extra: FILTER, open: true },
           { t: 'Nagłówek dnia', d: 'Obok daty dopisz najważniejsze zdarzenie dnia, dobre lub złe.', s: 'Z tych nagłówków zbudujesz timeline w review tygodniowym i miesięcznym.' },
         ],
         notes: [['Start', 'Na początek wystarczy rano zapisać 3 rzeczy na dziś. Regularność ważniejsza niż długość. Opuszczasz review? Skróć je.']],
@@ -310,8 +310,8 @@ footer .links { display: flex; gap: 14px; }
             { t: 'Timeline miesiąca', d: 'Dopisz najważniejsze zdarzenia minionego tygodnia (z nagłówków dni).' },
             { t: 'Skan', d: 'Logi dzienne i tygodniowe z tego miesiąca.' },
             { t: 'Lewa strona', d: 'Nowy log tygodniowy. Temat: daty minionego tygodnia.', extra: 'spread' },
-            { t: 'Refleksja', d: 'Krótko: rapid log wniosków. Długo: 1–2 strony journalingu. Tematy: wpisy {+}.', key: true },
-            { t: 'Przeczytaj ją', d: 'Treść i ton: frustracja, energia, złość, smutek, optymizm?', s: 'Sygnały: dużo zadań w jednym obszarze życia · dużo smutku · opuszczone dni = jestem ponad siły → priorytet: odzyskać czas.', key: true },
+            { t: 'Refleksja', d: 'Krótko: rapid log wniosków. Długo: 1–2 strony journalingu. Tematy: wpisy {+}.', s: 'Wnioski to nie zdarzenia (te są w timeline): pomysły, uczucia, obserwacje ze skanu. Dobry moment na to, co uwierało cały tydzień.', key: true },
+            { t: 'Przeczytaj ją', d: 'Treść i ton: frustracja, energia, złość, smutek, optymizm?', s: 'Dużo zadań w jednym obszarze życia → coś się tam dzieje, przyjrzyj się. Często smutek → zbadaj, skąd. Opuszczone logi dzienne → jestem ponad siły, priorytet tygodnia: odzyskać czas.', key: true },
           ],
         },
         {
@@ -320,7 +320,7 @@ footer .links { display: flex; gap: 14px; }
             { t: 'Prawa strona', d: 'Lista zadań. Temat: daty nadchodzącego tygodnia.' },
             { t: 'Z refleksji', d: 'Najpierw zadania z refleksji. Insighty nie na ten tydzień → log dzienny albo kolekcja.' },
             { t: 'Z listy miesiąca', d: 'Co na ten tydzień? Duże zadanie rozbij na małe kroki na kolejne dni.' },
-            { t: 'Otwarte {•}', d: 'Z dziennych i tygodniowych, przez filtr. Tylko to, co zrobisz w tym tygodniu.', extra: FILTER },
+            { t: 'Otwarte {•}', d: 'Z dziennych i tygodniowych. Tylko to, co zrobisz w tym tygodniu.', extra: FILTER },
             { t: 'Intencja', d: 'Zapisz intencję tygodnia (może być obok dat).', key: true },
             { t: 'Priorytety', d: 'Oznacz {*} na liście tygodnia, pod kątem intencji.', key: true },
           ],
@@ -337,23 +337,23 @@ footer .links { display: flex; gap: 14px; }
             { t: 'Timeline', d: 'Uzupełnij timeline mijającego miesiąca.' },
             { t: 'Lista zadań', d: 'Zaktualizuj: {×} {>} skreślone.' },
             { t: 'Studiuj', d: 'Zdarzenia obok zadań. Co z czego wynika?', s: 'Np. siłownia + kolacje na mieście ≠ cel.' },
-            { t: 'Czytaj', d: 'Wszystkie logi dzienne i tygodniowe. Z ciekawością, nie z osądem.' },
-            { t: 'Refleksja', d: 'Następna wolna rozkładówka po ostatnim dniu. Długa, jeśli masz czas.', key: true, extra: 'qs', open: true },
+            { t: 'Czytaj', d: 'Wszystkie logi dzienne i tygodniowe. Z ciekawością, nie z osądem.', s: 'Jak tydzień, tylko z dalszej perspektywy. Przy niezrobionym: jak się z tym czuję? Lęk, napięcie → jaką historię sobie opowiadam?' },
+            { t: 'Refleksja', d: 'Następna wolna rozkładówka po ostatnim dniu. Długa, jeśli masz czas.', s: 'Wnioski, nie zdarzenia: czego się nauczyłem z tego miesiąca.', key: true, extra: 'qs', open: true },
           ],
-          notes: [['Niezrobione', 'Za duże → rozbij. Bez sensu → znajdź cel albo odpuść. Ponad siły → biorę na siebie więcej, niż mam czasu.']],
+          notes: [['Niezrobione', 'Brak motywacji to często brak wiary. Za duże albo za trudne → rozbij na małe kroki. Bez sensu → znajdź cel albo odpuść. Busy work → nie muszę tego robić ja, nie musi być teraz albo wcale: odpuść. Ponad siły → biorę na siebie więcej, niż mam czasu.']],
         },
         {
           phase: ['B', 'Naprzód: migracja'],
           items: [
             { t: 'Nowy log miesięczny', d: 'Po refleksji. Nazwa miesiąca. Lewa: timeline. Prawa: zadania.', s: 'Timeline: daty + 1. litera dnia, kreska między tygodniami. Wpisuj po fakcie.' },
-            { t: 'Migracja', d: 'Drugie przejście po starym miesiącu. Otwarte {•} przez filtr → nowa lista lub kolekcja.', key: true, extra: FILTER },
+            { t: 'Migracja', d: 'Drugie przejście po starym miesiącu. Otwarte {•} przez filtr → nowa lista lub kolekcja.', s: 'Pytamy znowu, bo okoliczności się zmieniły. Coś, co przeszło filtr na początku miesiąca, teraz może nie przejść.', key: true, extra: FILTER },
             { t: 'Future log', d: 'Co stało się aktualne → na listę miesiąca.' },
             { t: 'Z refleksji', d: 'Dopisz nowe zadania.' },
             { t: 'Doprecyzuj', d: 'Mętny wpis przepisz lepiej.' },
             { t: 'Porządki', d: 'Wpisy do istniejących kolekcji. Rozsypane powiązane → nowa kolekcja (tylko to, co wartościowe).' },
             { t: 'Zombie', d: 'Migrowane w kółko? Za duże: rozbij albo daj mu kolekcję.' },
-            { t: 'Kolekcje', d: 'Które mi służą? Wygasłe zostaw. Toporne: nowa wersja.' },
-            { t: '3 + 3', d: 'Coś negatywnego: 3 małe kroki, żeby mniej zabierało. Najjaśniejsza ciekawość: 3 małe kroki. Na listę.', key: true },
+            { t: 'Kolekcje', d: 'Które mi służą? Wygasłe zostaw. Toporne: dlaczego nie działają? Nowa wersja z tym, co pomagało.', s: 'Wygasła to nie błąd: spełniła cel, zmieniły się okoliczności albo design nie wspierał celu.' },
+            { t: '3 + 3', d: 'Coś negatywnego: 3 małe kroki, żeby mniej zabierało. Najjaśniejsza ciekawość: 3 małe kroki. Na listę.', s: 'Ciekawość: ta, która świeci najjaśniej albo najbardziej pasuje do obecnej sytuacji. Kroki np.: 30 min czytania dziennie, 10 min praktyki rano, rozmowa z kimś, kto wie więcej.', key: true },
             { t: 'Indeks', d: 'Dopisz nowy log miesięczny.' },
           ],
         },
@@ -365,19 +365,19 @@ footer .links { display: flex; gap: 14px; }
         {
           phase: ['A', 'Pierwsze przejście: nauka'],
           items: [
-            { t: 'Chapter log', d: 'Wolna rozkładówka z tyłu notesu. Temat: zakres dat notesu. Cztery pola.', extra: 'quad', open: true },
-            { t: 'Cały notes', d: 'Przeczytaj od deski do deski: timeline’y, refleksje, dni. Wypełniaj cztery pola.', key: true },
+            { t: 'Chapter log', d: 'Wolna rozkładówka z tyłu notesu. Temat: zakres dat notesu. Cztery pola.', s: 'Lewa strona: proces. Prawa: cel, czyli co dodawało, a co odbierało dobrostanu (hobby, relacje, zachowania).', extra: 'quad', open: true },
+            { t: 'Cały notes', d: 'Przeczytaj od deski do deski: timeline’y, refleksje, dni. Wypełniaj cztery pola.', s: 'Timeline’y przypomną, co się działo. Refleksje dadzą kontekst. Zdziwisz się, ile zapomniałeś.', key: true },
             { t: 'Refleksja', d: 'Kolejna rozkładówka: synteza wniosków.' },
           ],
         },
         {
           phase: ['B', 'Drugie przejście: działanie'],
           items: [
-            { t: 'Indeks', d: 'Przy każdej kolekcji {•}. Dalej przydatna: zostaw otwartą. Bezużyteczna: {×}. Przy obu: dlaczego?' },
-            { t: 'Nowy notes', d: 'Rozłam grzbiet. Intencja: przepisz starą albo nową z refleksji.' },
+            { t: 'Indeks', d: 'Przy każdej kolekcji {•}. Dalej przydatna: zostaw otwartą. Bezużyteczna: {×}. Przy obu: dlaczego?', s: 'Która wnosi wartość? Która przybliżyła mnie do celów? Która pomogła pokonać wyzwania? O tym, co zostaje, decyduje cel.' },
+            { t: 'Nowy notes', d: 'Twarda okładka? Rozłam grzbiet. Intencja: przepisz starą, jeśli służyła, albo zapisz nową z refleksji.' },
             { t: 'Kolekcje core', d: 'Indeks, future log, log miesięczny… (te, które służą).' },
-            { t: 'Otwarte {•}', d: 'Jak w migracji miesięcznej → nowy log miesięczny.', extra: FILTER },
-            { t: 'Kolekcje {•}', d: 'Po jednej. Najpierw popraw design (czego brakowało? co uprościć?), potem przenieś tylko to, co nadal wartościowe.', key: true },
+            { t: 'Otwarte {•}', d: 'Jak w migracji miesięcznej. Co na ten miesiąc → nowy log miesięczny.', extra: FILTER },
+            { t: 'Kolekcje {•}', d: 'Po jednej. Najpierw popraw design (czego brakowało? co uprościć?), potem przenieś tylko to, co nadal wartościowe.', s: 'Lista lektur: tylko książki, które nadal ciekawią. Tracker: tylko pierwszy wpis, który daje kontekst. Reszta zostaje w starym notesie.', key: true },
           ],
         },
       ],
@@ -389,6 +389,7 @@ footer .links { display: flex; gap: 14px; }
     'Jak działania wspierały intencję?', 'A jak jej nie wspierały?',
     'Jakie mam wymówki?', 'Jakie historie sobie opowiadam?',
     'Czego nie zrobiłem i dlaczego?', 'Jakie działania muszę podjąć?',
+    'Którego celu trzymam się na siłę, choć mnie męczy?', 'Co niespodziewanie mnie wciągnęło? Dlaczego?',
   ];
 
   const LEGEND = [
@@ -544,9 +545,9 @@ footer .links { display: flex; gap: 14px; }
   function filterHtml() {
     return `
       <div class="filtr">
-        <div class="step"><span class="k">1</span><p><strong>Czy to niezbędne?</strong> Realne konsekwencje: praca, czynsz, podatki, raty.<span>Pytaj „dlaczego?” aż do przyczyny. Wybieraj proces, który kontrolujesz, nie wynik.</span></p></div>
-        <div class="step"><span class="k">2</span><p><strong>Czy to ma znaczenie</strong> dla mnie albo kogoś, kogo kocham?<span>Praca: brak kontekstu? Dopytaj. Prywatne: sprawdź „datę ważności”.</span></p></div>
-        <div class="step"><span class="k">3</span><p><strong>Co się stanie, jeśli nigdy tego nie zrobię?</strong><span>Zero konsekwencji = rozproszenie. Pozwól sobie odpuścić.</span></p></div>
+        <div class="step"><span class="k">1</span><p><strong>Czy to niezbędne?</strong> Realne konsekwencje: praca, czynsz, podatki, raty.<span>Pytaj „dlaczego?” aż do przyczyny. Wybieraj proces, który kontrolujesz, nie wynik. Tak → zostaje. Nie → pytanie 2.</span></p></div>
+        <div class="step"><span class="k">2</span><p><strong>Czy to ma znaczenie</strong> dla mnie albo kogoś, kogo kocham?<span>Praca: brak kontekstu? Dopytaj. Prywatne: sprawdź „datę ważności”. Ważne miesiąc po miesiącu? Pewnie naprawdę ma znaczenie. Tak → zostaje. Nie albo nie wiem → pytanie 3.</span></p></div>
+        <div class="step"><span class="k">3</span><p><strong>Co się stanie, jeśli nigdy tego nie zrobię?</strong><span>Zero konsekwencji = rozproszenie. Pozwól sobie odpuścić. Bywa odwrotnie: niezrobione pranie, gdy partner gotuje, uderza w relację. Wtedy ma sens.</span></p></div>
         <div class="step"><span class="k">4</span><p><strong>Przepisz ręcznie.</strong> To ostatnie sito.<span>Nie warte przepisania = nie warte zrobienia.</span></p></div>
         <div class="verdict"><b>Nie</b> na 1, 2 i 3 → skreśl. Przeszło → <span class="g">&gt;</span> przepisz tylko to, co zrobisz w tym okresie.</div>
       </div>`;
