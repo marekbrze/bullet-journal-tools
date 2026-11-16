@@ -250,10 +250,11 @@ footer .links { display: flex; gap: 14px; }
 <main><div class="wrap" id="app"></div></main>
 <footer>
   <div class="wrap">
-    <span>Dane zostają w tej przeglądarce</span>
+    <span id="foot-note"></span>
     <span class="links">
-      <button type="button" data-act="export">Eksport</button>
-      <button type="button" data-act="import">Import</button>
+      <button type="button" data-act="lang" id="lang-btn"></button>
+      <button type="button" data-act="export" id="export-btn"></button>
+      <button type="button" data-act="import" id="import-btn"></button>
     </span>
   </div>
 </footer>
@@ -264,14 +265,18 @@ footer .links { display: flex; gap: 14px; }
 (() => {
   'use strict';
 
-  /* ---------- treść ----------
-     Kroki przeglądów opisane własnymi słowami. {x} w tekście = symbol z legendy. */
+  /* ---------- treść / content ----------
+     PL to oryginał, EN to jego tłumaczenie. Obie wersje muszą mieć tę samą
+     strukturę (te same id, sekcje i liczbę kroków), bo postęp zapisuje się
+     po pozycji kroku. {x} w tekście = symbol z legendy. */
 
   const FILTER = 'filter';
 
-  const REVIEWS = [
+  const CONTENT = {
+  pl: {
+    reviews: [
     {
-      id: 'morning', group: 'Codziennie', title: 'Poranek', when: 'Rano, zanim ruszysz z dniem', time: '5–10 min',
+      id: 'morning', group: 'daily', title: 'Poranek', when: 'Rano, zanim ruszysz z dniem', time: '5–10 min',
       sections: [{
         items: [
           { t: 'Nowa strona dnia', d: 'Data, dzień tygodnia, numer strony.', s: 'Zakładasz ją w dniu, którego dotyczy, najwcześniej poprzedniego wieczoru.' },
@@ -287,7 +292,7 @@ footer .links { display: flex; gap: 14px; }
       }],
     },
     {
-      id: 'evening', group: 'Codziennie', title: 'Wieczór', when: 'Na koniec dnia, po wyłączeniu ekranów', time: '5–10 min',
+      id: 'evening', group: 'daily', title: 'Wieczór', when: 'Na koniec dnia, po wyłączeniu ekranów', time: '5–10 min',
       sections: [{
         items: [
           { t: 'Ekrany off', d: 'Notes to ostatnia rzecz, na którą dziś patrzysz.' },
@@ -301,7 +306,7 @@ footer .links { display: flex; gap: 14px; }
       }],
     },
     {
-      id: 'week', group: 'Cyklicznie', title: 'Tydzień', when: 'Zawsze ten sam dzień tygodnia', time: null,
+      id: 'week', group: 'cyclic', title: 'Tydzień', when: 'Zawsze ten sam dzień tygodnia', time: null,
       sections: [
         {
           phase: ['A', 'Wstecz'],
@@ -328,7 +333,7 @@ footer .links { display: flex; gap: 14px; }
       ],
     },
     {
-      id: 'month', group: 'Cyklicznie', title: 'Miesiąc', when: 'Ostatnie lub pierwsze dni miesiąca', time: null,
+      id: 'month', group: 'cyclic', title: 'Miesiąc', when: 'Ostatnie lub pierwsze dni miesiąca', time: null,
       sections: [
         {
           phase: ['A', 'Wstecz'],
@@ -359,7 +364,7 @@ footer .links { display: flex; gap: 14px; }
       ],
     },
     {
-      id: 'chapter', group: 'Cyklicznie', title: 'Rozdział', when: 'Gdy kończy się notes', time: null,
+      id: 'chapter', group: 'cyclic', title: 'Rozdział', when: 'Gdy kończy się notes', time: null,
       sections: [
         {
           phase: ['A', 'Pierwsze przejście: wnioski'],
@@ -381,27 +386,272 @@ footer .links { display: flex; gap: 14px; }
         },
       ],
     },
-  ];
-
-  const MONTH_QS = [
+    ],
+    monthQs: [
     'Co powtarza się w moich zapiskach?', 'Co mnie ładowało, a co wyczerpywało?',
     'Na ile to, co robiłem, szło w parze z intencją?', 'Gdzie się z nią rozjeżdżało?',
     'Czym się usprawiedliwiam?', 'Co sobie o sobie wmawiam?',
     'Co zostało niezrobione i czemu?', 'Który cel już mi nie służy?',
     'Co pozytywnie mnie zaskoczyło?', 'Co konkretnie zmieniam w przyszłym miesiącu?',
-  ];
-
-  const LEGEND = [
+    ],
+    legend: [
     ['•', 'Zadanie', 'do zrobienia'], ['×', 'Zrobione', 'krzyżyk na kropce'],
     ['>', 'Przeniesione', 'na inny dzień, miesiąc, do kolekcji'], ['<', 'Do future logu', 'albo do kalendarza'],
     ['<s>•</s>', 'Odpuszczone', 'świadoma decyzja'], ['–', 'Notatka', 'do zapamiętania'],
     ['+', 'Do rozwinięcia', 'temat do dłuższego pisania'], ['○', 'Zdarzenie', 'fakt, bez oceny'],
     ['*', 'Priorytet', 'przy zadaniu', true], ['!', 'Inspiracja', 'przy notatce', true],
-  ];
+    ],
+  },
+  en: {
+    reviews: [
+      {
+        id: 'morning', group: 'daily', title: 'Morning', when: 'In the morning, before the day gets going', time: '5–10 min',
+        sections: [{
+          items: [
+            { t: 'New day page', d: 'Date, day of the week, page number.', s: 'Set it up on the day itself, or the evening before at the earliest.' },
+            { t: 'Brain dump', d: 'Jot down whatever has been on your mind since you woke up.' },
+            { t: 'Recent days', d: 'Look through the pages from the last few days.' },
+            { t: 'Notes {–}', d: 'Done with it? Leave it. Keeps coming back, or you want to dig into it? Change it to {+}.', s: '{+} marks a topic for longer writing, e.g. in the weekly review.' },
+            { t: 'Tasks {•}', d: 'For each one, decide: do it, hand it off or let it go.' },
+            { t: 'Due today', d: 'Run entries dated today through the filter. Copy the ones that stay onto today’s page with {*}.', key: true, extra: FILTER },
+            { t: 'Weekly plan', d: 'Check the week’s list and take the next thing from it for today.' },
+            { t: 'Three priorities', d: 'Three things for today at most, marked {*}.', s: 'With five priorities, none of them really comes first.', key: true },
+          ],
+          notes: [['Don’t', 'carry over every open task from previous days. The weekly review handles them in bulk.']],
+        }],
+      },
+      {
+        id: 'evening', group: 'daily', title: 'Evening', when: 'At the end of the day, screens off', time: '5–10 min',
+        sections: [{
+          items: [
+            { t: 'Screens off', d: 'Your notebook is the last thing you look at today.' },
+            { t: 'Empty your head', d: 'Write down whatever is still going round in your head. Fill in the gaps in today’s notes.' },
+            { t: 'Tick off what’s done', d: '{×} on everything finished. If you did something you never wrote down, add it and tick it too.', s: 'A full list of what you did shows how much you really get done in a day.', key: true },
+            { t: 'Anyone else?', d: 'Could someone else do any of what’s left?' },
+            { t: 'Filter', d: 'Run the rest through the filter. Can’t say why you’re doing it? Cross it out.', s: 'Before you cross something out, ask what it’s for. A dull task can be a step towards something you care about.', key: true, extra: FILTER, open: true },
+            { t: 'Headline', d: 'Next to the date, write the one event that best sums up the day.', s: 'These headlines become the timeline in the weekly and monthly reviews.' },
+          ],
+          notes: [['Start', 'Begin with the minimum: three things for today, in the morning. Short and daily beats long and now and then. Keep skipping the review? Make it shorter. A phone reminder helps.']],
+        }],
+      },
+      {
+        id: 'week', group: 'cyclic', title: 'Week', when: 'Same day every week', time: null,
+        sections: [
+          {
+            phase: ['A', 'Look back'],
+            items: [
+              { t: 'Timeline', d: 'In the monthly log, add the main events of the past week. You’ll find them in the day headlines.' },
+              { t: 'Skim', d: 'Skim this month’s day and week pages.' },
+              { t: 'Left page', d: 'Start the weekly log. Title: the dates of the past week.', extra: 'spread' },
+              { t: 'Reflection', d: 'Short version: a few bullet points with takeaways. Long version: free writing, a page or two. Look for topics next to {+}.', s: 'Write down takeaways and feelings. The events are already in the timeline.', key: true },
+              { t: 'Read what you wrote', d: 'Notice the tone. What mood comes through?', s: 'One area of life collects lots of tasks → check what’s going on there. Sadness keeps coming up → look for the source. Day pages are missing → you have too much on your plate, so lighten the calendar this week.', key: true },
+            ],
+          },
+          {
+            phase: ['B', 'Look ahead'],
+            items: [
+              { t: 'Right page', d: 'Task list. Title: the dates of the coming week.' },
+              { t: 'From the reflection', d: 'Start with the tasks that came out of it. Ideas for later go on a day page or into a collection.' },
+              { t: 'From the month', d: 'Take what’s due this week from the monthly list. Split big things into steps spread across the days.' },
+              { t: 'Open {•}', d: 'From the day and week pages, carry over only what you’ll actually do this week.', extra: FILTER },
+              { t: 'Intention', d: 'In one sentence: what is this week about? Write it next to the dates.', key: true },
+              { t: 'Priorities', d: 'Mark with {*} the tasks that best serve the intention.', key: true },
+            ],
+            notes: [['Relax', 'Whatever you don’t carry over won’t get lost. It comes back at the next review.']],
+          },
+        ],
+      },
+      {
+        id: 'month', group: 'cyclic', title: 'Month', when: 'Last or first days of the month', time: null,
+        sections: [
+          {
+            phase: ['A', 'Look back'],
+            items: [
+              { t: 'Timeline', d: 'Finish the timeline for the month that’s ending.' },
+              { t: 'Task list', d: 'Bring it up to date: {×}, {>}, crossed out.' },
+              { t: 'Side by side', d: 'Compare events with tasks. What might have affected what?', s: 'You’re looking for links, e.g. between a goal that isn’t moving and a habit that gets in its way.' },
+              { t: 'Read the month', d: 'All the day and week pages. With curiosity, not judgement.' },
+              { t: 'Reflection', d: 'On the first free spread after the last day of the month. Write more if you have time.', s: 'Write down what this month taught you.', key: true, extra: 'qs', open: true },
+            ],
+            notes: [['Not done', 'Instead of blaming yourself, ask why. Too big → split it. Can’t see the point → find one or let it go. Doesn’t have to be mine, doesn’t have to be now → hand it off or let it go. Too much at once → I’m taking on more than I have time for.']],
+          },
+          {
+            phase: ['B', 'Look ahead: migration'],
+            items: [
+              { t: 'New monthly log', d: 'After the reflection. Title: the name of the month. Left page: timeline, right page: tasks.', s: 'Timeline: one line per day with the weekday’s initial, a rule between weeks. Fill it in after the fact.' },
+              { t: 'Migration', d: 'Go through the old month once more. Run open {•} through the filter and move them to the new list or into a collection.', s: 'Filter again, because things may have changed over the month.', key: true, extra: FILTER },
+              { t: 'Future log', d: 'Bring over whatever is due this month.' },
+              { t: 'From the reflection', d: 'Add the tasks that came out of it.' },
+              { t: 'Clarify', d: 'Rewrite any vague task so it’s clear what to do.' },
+              { t: 'Tidy up', d: 'Move entries that belong in existing collections there. Several related entries? Start a collection and move over only what still matters.' },
+              { t: 'Endless migrations', d: 'A task you’re moving yet again is probably too big. Split it or give it its own collection.' },
+              { t: 'Collections', d: 'Which ones do you actually use? Leave the unused ones behind. Redesign the awkward ones, keeping what worked.', s: 'A collection you no longer need is a normal part of the process.' },
+              { t: '3 + 3', d: 'One thing that drains you: three small steps to cut it down. The one that interests you most: three small steps to explore it. All of it goes on the list.', s: 'Small means really small: fifteen minutes a day, one conversation, one book.', key: true },
+              { t: 'Index', d: 'Add the new monthly log to the index.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'chapter', group: 'cyclic', title: 'Chapter', when: 'When the notebook is full', time: null,
+        sections: [
+          {
+            phase: ['A', 'First pass: lessons'],
+            items: [
+              { t: 'Chapter log', d: 'A free spread at the back of the notebook. Title: the dates it covers. Divide it into four boxes.', s: 'The left page is about how you work. The right page: what was good for you and what wasn’t (activities, people, habits).', extra: 'quad', open: true },
+              { t: 'The whole notebook', d: 'Read it cover to cover and fill in the four boxes.', s: 'The timelines remind you how the months went. The reflections add the detail.', key: true },
+              { t: 'Reflection', d: 'On the next spread, gather the main lessons.' },
+            ],
+          },
+          {
+            phase: ['B', 'Second pass: new notebook'],
+            items: [
+              { t: 'Index', d: 'Put a {•} next to every collection. Still useful: leave it open. Not needed: {×}. For each one, think about why.', s: 'There is one test: does this collection do anything for you today?' },
+              { t: 'New notebook', d: 'Get the notebook ready. Write down your intention: the current one if it still fits, or a new one from the reflection.' },
+              { t: 'Core collections', d: 'Set up the core collections you actually use.' },
+              { t: 'Open {•}', d: 'As in the monthly migration. Things for this month go into the new monthly log.', extra: FILTER },
+              { t: 'Collections {•}', d: 'Move them one at a time. First improve the layout: what was unnecessary, what was missing. Then copy over only the content you still need.', s: 'Everything else stays in the old notebook. You can always look it up there.', key: true },
+            ],
+          },
+        ],
+      },
+    ],
+
+    monthQs: [
+      'What keeps coming up in my notes?', 'What gave me energy, and what drained it?',
+      'How well did my actions match my intention?', 'Where did they drift apart?',
+      'What excuses do I make?', 'What do I keep telling myself about myself?',
+      'What didn’t get done, and why?', 'Which goal no longer serves me?',
+      'What surprised me in a good way?', 'What exactly am I changing next month?',
+    ],
+
+    legend: [
+      ['•', 'Task', 'to do'], ['×', 'Done', 'an X over the dot'],
+      ['>', 'Migrated', 'to another day, month or collection'], ['<', 'To future log', 'or to the calendar'],
+      ['<s>•</s>', 'Dropped', 'a deliberate choice'], ['–', 'Note', 'to remember'],
+      ['+', 'To explore', 'topic for longer writing'], ['○', 'Event', 'a fact, no judgement'],
+      ['*', 'Priority', 'next to a task', true], ['!', 'Inspiration', 'next to a note', true],
+    ],
+  },
+  };
+
+  /* ---------- teksty interfejsu / UI strings ---------- */
+  const UI = {
+    pl: {
+      locale: 'pl-PL', app: 'Przeglądy', htmlLang: 'pl',
+      groups: { daily: 'Codziennie', cyclic: 'Cyklicznie' },
+      home: 'Co dziś przeglądasz?', homeLead: 'Najpierw to, co było. Potem plan na to, co dalej. Odhaczaj po kolei.',
+      history: 'Historia', handy: 'Pod ręką', cheat: 'Ściąga', cheatMeta: 'Symbole · filtr · w ciągu dnia · kolekcje core',
+      now: 'teraz', inProgress: (n, t) => `w toku · ${n} z ${t}`, steps: n => `${n} kroków`,
+      last: w => 'ostatnio ' + w, never: 'jeszcze nie robione', streak: n => `${n} dni z rzędu`,
+      today: 'dziś', yesterday: 'wczoraj', daysAgo: n => `${n} dni temu`,
+      back: 'Przeglądy', started: w => 'zaczęte ' + w, keyStep: 'Kluczowy krok',
+      staleTitle: 'Wczoraj?', stale: w => `Te odhaczenia są z ${w}.`, restart: 'Zacznij od nowa',
+      done: 'Gotowe', allDone: d => `Wszystkie kroki odhaczone${d ? ' w ' + d : ''}.`, saveClose: 'Zapisz i zamknij',
+      clear: 'Wyczyść odhaczenia', finishEarly: 'Zakończ wcześniej',
+      hintKey: 'kluczowy krok', hintKbd: '<kbd>X</kbd> odhacza następny · <kbd>Z</kbd> cofa · <kbd>↑</kbd> <kbd>↓</kbd> poruszanie · <kbd>Spacja</kbd> przełącza',
+      saved: t => `${t}: zapisane`, savedPart: (t, n, all) => `${t}: zapisane (${n} z ${all})`,
+      histLead30: s => 'Ostatnie 30 dni: ' + s, histEmpty: 'Jeszcze nic. Zamknięte przeglądy pojawią się tutaj.',
+      extras: { filter: 'Filtr', qs: 'Pytania do refleksji', spread: 'Układ rozkładówki', quad: 'Cztery pola' },
+      spread: [['Lewa · mijający tydzień', 'refleksja'], ['Prawa · nadchodzący', 'zadania · intencja · <span class="g">*</span>']],
+      quad: [['Co działało', 'sposób pracy'], ['Więcej tego', 'co mi służy'], ['Co nie działało', 'sposób pracy'], ['Mniej tego', 'co mi nie służy']],
+      filter: [
+        ['<strong>Czy to konieczne?</strong> Czy zaniechanie ma poważne skutki: praca, rachunki, urzędy?', 'Dopytuj „po co?”, aż dojdziesz do sedna. Wybieraj działania, na które masz wpływ, a nie wyniki. Tak → zostaje. Nie → dalej.'],
+        ['<strong>Czy to ważne</strong> dla mnie albo dla moich bliskich?', 'W pracy, gdy nie wiesz po co, dopytaj. Prywatnie sprawdź, czy dawny pomysł wciąż cię ciekawi. Tak → zostaje. Nie albo nie wiem → dalej.'],
+        ['<strong>Co się stanie, jeśli tego nie zrobię?</strong>', 'Nic? Skreśl bez wyrzutów. Ucierpi coś, na czym ci zależy, np. relacja? Wtedy zadanie ma sens.'],
+        ['<strong>Przepisz ręcznie.</strong> Ostatnie sito.', 'Szkoda ci minuty na przepisanie? Odpuść.'],
+      ],
+      verdict: '<b>Trzy razy „nie”</b> → skreśl. Zostaje → <span class="g">&gt;</span> przepisz tylko to, co zrobisz w tym okresie.',
+      cheatLead: 'To, do czego wracasz w trakcie przeglądów.',
+      symbols: 'Symbole', symbolsLead: 'Krótkie wpisy z jednym znakiem na początku',
+      filterTitle: 'Filtr', filterLead: 'Dla każdego otwartego <span class="g">•</span>, przy każdym przeglądzie.',
+      dayTitle: 'W ciągu dnia', dayLead: 'Zapisuj od razu',
+      day: [
+        ['Najpierw na stronę dnia', 'Krótko i od razu, bez zastanawiania się, gdzie to pasuje. Do kalendarza czy future logu przeniesiesz później.'],
+        ['Spotkania cykliczne', 'Na stronie dnia tylko <span class="g">○</span> z odnośnikiem do strony. Same notatki trafiają do osobnej kolekcji, z datą.'],
+        ['Zdarzenia <span class="g">○</span>', 'Fakty, bez oceny. Myśli i emocje jako <span class="g">–</span>, wcięte pod spodem.'],
+      ],
+      coreTitle: 'Kolekcje core', coreLead: 'Co gdzie leży',
+      core: [
+        ['Indeks', 'Na początku notesu. Nazwa kolekcji i numery stron; kolejne części dopisujesz obok. Stron dni nie indeksujesz.'],
+        ['Future log', 'Kilka kolejnych miesięcy na jednej rozkładówce. Trafia tu wszystko z datą poza bieżącym miesiącem.'],
+        ['Log miesięczny', 'Lewa strona: timeline, wypełniany po fakcie. Prawa: zadania z future logu, z poprzedniego miesiąca i nowe.'],
+        ['Log tygodniowy', 'Lewa strona: refleksja o mijającym tygodniu. Prawa: zadania na nadchodzący.'],
+        ['Strona dnia', 'Data i numer strony. Zajmuje tyle miejsca, ile trzeba. Nic nie zakładasz na zapas.'],
+      ],
+      quote: 'Przy każdym przeglądzie pytania są te same, ale odpowiedzi z czasem się zmieniają. Dlatego wracasz do nich regularnie.',
+      foot: 'Dane zostają w tej przeglądarce', other: 'English', exp: 'Eksport', imp: 'Import', file: 'przeglady',
+      saveErr: 'Nie udało się zapisać danych w tej przeglądarce',
+      imported: n => `Zaimportowano ${n} wpisów historii`, badFile: 'To nie jest poprawny plik eksportu',
+    },
+    en: {
+      locale: 'en-GB', app: 'Reviews', htmlLang: 'en',
+      groups: { daily: 'Daily', cyclic: 'Recurring' },
+      home: 'What are you reviewing today?', homeLead: 'First what happened, then the plan for what’s next. Tick things off as you go.',
+      history: 'History', handy: 'Handy', cheat: 'Cheat sheet', cheatMeta: 'Symbols · filter · during the day · core collections',
+      now: 'now', inProgress: (n, t) => `in progress · ${n} of ${t}`, steps: n => `${n} steps`,
+      last: w => 'last ' + w, never: 'not done yet', streak: n => `${n} days in a row`,
+      today: 'today', yesterday: 'yesterday', daysAgo: n => `${n} days ago`,
+      back: 'Reviews', started: w => 'started ' + w, keyStep: 'Key step',
+      staleTitle: 'Yesterday?', stale: w => `These ticks are from ${w}.`, restart: 'Start over',
+      done: 'Done', allDone: d => `All steps ticked off${d ? ' in ' + d : ''}.`, saveClose: 'Save and close',
+      clear: 'Clear ticks', finishEarly: 'Finish early',
+      hintKey: 'key step', hintKbd: '<kbd>X</kbd> ticks the next one · <kbd>Z</kbd> undo · <kbd>↑</kbd> <kbd>↓</kbd> move · <kbd>Space</kbd> toggles',
+      saved: t => `${t}: saved`, savedPart: (t, n, all) => `${t}: saved (${n} of ${all})`,
+      histLead30: s => 'Last 30 days: ' + s, histEmpty: 'Nothing yet. Finished reviews will show up here.',
+      extras: { filter: 'Filter', qs: 'Reflection prompts', spread: 'Spread layout', quad: 'Four boxes' },
+      spread: [['Left · past week', 'reflection'], ['Right · coming week', 'tasks · intention · <span class="g">*</span>']],
+      quad: [['What worked', 'how you work'], ['More of this', 'what’s good for me'], ['What didn’t work', 'how you work'], ['Less of this', 'what isn’t good for me']],
+      filter: [
+        ['<strong>Is it necessary?</strong> Would skipping it have serious consequences: work, bills, official matters?', 'Keep asking “why?” until you get to the heart of it. Choose actions you can influence, not outcomes. Yes → it stays. No → next.'],
+        ['<strong>Does it matter</strong> to me or to the people close to me?', 'At work, if you don’t know why, ask. In private life, check whether an old idea still interests you. Yes → it stays. No or not sure → next.'],
+        ['<strong>What happens if I never do it?</strong>', 'Nothing? Cross it out, no guilt. Something you care about suffers, like a relationship? Then the task makes sense.'],
+        ['<strong>Rewrite it by hand.</strong> The last sieve.', 'Not worth a minute of rewriting? Let it go.'],
+      ],
+      verdict: '<b>Three “no”s</b> → cross it out. It stays → <span class="g">&gt;</span> rewrite only what you’ll do in this period.',
+      cheatLead: 'What you come back to during reviews.',
+      symbols: 'Symbols', symbolsLead: 'Short entries that start with a single sign',
+      filterTitle: 'Filter', filterLead: 'For every open <span class="g">•</span>, at every review.',
+      dayTitle: 'During the day', dayLead: 'Write it down right away',
+      day: [
+        ['Day page first', 'Briefly and straight away, without deciding where it belongs. Move things to the calendar or future log later.'],
+        ['Recurring meetings', 'On the day page, just a <span class="g">○</span> with a pointer to the page. The notes themselves go into a separate collection, dated.'],
+        ['Events <span class="g">○</span>', 'Facts, no judgement. Thoughts and feelings as <span class="g">–</span>, indented underneath.'],
+      ],
+      coreTitle: 'Core collections', coreLead: 'What lives where',
+      core: [
+        ['Index', 'At the front of the notebook. Collection name and page numbers. Add later parts next to them. Day pages don’t get indexed.'],
+        ['Future log', 'The next few months on one spread. Everything with a date outside the current month goes here.'],
+        ['Monthly log', 'Left page: timeline, filled in after the fact. Right page: tasks from the future log, from last month and new ones.'],
+        ['Weekly log', 'Left page: reflection on the past week. Right page: tasks for the coming week.'],
+        ['Day page', 'Date and page number. Takes as much space as it needs. Nothing gets set up in advance.'],
+      ],
+      quote: 'Every review asks the same questions, but the answers change over time. That’s why you keep coming back to them.',
+      foot: 'Data stays in this browser', other: 'Polski', exp: 'Export', imp: 'Import', file: 'reviews',
+      saveErr: 'Could not save data in this browser',
+      imported: n => `Imported ${n} history entries`, badFile: 'Not a valid export file',
+    },
+  };
+
+  /* ---------- język / language ---------- */
+  const LANG_KEY = 'notebook-tools.lang';  // wspólny dla wszystkich narzędzi w repo
+  let lang = (() => {
+    try { const v = localStorage.getItem(LANG_KEY); if (v === 'pl' || v === 'en') return v; } catch (e) {}
+    return /^pl\b/i.test(navigator.language || '') ? 'pl' : 'en';
+  })();
+  let T, C;
+  function setLang(l) {
+    lang = l; T = UI[l]; C = CONTENT[l];
+    document.documentElement.lang = T.htmlLang;
+    $('#foot-note').textContent = T.foot;
+    $('#lang-btn').textContent = T.other;
+    $('#export-btn').textContent = T.exp;
+    $('#import-btn').textContent = T.imp;
+  }
 
   const glyphs = s => s.replace(/\{(.+?)\}/g, '<span class="g">$1</span>');
   const TOTAL = r => r.sections.reduce((n, s) => n + s.items.length, 0);
-  const byId = id => REVIEWS.find(r => r.id === id);
+  const byId = id => C.reviews.find(r => r.id === id);
 
   /* ---------- storage ---------- */
   const KEY = 'przeglady.v1';
@@ -417,23 +667,23 @@ footer .links { display: flex; gap: 14px; }
   }
   function save() {
     try { localStorage.setItem(KEY, JSON.stringify(db)); }
-    catch (e) { toast('Nie udało się zapisać danych w tej przeglądarce'); }
+    catch (e) { toast(T.saveErr); }
   }
 
   const $ = s => document.querySelector(s);
 
-  /* ---------- daty ---------- */
+  /* ---------- daty / dates ---------- */
   const DAY = 864e5;
   const startOfDay = t => { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); };
   const daysAgo = t => Math.round((startOfDay(Date.now()) - startOfDay(t)) / DAY);
-  const hm = t => new Date(t).toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+  const hm = t => new Date(t).toLocaleTimeString(T.locale, { hour: '2-digit', minute: '2-digit' });
   function fmtWhen(t) {
     const n = daysAgo(t);
-    if (n === 0) return 'dziś, ' + hm(t);
-    if (n === 1) return 'wczoraj, ' + hm(t);
-    if (n < 7) return `${n} dni temu`;
+    if (n === 0) return T.today + ', ' + hm(t);
+    if (n === 1) return T.yesterday + ', ' + hm(t);
+    if (n < 7) return T.daysAgo(n);
     const d = new Date(t);
-    return d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'short', year: d.getFullYear() === new Date().getFullYear() ? undefined : 'numeric' });
+    return d.toLocaleDateString(T.locale, { day: 'numeric', month: 'short', year: d.getFullYear() === new Date().getFullYear() ? undefined : 'numeric' });
   }
   function fmtDur(ms) {
     const m = Math.round(ms / 6e4);
@@ -461,7 +711,7 @@ footer .links { display: flex; gap: 14px; }
   // Streak dla codziennych: dni z rzędu (do dziś albo do wczoraj).
   function streak(id) {
     const days = new Set(db.log.filter(e => e.id === id).map(e => daysAgo(e.t)));
-    let start = days.has(0) ? 0 : days.has(1) ? 1 : -1;
+    const start = days.has(0) ? 0 : days.has(1) ? 1 : -1;
     if (start < 0) return 0;
     let n = 0;
     while (days.has(start + n)) n++;
@@ -472,8 +722,8 @@ footer .links { display: flex; gap: 14px; }
   function route() {
     const p = location.hash.replace(/^#\/?/, '').split('/');
     if (p[0] === 'r' && byId(p[1])) return { view: 'review', review: byId(p[1]) };
-    if (p[0] === 'sciaga') return { view: 'cheat' };
-    if (p[0] === 'historia') return { view: 'history' };
+    if (p[0] === 'cheat' || p[0] === 'sciaga') return { view: 'cheat' };
+    if (p[0] === 'history' || p[0] === 'historia') return { view: 'history' };
     return { view: 'home' };
   }
 
@@ -499,7 +749,7 @@ footer .links { display: flex; gap: 14px; }
 
   function render(opts = {}) {
     const rt = route();
-    document.title = rt.review ? `${rt.review.title} · Przeglądy` : 'Przeglądy';
+    document.title = rt.review ? `${rt.review.title} · ${T.app}` : T.app;
     if (rt.view === 'review') renderReview(rt.review, opts);
     else if (rt.view === 'cheat') renderCheat();
     else if (rt.view === 'history') renderHistory();
@@ -507,36 +757,36 @@ footer .links { display: flex; gap: 14px; }
   }
 
   function renderHome() {
-    const groups = [...new Set(REVIEWS.map(r => r.group))];
+    const groups = [...new Set(C.reviews.map(r => r.group))];
     const row = r => {
       const p = db.progress[r.id], total = TOTAL(r);
       const n = p ? p.done.length : 0;
       const last = lastDone(r.id);
-      const st = r.group === 'Codziennie' ? streak(r.id) : 0;
+      const st = r.group === 'daily' ? streak(r.id) : 0;
       const bits = [];
-      if (p && n) bits.push(`w toku · ${n} z ${total}`);
-      else bits.push(`${total} kroków` + (r.time ? ` · ${r.time}` : ''));
-      bits.push(last ? 'ostatnio ' + fmtWhen(last) : 'jeszcze nie robione');
-      if (st > 1) bits.push(`${st} dni z rzędu`);
+      if (p && n) bits.push(T.inProgress(n, total));
+      else bits.push(T.steps(total) + (r.time ? ` · ${r.time}` : ''));
+      bits.push(last ? T.last(fmtWhen(last)) : T.never);
+      if (st > 1) bits.push(T.streak(st));
       return `
         <li><a href="#/r/${r.id}">
-          <span class="name"><span>${r.title}</span>${due(r) && !(p && n) ? '<span class="tag">teraz</span>' : ''}</span>
+          <span class="name"><span>${r.title}</span>${due(r) && !(p && n) ? `<span class="tag">${T.now}</span>` : ''}</span>
           <span class="meta">${bits.join(' · ')}</span>
           <span class="side">${p && n ? ring(n, total) : ''}${ICON_NEXT}</span>
         </a></li>`;
     };
     app.innerHTML = `
-      <div class="crumbs"><span class="brand">${LOGO}Przeglądy</span><a href="#/historia">Historia</a></div>
-      <h1>Co dziś przeglądasz?</h1>
-      <p class="lead">Najpierw to, co było. Potem plan na to, co dalej. Odhaczaj po kolei.</p>
+      <div class="crumbs"><span class="brand">${LOGO}${T.app}</span><a href="#/history">${T.history}</a></div>
+      <h1>${T.home}</h1>
+      <p class="lead">${T.homeLead}</p>
       ${groups.map(g => `
-        <p class="group">${g}</p>
-        <ul class="lists">${REVIEWS.filter(r => r.group === g).map(row).join('')}</ul>`).join('')}
-      <p class="group">Pod ręką</p>
+        <p class="group">${T.groups[g]}</p>
+        <ul class="lists">${C.reviews.filter(r => r.group === g).map(row).join('')}</ul>`).join('')}
+      <p class="group">${T.handy}</p>
       <ul class="lists">
-        <li><a href="#/sciaga">
-          <span class="name"><span>Ściąga</span></span>
-          <span class="meta">Symbole · filtr · w ciągu dnia · kolekcje core</span>
+        <li><a href="#/cheat">
+          <span class="name"><span>${T.cheat}</span></span>
+          <span class="meta">${T.cheatMeta}</span>
           <span class="side">${ICON_NEXT}</span>
         </a></li>
       </ul>`;
@@ -545,18 +795,16 @@ footer .links { display: flex; gap: 14px; }
   function filterHtml() {
     return `
       <div class="filtr">
-        <div class="step"><span class="k">1</span><p><strong>Czy to konieczne?</strong> Czy zaniechanie ma poważne skutki: praca, rachunki, urzędy?<span>Dopytuj „po co?”, aż dojdziesz do sedna. Wybieraj działania, na które masz wpływ, a nie wyniki. Tak → zostaje. Nie → dalej.</span></p></div>
-        <div class="step"><span class="k">2</span><p><strong>Czy to ważne</strong> dla mnie albo dla moich bliskich?<span>W pracy, gdy nie wiesz po co, dopytaj. Prywatnie sprawdź, czy dawny pomysł wciąż cię ciekawi. Tak → zostaje. Nie albo nie wiem → dalej.</span></p></div>
-        <div class="step"><span class="k">3</span><p><strong>Co się stanie, jeśli tego nie zrobię?</strong><span>Nic? Skreśl bez wyrzutów. Ucierpi coś, na czym ci zależy, np. relacja? Wtedy zadanie ma sens.</span></p></div>
-        <div class="step"><span class="k">4</span><p><strong>Przepisz ręcznie.</strong> Ostatnie sito.<span>Szkoda ci minuty na przepisanie? Odpuść.</span></p></div>
-        <div class="verdict"><b>Trzy razy „nie”</b> → skreśl. Zostaje → <span class="g">&gt;</span> przepisz tylko to, co zrobisz w tym okresie.</div>
+        ${T.filter.map(([q, s], i) => `<div class="step"><span class="k">${i + 1}</span><p>${q}<span>${s}</span></p></div>`).join('')}
+        <div class="verdict">${T.verdict}</div>
       </div>`;
   }
+  const cells = (rows, cls) => `<div class="spread${cls ? ' ' + cls : ''}">${rows.map(([b, s]) => `<div><b>${b}</b>${s}</div>`).join('')}</div>`;
   const EXTRAS = {
-    [FILTER]: ['Filtr', filterHtml],
-    qs: ['Pytania do refleksji', () => `<ul class="qs">${MONTH_QS.map(q => `<li>${q}</li>`).join('')}</ul>`],
-    spread: ['Układ rozkładówki', () => `<div class="spread"><div><b>Lewa · mijający tydzień</b>refleksja</div><div><b>Prawa · nadchodzący</b>zadania · intencja · <span class="g">*</span></div></div>`],
-    quad: ['Cztery pola', () => `<div class="spread quad"><div><b>Co działało</b>sposób pracy</div><div><b>Więcej tego</b>co mi służy</div><div><b>Co nie działało</b>sposób pracy</div><div><b>Mniej tego</b>co mi nie służy</div></div>`],
+    [FILTER]: filterHtml,
+    qs: () => `<ul class="qs">${C.monthQs.map(q => `<li>${q}</li>`).join('')}</ul>`,
+    spread: () => cells(T.spread),
+    quad: () => cells(T.quad, 'quad'),
   };
 
   function renderReview(r, opts) {
@@ -565,7 +813,7 @@ footer .links { display: flex; gap: 14px; }
     const total = TOTAL(r), n = done.size;
     const pct = Math.round(n / total * 100);
     let idx = 0;
-    const stale = p && p.started && daysAgo(p.started) > 0 && r.group === 'Codziennie' && n > 0;
+    const stale = p && p.started && daysAgo(p.started) > 0 && r.group === 'daily' && n > 0;
 
     const sections = r.sections.map((s, si) => `
       ${s.phase ? `<p class="phase"><b>${s.phase[0]}</b>${s.phase[1]}</p>` : ''}
@@ -580,14 +828,14 @@ footer .links { display: flex; gap: 14px; }
             <button class="item ${on ? 'done' : ''}" data-act="tick" data-k="${k}" role="checkbox" aria-checked="${on}">
               <span class="box">${ICON_CHECK}</span>
               <span>
-                <span class="t"><span class="n">${num}</span><span class="tx">${glyphs(it.t)}</span>${it.key ? '<span class="key" title="Kluczowy krok"></span>' : ''}</span>
+                <span class="t"><span class="n">${num}</span><span class="tx">${glyphs(it.t)}</span>${it.key ? `<span class="key" title="${T.keyStep}"></span>` : ''}</span>
                 <span class="d">${glyphs(it.d)}</span>
                 ${it.s ? `<span class="s">${glyphs(it.s)}</span>` : ''}
               </span>
             </button>
             ${ex ? `<div class="extra">
-              <button class="toggle" data-act="extra" data-x="${exKey}" data-default="${it.open ? 1 : 0}" aria-expanded="${open}">${ICON_NEXT}${ex[0]}</button>
-              ${open ? ex[1]() : ''}
+              <button class="toggle" data-act="extra" data-x="${exKey}" data-default="${it.open ? 1 : 0}" aria-expanded="${open}">${ICON_NEXT}${T.extras[it.extra]}</button>
+              ${open ? ex() : ''}
             </div>` : ''}
           </li>`;
         }).join('')}
@@ -596,77 +844,68 @@ footer .links { display: flex; gap: 14px; }
 
     app.innerHTML = `
       <div class="crumbs">
-        <a href="#/">${ICON_BACK}<span>Przeglądy</span></a>
+        <a href="#/">${ICON_BACK}<span>${T.back}</span></a>
         <span class="progress-meta">${n} / ${total}</span>
       </div>
       <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><span style="width:${pct}%"></span></div>
       <h1>${r.title}</h1>
-      <p class="lead">${r.when}${r.time ? ' · ' + r.time : ''}${p && n && p.started ? ' · zaczęte ' + fmtWhen(p.started) : ''}</p>
-      ${stale ? `<div class="note" style="margin:-12px 0 24px"><b>Wczoraj?</b><span>Te odhaczenia są z ${fmtWhen(p.started)}. <button class="toggle" style="text-decoration:underline;text-underline-offset:3px" data-act="restart">Zacznij od nowa</button></span></div>` : ''}
+      <p class="lead">${r.when}${r.time ? ' · ' + r.time : ''}${p && n && p.started ? ' · ' + T.started(fmtWhen(p.started)) : ''}</p>
+      ${stale ? `<div class="note" style="margin:-12px 0 24px"><b>${T.staleTitle}</b><span>${T.stale(fmtWhen(p.started))} <button class="toggle" style="text-decoration:underline;text-underline-offset:3px" data-act="restart">${T.restart}</button></span></div>` : ''}
       ${sections}
       ${n === total ? `
         <div class="finish ${opts.anim ? 'anim' : ''}" id="finish">
-          <h2>Gotowe</h2>
-          <p>Wszystkie kroki odhaczone${p && p.started ? ' w ' + fmtDur(Date.now() - p.started) : ''}.</p>
-          <div class="actions"><button class="btn primary" data-act="complete">Zapisz i zamknij</button></div>
+          <h2>${T.done}</h2>
+          <p>${T.allDone(p && p.started ? fmtDur(Date.now() - p.started) : '')}</p>
+          <div class="actions"><button class="btn primary" data-act="complete">${T.saveClose}</button></div>
         </div>` : `
         <div class="actions">
-          ${n ? '<button class="btn ghost danger" data-act="restart">Wyczyść odhaczenia</button>' : ''}
+          ${n ? `<button class="btn ghost danger" data-act="restart">${T.clear}</button>` : ''}
           <span class="spacer"></span>
-          ${n ? '<button class="btn" data-act="complete">Zakończ wcześniej</button>' : ''}
+          ${n ? `<button class="btn" data-act="complete">${T.finishEarly}</button>` : ''}
         </div>
-        <p class="hint"><span class="legend-key"></span>kluczowy krok<span class="kbd-hint"> · <kbd>X</kbd> odhacza następny · <kbd>Z</kbd> cofa · <kbd>↑</kbd> <kbd>↓</kbd> poruszanie · <kbd>Spacja</kbd> przełącza</span></p>`}`;
+        <p class="hint"><span class="legend-key"></span>${T.hintKey}<span class="kbd-hint"> · ${T.hintKbd}</span></p>`}`;
 
     if (opts.focus) app.querySelector(`[data-k="${opts.focus}"]`)?.focus({ preventScroll: true });
   }
 
   function renderCheat() {
+    const defs = rows => `<ul class="defs">${rows.map(([b, s]) => `<li><b>${b}</b>${s}</li>`).join('')}</ul>`;
     app.innerHTML = `
-      <div class="crumbs"><a href="#/">${ICON_BACK}<span>Przeglądy</span></a></div>
-      <h1>Ściąga</h1>
-      <p class="lead">To, do czego wracasz w trakcie przeglądów.</p>
+      <div class="crumbs"><a href="#/">${ICON_BACK}<span>${T.back}</span></a></div>
+      <h1>${T.cheat}</h1>
+      <p class="lead">${T.cheatLead}</p>
 
-      <h2 class="sec">Symbole</h2>
-      <p class="lead">Krótkie wpisy z jednym znakiem na początku</p>
+      <h2 class="sec">${T.symbols}</h2>
+      <p class="lead">${T.symbolsLead}</p>
       <div class="legenda">
-        ${LEGEND.map(([g, n, s, mark]) => `<div class="sym"><span class="gl${mark ? ' mark' : ''}">${g}</span><span>${n}<small>${s}</small></span></div>`).join('')}
+        ${C.legend.map(([g, n, s, mark]) => `<div class="sym"><span class="gl${mark ? ' mark' : ''}">${g}</span><span>${n}<small>${s}</small></span></div>`).join('')}
       </div>
 
-      <h2 class="sec">Filtr</h2>
-      <p class="lead">Dla każdego otwartego <span class="g">•</span>, przy każdym przeglądzie.</p>
+      <h2 class="sec">${T.filterTitle}</h2>
+      <p class="lead">${T.filterLead}</p>
       ${filterHtml()}
 
-      <h2 class="sec">W ciągu dnia</h2>
-      <p class="lead">Zapisuj od razu</p>
-      <ul class="defs">
-        <li><b>Najpierw na stronę dnia</b>Krótko i od razu, bez zastanawiania się, gdzie to pasuje. Do kalendarza czy future logu przeniesiesz później.</li>
-        <li><b>Spotkania cykliczne</b>Na stronie dnia tylko <span class="g">○</span> z odnośnikiem do strony. Same notatki trafiają do osobnej kolekcji, z datą.</li>
-        <li><b>Zdarzenia <span class="g">○</span></b>Fakty, bez oceny. Myśli i emocje jako <span class="g">–</span>, wcięte pod spodem.</li>
-      </ul>
+      <h2 class="sec">${T.dayTitle}</h2>
+      <p class="lead">${T.dayLead}</p>
+      ${defs(T.day)}
 
-      <h2 class="sec">Kolekcje core</h2>
-      <p class="lead">Co gdzie leży</p>
-      <ul class="defs">
-        <li><b>Indeks</b>Na początku notesu. Nazwa kolekcji i numery stron; kolejne części dopisujesz obok. Stron dni nie indeksujesz.</li>
-        <li><b>Future log</b>Kilka kolejnych miesięcy na jednej rozkładówce. Trafia tu wszystko z datą poza bieżącym miesiącem.</li>
-        <li><b>Log miesięczny</b>Lewa strona: timeline, wypełniany po fakcie. Prawa: zadania z future logu, z poprzedniego miesiąca i nowe.</li>
-        <li><b>Log tygodniowy</b>Lewa strona: refleksja o mijającym tygodniu. Prawa: zadania na nadchodzący.</li>
-        <li><b>Strona dnia</b>Data i numer strony. Zajmuje tyle miejsca, ile trzeba. Nic nie zakładasz na zapas.</li>
-      </ul>
+      <h2 class="sec">${T.coreTitle}</h2>
+      <p class="lead">${T.coreLead}</p>
+      ${defs(T.core)}
 
-      <p class="quote">Przy każdym przeglądzie pytania są te same, ale odpowiedzi z czasem się zmieniają. Dlatego wracasz do nich regularnie.</p>`;
+      <p class="quote">${T.quote}</p>`;
   }
 
   function renderHistory() {
     const items = [...db.log].sort((a, b) => b.t - a.t).slice(0, 60);
     const since = Date.now() - 30 * DAY;
-    const counts = REVIEWS.map(r => [r, db.log.filter(e => e.id === r.id && e.t >= since).length]);
+    const counts = C.reviews.map(r => [r, db.log.filter(e => e.id === r.id && e.t >= since).length]);
     app.innerHTML = `
-      <div class="crumbs"><a href="#/">${ICON_BACK}<span>Przeglądy</span></a></div>
-      <h1>Historia</h1>
+      <div class="crumbs"><a href="#/">${ICON_BACK}<span>${T.back}</span></a></div>
+      <h1>${T.history}</h1>
       <p class="lead">${db.log.length
-        ? 'Ostatnie 30 dni: ' + counts.filter(c => c[1]).map(([r, c]) => `${r.title.toLowerCase()} ${c}×`).join(' · ')
-        : 'Jeszcze nic. Zamknięte przeglądy pojawią się tutaj.'}</p>
+        ? T.histLead30(counts.filter(c => c[1]).map(([r, c]) => `${r.title.toLowerCase()} ${c}×`).join(' · '))
+        : T.histEmpty}</p>
       ${items.length ? `<ul class="hist">${items.map(e => {
         const r = byId(e.id);
         const part = e.n < e.total ? ` · ${e.n}/${e.total}` : '';
@@ -674,7 +913,7 @@ footer .links { display: flex; gap: 14px; }
       }).join('')}</ul>` : ''}`;
   }
 
-  /* ---------- akcje ---------- */
+  /* ---------- akcje / actions ---------- */
   const current = () => route().review;
   let lastTicked = [];
 
@@ -701,13 +940,13 @@ footer .links { display: flex; gap: 14px; }
 
   function complete(r) {
     const p = db.progress[r.id];
-    const n = p ? p.done.length : 0;
-    db.log.push({ id: r.id, t: Date.now(), dur: p && p.started ? Date.now() - p.started : 0, n, total: TOTAL(r) });
+    const n = p ? p.done.length : 0, all = TOTAL(r);
+    db.log.push({ id: r.id, t: Date.now(), dur: p && p.started ? Date.now() - p.started : 0, n, total: all });
     delete db.progress[r.id];
     lastTicked = [];
     save();
     location.hash = '#/';
-    toast(n === TOTAL(r) ? `${r.title}: zapisane` : `${r.title}: zapisane (${n} z ${TOTAL(r)})`);
+    toast(n === all ? T.saved(r.title) : T.savedPart(r.title, n, all));
   }
 
   document.addEventListener('click', e => {
@@ -727,11 +966,16 @@ footer .links { display: flex; gap: 14px; }
       delete db.progress[r.id]; lastTicked = []; save(); render(); window.scrollTo(0, 0);
     }
     else if (act === 'complete' && r) complete(r);
+    else if (act === 'lang') {
+      setLang(lang === 'pl' ? 'en' : 'pl');
+      try { localStorage.setItem(LANG_KEY, lang); } catch (_) {}
+      render();
+    }
     else if (act === 'export') {
       const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `przeglady-${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = `${T.file}-${new Date().toISOString().slice(0, 10)}.json`;
       document.body.appendChild(a); a.click(); a.remove();
       setTimeout(() => URL.revokeObjectURL(a.href), 1000);
     }
@@ -754,8 +998,8 @@ footer .links { display: flex; gap: 14px; }
         if (byId(id) && p && Array.isArray(p.done) && !db.progress[id]) db.progress[id] = p;
       }
       save(); render();
-      toast(`Zaimportowano ${added} wpisów historii`);
-    } catch (_) { toast('To nie jest poprawny plik eksportu'); }
+      toast(T.imported(added));
+    } catch (_) { toast(T.badFile); }
   });
 
   document.addEventListener('keydown', e => {
@@ -791,8 +1035,12 @@ footer .links { display: flex; gap: 14px; }
     }
   });
 
-  window.addEventListener('storage', e => { if (e.key === KEY) { db = load(); render(); } });
+  window.addEventListener('storage', e => {
+    if (e.key === KEY) { db = load(); render(); }
+    if (e.key === LANG_KEY && (e.newValue === 'pl' || e.newValue === 'en')) { setLang(e.newValue); render(); }
+  });
   window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
+  setLang(lang);
   render();
 })();
 </script>
