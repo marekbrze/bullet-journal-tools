@@ -223,6 +223,8 @@ footer { padding: 24px 0 32px; font-size: 13px; color: var(--faint); }
 footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 footer button { background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
 footer button:hover { color: var(--text); }
+footer a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
+footer a:hover { color: var(--text); }
 footer .links { display: flex; gap: 14px; }
 
 /* toast */
@@ -252,6 +254,7 @@ footer .links { display: flex; gap: 14px; }
   <div class="wrap">
     <span>Data stays in this browser</span>
     <span class="links">
+      <a href="../index.html">All tools</a>
       <button type="button" data-act="export">Export</button>
       <button type="button" data-act="import">Import</button>
     </span>
@@ -584,7 +587,7 @@ footer .links { display: flex; gap: 14px; }
         </a></li>`;
     };
     app.innerHTML = `
-      <div class="crumbs"><span class="brand">${LOGO}${T.app}</span><a href="#/history">${T.history}</a></div>
+      <div class="crumbs"><a href="../index.html">${ICON_BACK}<span>All tools</span></a><a href="#/history">${T.history}</a></div>
       <h1>${T.home}</h1>
       <p class="lead">${T.homeLead}</p>
       ${groups.map(g => `

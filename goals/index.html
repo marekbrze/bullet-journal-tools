@@ -223,6 +223,8 @@ footer { padding: 24px 0 32px; font-size: 13px; color: var(--faint); }
 footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 footer button { background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
 footer button:hover { color: var(--text); }
+footer a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
+footer a:hover { color: var(--text); }
 footer .links { display: flex; gap: 14px; }
 
 /* toast */
@@ -351,6 +353,7 @@ textarea.big { min-height: 110px; resize: vertical; line-height: 1.5; font-size:
   <div class="wrap">
     <span>Data stays in this browser</span>
     <span class="links">
+      <a href="../index.html">All tools</a>
       <button type="button" data-act="export">Export</button>
       <button type="button" data-act="import">Import</button>
     </span>
@@ -461,7 +464,7 @@ textarea.big { min-height: 110px; resize: vertical; line-height: 1.5; font-size:
     const active = db.goals.filter(g => g.status === 'active');
     const archived = db.goals.length - active.length;
     app.innerHTML = `
-      <div class="crumbs"><span class="brand">${LOGO}Goals</span>${archived ? '<a href="#/archive">Archive</a>' : ''}</div>
+      <div class="crumbs"><a href="../index.html">${ICON_BACK}<span>All tools</span></a>${archived ? '<a href="#/archive">Archive</a>' : ''}</div>
       <h1>Where are you heading?</h1>
       <p class="lead">A goal you actually want, worked back to something you can do today.</p>
       ${db.draft ? `<div class="callout" style="margin:0 0 20px"><b>Unfinished goal:</b> ${esc(db.draft.title || 'untitled')}. <a href="#/new">Carry on</a></div>` : ''}
