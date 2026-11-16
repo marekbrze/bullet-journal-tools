@@ -246,7 +246,98 @@ footer .links { display: flex; gap: 14px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+/* ---------- e-ink ----------
+   For Kindle, Kobo, PocketBook, Boox and other e-paper readers. Turned on automatically
+   when the browser looks like one, or with "E-ink mode" in the footer.
+   Black on white, no grey text, no motion, no hover fills, bigger type and tap targets. */
+:root.eink {
+  --bg: #fff; --surface: #fff; --text: #000; --muted: #222; --faint: #444; --line: #333;
+  --hover: #fff; --accent: #000; --accent-text: #fff; --key: #000; --danger: #000; --focus: #000;
+  --shadow: none; color-scheme: light;
+}
+.eink *, .eink *::before, .eink *::after { animation: none !important; transition: none !important; }
+.eink body { font-size: 18px; line-height: 1.55; -webkit-font-smoothing: auto; }
+.eink .wrap { max-width: 680px; padding: 0 20px; }
+.eink :focus-visible { outline: 3px solid #000; }
+.eink kbd, .eink .kbd-hint { display: none; }
+
+/* type: nothing smaller than 16px, weight instead of grey for hierarchy */
+.eink h1 { font-size: 30px; font-weight: 700; }
+.eink h2.sec { font-size: 21px; }
+.eink .lead, .eink .item .d, .eink .defs li, .eink .quote, .eink .finish p, .eink .recap,
+.eink .helper .body, .eink .stage .task { font-size: 17px; }
+.eink .crumbs, .eink .group, .eink .phase, .eink .lists .meta, .eink .item .s, .eink .item .n,
+.eink .hint, .eink .toggle, .eink .helper .toggle, .eink .filtr .step, .eink .filtr p span, .eink .verdict,
+.eink .qs, .eink .spread, .eink .spread b, .eink .note, .eink .sym small, .eink .hist, .eink footer,
+.eink .field label, .eink .chip, .eink .dial .time small, .eink .toast { font-size: 16px; }
+.eink .tag { font-size: 13px; }
+.eink .group, .eink .phase { color: #000; font-weight: 600; }
+.eink .item .t, .eink .lists .name, .eink .recap b, .eink .defs li b { font-weight: 650; }
+.eink .item.done .t { color: #000; }
+.eink .item.done .tx { text-decoration-color: #000; text-decoration-thickness: 2px; }
+.eink .item.done .d, .eink .item.done .s { opacity: 1; }
+
+/* tap targets: at least 44px, buttons ~52px */
+.eink .btn {
+  height: auto; min-height: 52px; padding: 10px 22px; border: 2px solid #000;
+  font-size: 17px; font-weight: 600; white-space: normal;
+}
+.eink .btn:hover { background: var(--surface); }
+.eink .btn.primary:hover { background: #000; opacity: 1; }
+.eink .btn.ghost { border-color: transparent; color: #000; text-decoration: underline; text-underline-offset: 4px; }
+.eink .btn.ghost:hover { background: transparent; }
+.eink .btn:disabled { opacity: 1; border-style: dashed; color: #555; background: #fff; border-color: #555; }
+.eink .actions { gap: 12px; }
+.eink .crumbs { min-height: 44px; }
+.eink .crumbs a, .eink footer a, .eink footer button { min-height: 44px; display: inline-flex; align-items: center; }
+.eink .toggle { min-height: 44px; padding: 6px 0; color: #000; }
+.eink .toggle svg { width: 14px; height: 14px; }
+.eink .lists a { padding: 20px 4px; }
+.eink .lists .side { color: #000; }
+.eink .lists .side svg { width: 18px; height: 18px; }
+.eink .lists a:hover .name span:first-child { text-decoration: none; }
+.eink .item { padding: 18px 4px; grid-template-columns: 30px 1fr; }
+.eink .item:hover { background: transparent; }
+.eink .box { width: 28px; height: 28px; border: 2px solid #000; margin-top: -2px; }
+.eink .box svg { width: 18px; height: 18px; }
+.eink .extra { padding-left: 48px; }
+.eink .item .key, .eink .legend-key { width: 9px; height: 9px; }
+.eink .chip { min-height: 44px; padding: 8px 16px; border: 1.5px solid #000; color: #000; }
+.eink .chip:hover { background: #fff; }
+.eink .big { border: 2px solid #000; font-size: 19px; }
+.eink .big::placeholder { color: #555; }
+.eink footer { color: #000; }
+.eink footer a, .eink footer button { text-decoration-color: #000; }
+.eink footer .links { flex-wrap: wrap; gap: 0 20px; }
+.eink footer .wrap { align-items: center; }
+.eink .big:focus, .eink .big:focus-visible { outline: 0; border-width: 3px; }
+
+/* tracks keep a light fill so the filled part still reads against them */
+.eink .progress { height: 8px; background: #fff; border: 1.5px solid #000; border-radius: 4px; }
+.eink .ring .bg, .eink .dial .bg { stroke: #bbb; }
+.eink .dial .fg { stroke-linecap: butt; }
+.eink .count { font-weight: 800; }
+
+/* panels: a black outline instead of a grey fill or shadow */
+.eink .note, .eink .helper .body .split { background: #fff; border: 1.5px solid #000; }
+.eink .filtr, .eink .spread, .eink .finish { border: 1.5px solid #000; }
+.eink .tag.soft { border-color: #000; color: #000; }
+.eink .toast { border: 2px solid #fff; outline: 2px solid #000; }
+@media (max-width: 560px) {
+  .eink h1 { font-size: 26px; }
+  .eink .extra { padding-left: 4px; }
+}
 </style>
+<script>
+/* E-ink mode: on by default on e-readers, switchable in the footer. One setting for all tools. */
+(function () {
+  var d = document.documentElement, ua = navigator.userAgent || '', pref = null;
+  try { pref = localStorage.getItem('notebook-tools:eink'); } catch (e) {}
+  function mq(q) { try { return !!(window.matchMedia && window.matchMedia(q).matches); } catch (e) { return false; } }
+  var reader = /Kindle|Kobo|PocketBook|tolino|BOOX|Onyx|Bookeen|Inkpalm|Meebook|Bigme/i.test(ua) && !/Silk/i.test(ua);
+  if (pref === '1' || (pref !== '0' && (reader || mq('(monochrome)') || mq('(update: slow)')))) d.className += ' eink';
+})();
+</script>
 </head>
 <body>
 <main><div class="wrap" id="app"></div></main>
@@ -257,6 +348,7 @@ footer .links { display: flex; gap: 14px; }
       <a href="../index.html">All tools</a>
       <button type="button" data-act="export">Export</button>
       <button type="button" data-act="import">Import</button>
+      <button type="button" id="eink-toggle" aria-pressed="false">E-ink mode</button>
     </span>
   </div>
 </footer>
@@ -858,6 +950,21 @@ footer .links { display: flex; gap: 14px; }
   });
   window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
   render();
+})();
+</script>
+<script>
+(function () {
+  var b = document.getElementById('eink-toggle'), d = document.documentElement;
+  if (!b) return;
+  function on() { return /(^|\s)eink(\s|$)/.test(d.className); }
+  function label() { b.textContent = on() ? 'E-ink mode: on' : 'E-ink mode: off'; b.setAttribute('aria-pressed', on() ? 'true' : 'false'); }
+  label();
+  b.addEventListener('click', function () {
+    var next = !on();
+    d.className = next ? (d.className + ' eink').replace(/^\s+/, '') : d.className.replace(/(^|\s)eink(?=\s|$)/g, '');
+    try { localStorage.setItem('notebook-tools:eink', next ? '1' : '0'); } catch (e) {}
+    label();
+  });
 })();
 </script>
 </body>
