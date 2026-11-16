@@ -13,6 +13,7 @@
 | Tool | What it's for |
 |---|---|
 | [**Start**](start/) | For when you keep putting something off: pick the smallest step, count down from five, work for six minutes. |
+| [**Goals**](goals/) | A goal you actually want: a picture of it done, an excitement check, milestones worked backwards, a 30-day habit and a step for today. |
 | [**Reviews**](reviews/) | Review checklists: morning, evening, week, month, chapter. Tick the steps off one by one. |
 
 No account, no server. Each tool keeps its data in your browser, with export to a file.
