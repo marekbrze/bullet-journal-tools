@@ -14,6 +14,7 @@
 |---|---|
 | [**Start**](start/) | For when you keep putting something off: pick the smallest step, count down from five, work for six minutes. |
 | [**Goals**](goals/) | A goal you actually want: a picture of it done, an excitement check, milestones worked backwards, a 30-day habit and a step for today. |
+| [**Reset**](reset/) | When something went wrong and your head runs the worst version of it: facts, the move against each thought pattern, what you control, one move now. |
 | [**Reviews**](reviews/) | Review checklists: morning, evening, week, month, chapter. Tick the steps off one by one. |
 
 No account, no server. Each tool keeps its data in your browser, with export to a file.

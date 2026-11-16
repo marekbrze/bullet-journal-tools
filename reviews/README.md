@@ -25,10 +25,10 @@ A notebook review has a dozen or so steps, and it's easy to skip one, especially
 
 | | |
 |:-:|---|
-| **Morning** | 8 steps · new day page, three priorities for the day |
-| **Evening** | 7 steps · <code>×</code> on what's done, the rest through the filter, dates to the right place, a headline for the day |
+| **Morning** | 9 steps · new day page, three priorities for the day |
+| **Evening** | 8 steps · <code>×</code> on what's done, the rest through the filter, dates to the right place, one win, a headline for the day |
 | **Week** | 11 steps · reflection on the left page, tasks and intention on the right |
-| **Month** | 15 steps · reflection with prompts, migration, 3 + 3 |
+| **Month** | 16 steps · reflection with prompts, migration, 3 + 3 |
 | **Chapter** | 8 steps · chapter log with four boxes, moving to a new notebook |
 
 Plus a **Cheat sheet**: symbols, the filter, how to log during the day and the core collections.
@@ -45,6 +45,7 @@ Plus a **Cheat sheet**: symbols, the filter, how to log during the day and the c
 - **Remembers where you stopped.** Ticks are saved right away. Close the tab halfway through and you'll come back to the same place.
 - **Suggests what's next.** Morning review in the morning, evening review in the evening, weekly after a week, monthly around the turn of the month.
 - **Filter at hand.** Steps where you move tasks have the filter one click away.
+- **Linked to the other tools.** The morning review points to [Goals](../goals/) and [Start](../start/), the evening one to [Reset](../reset/), the monthly one includes a goals check-in.
 - **History.** Every finished review goes into the history with how long it took. Daily reviews show your streak.
 - **Keyboard.** `X` ticks the next step, `Z` undoes, `↑` `↓` move.
 - **Private, one file.** No account, no server. Download `index.html` and open it from your disk, offline too.
